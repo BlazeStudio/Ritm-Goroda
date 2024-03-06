@@ -7,12 +7,12 @@
     <title>{{ event.title }}</title>
         <style>
         .container {
-            display: flex; /* Используем flexbox для расположения блоков */
+            display: flex;
         }
         .block {
             padding: 20px;
             border: 1px solid #ccc;
-            box-sizing: border-box; /* Учитываем padding и border в расчете ширины */
+            box-sizing: border-box;
         }
         .line{
 	width: 200px;
@@ -31,7 +31,8 @@
 <div class="container" style="color: #000000">
         <div class="block" style="width: 90%">
             <h2>Фотка</h2>
-            <div><i style="font-size: 15px">Кратко</i><a class="line"></a><a style="font-size: 17px">{{ event.tiny_description }}</a></div>
+            <div style="border: 1px solid #b3b3b3; border-radius: 5px; padding: 10px; margin: 10px 0;">
+                <u><b><i style="font-size: 15px">Кратко</i></b></u> — <a style="font-size: 17px">{{ event.tiny_description }}</a></div>
             <p>{{ event.description }}</p>
             <p><b>Адрес</b> - {{ event.address }}</p>
             <p><b>Телефон</b> - {{ event.address }}</p>
@@ -45,7 +46,7 @@
         </div>
         <div class="block" style="width: 50%;">
             <h5>Информация о событии</h5>
-            <p>Дата</p>
+            <p>Дата - {{event.datetime}}</p>
             <p>Адрес - {{ event.address }}</p>
             <p>Карта</p>
 

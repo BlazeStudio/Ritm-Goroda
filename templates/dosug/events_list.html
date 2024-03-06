@@ -109,11 +109,11 @@
     {% if type == None %}
     <a href="/events/all" id="allProducts">Все продукты</a>
     <a href="/events/all/views" id="popularity">По популярности</a>
-    <a href="/events/all" id="dateAdded">По дате добавления</a>
+    <a href="/events/all/datetime" id="dateAdded">По дате добавления</a>
     {% else %}
     <a href="/events/{{ type }}" id="allProducts">Все продукты</a>
     <a href="/events/{{ type }}/views" id="popularity">По популярности</a>
-    <a href="/events/{{ type }}" id="dateAdded">По дате добавления</a>
+    <a href="/events/{{ type }}/datetime" id="dateAdded">По дате добавления</a>
     {% endif %}
   </div>
 </div>
@@ -127,8 +127,7 @@
               <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
                 <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
                 <ul class="post-modern-meta">
-                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>
-                  <li>Дата</li>
+                  <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>
                 </ul>
                 <p style="font-size: 15px">{{ event.tiny_description }}</p>
               </article>

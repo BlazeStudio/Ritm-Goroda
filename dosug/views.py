@@ -50,6 +50,8 @@ def map(request):
     map_dots = Event.objects.all()
     data = list(map_dots.values())
     file_path = 'static\js\data2.json'
+    for item in data:
+        item['datetime'] = item['datetime'].strftime("%Y-%m-%d %H:%M:%S")
     new_data = {"features": data}
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(new_data, json_file, ensure_ascii=False, indent=2)

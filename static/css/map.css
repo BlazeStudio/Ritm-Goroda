@@ -1,0 +1,16 @@
+.map{
+
+    margin: auto;
+    width: 1280px;
+    height: 720px;
+    background: #0d0a0a;
+}
+.tag{
+    color: darkgray;
+    font-size: 12px;
+}
+
+/*Скрывает условия использования*/
+[class*="copyrights-pane"] {
+  display: none !important;
+}

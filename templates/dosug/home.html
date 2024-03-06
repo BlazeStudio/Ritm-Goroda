@@ -1,0 +1,176 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Ритм города</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="../../static/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/fonts.css">
+    <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
+button{
+    background: #4348bd;
+    font-family: "Georgia";
+    color: white;
+}
+button:hover{
+    background:#373b97;
+}
+    </style>
+  </head>
+    <div class="page">
+{#        ГЛАВНАЯ КАРТИНКА#}
+      <section class="section swiper-container swiper-slider swiper-slider-minimal" data-loop="true" data-slide-effect="fade" data-autoplay="4759" data-simulate-touch="true">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide swiper-slide_video" data-slide-bg="../../static/images/site_pics/tyler.png">
+            <div class="container">
+              <div class="jumbotron-classic-content">
+                <div class="wow-outer">
+                </div>
+                <h1 class="text-uppercase text-white font-weight-bold wow-outer"><span class="wow slideInDown" data-wow-delay=".2s">Брось вызов рутине</span></h1>
+                <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">Все грани молодёжной жизни Москвы на одном сайте</span></p>
+                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#"  data-wow-delay=".4s">Выбрать</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide" data-slide-bg="../../static/images/slider-minimal-slide-2-1920x968.jpg">
+            <div class="container">
+              <div class="jumbotron-classic-content">
+                <div class="wow-outer">
+                </div>
+                <h1 class="text-uppercase text-white font-weight-bold wow-outer" style="margin: auto"><span class="wow slideInDown" data-wow-delay=".2s">От спортивных соревнований</span></h1>
+                <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">До уроков игры на диджериду</span></p>
+                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#" data-wow-delay=".4s">Занятие найдётся каждому</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide" data-slide-bg="../../static/images/slider-minimal-slide-3-1920x968.jpg">
+            <div class="container">
+              <div class="jumbotron-classic-content">
+                <div class="wow-outer">
+                </div>
+                <h1 class="text-uppercase text-white font-weight-bold wow-outer" style="margin: auto"><span class="wow slideInDown" data-wow-delay=".2s">Выбери себе занятие по душе</span></h1>
+                <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">Проведи время с пользой и заведи новых друзей</span></p>
+                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#" data-wow-delay=".4s">Вперёд</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination-outer container">
+          <div class="swiper-pagination swiper-pagination-modern swiper-pagination-marked" style="margin: auto"  data-index-bullet="true"></div>
+        </div>
+      </section>
+{#        ПОПУЛЯРНЫЕ СОБЫТИЯ#}
+      <section class="section novi-background section-md text-center">
+        <div class="container">
+          <h3 class="text-uppercase font-weight-bold wow-outer"><span class="wow slideInDown">Популярные события</span></h3>
+          <div class="row row-lg-50 row-35 offset-top-2">
+              {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}
+              <div class="col-md-4 wow-outer">
+              <!-- Post Modern-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Ждёшь в глазах моих печаль?</a></h4>
+                <ul class="post-modern-meta">
+                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>
+                  <li>Дата</li>
+                </ul>
+                <p style="font-size: 15px">Прошло, не мечтай! Знаю, любишь его. И тебя мне не жаль!</p>
+              </article>
+            </div>
+              <div class="col-md-4 wow-outer">
+              <!-- Post Modern-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="#">По ту сторону весны</a></h4>
+                <ul class="post-modern-meta">
+                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>
+                  <li>Дата</li>
+                </ul>
+                <p style="font-size: 15px">Я смотрю цветные сны</p>
+              </article>
+            </div>
+              <div class="col-md-4 wow-outer">
+              <!-- Post Modern-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Бог - одинокий ребёнок, брошенный всеми</a></h4>
+                <ul class="post-modern-meta">
+                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>
+                  <li>Дата</li>
+                </ul>
+                <p style="font-size: 15px">В пустом магазине игрушек</p>
+              </article>
+            </div>
+              <div class="col-md-4 wow-outer">
+              <!-- Post Modern-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Когда то, что давно на виду вдруг выйдет, срывая засов</a></h4>
+                <ul class="post-modern-meta">
+                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>
+                  <li>Дата</li>
+                </ul>
+                <p style="font-size: 15px">Мы больше не будем терпеть, спустим с цепей наших псов</p>
+              </article>
+            </div>
+            <div class="col-md-12 wow-outer"><a class="button button-primary" href="#">Больше</a></div>
+          </div>
+        </div>
+      </section>
+{#        ЦИФЕРКА#}
+              <section class="section novi-background section-1 bg-primary-darker text-center" style="background-image: url(../../static/images/1920-458.png);">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-sm-10 col-lg-7 col-xl-6">
+              <h3 class="wow-outer"><span class="wow slideInDown text-uppercase">{{ count }}</span></h3>
+              <p class="wow-outer offset-top-4"><span class="wow slideInDown" data-wow-delay=".05s" style="font-size: 20px">Ровно столько событий насчитывается на нашем сайте</span></p>
+              <div class="wow-outer button-outer"><a class="button button-primary-white wow slideInDown" href="/events" data-wow-delay=".1s">Перейти</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ШТУКИ-->
+      <section class="section novi-background section-lg text-center">
+        <div class="container">
+          <h3 class="text-uppercase">Главные парки Москвы</h3>
+          <p><span class="text-width-1">А чё в них классного, честно, я хз</span></p>
+          <div class="row row-35 row-xxl-70 offset-top-2">
+            <div class="col-sm-6 col-lg-3">
+              <!-- Thumbnail Light-->
+              <article class="thumbnail-light"><a class="thumbnail-light-media" href="#"><img class="thumbnail-light-image" src="../../static/images/service-thumbnail-1-270x300.jpg" alt="" width="270" height="300"/></a>
+                <h4 class="thumbnail-light-title"><a href="#">Ну типа</a></h4>
+              </article>
+            </div>
+            <div class="col-md-12 wow-outer"><a class="button button-primary" href="#">Все парки</a></div>
+          </div>
+        </div>
+      </section>
+{#        ЧТО-ТО#}
+              <section class="section novi-background section-lg bg-gray-100">
+        <div class="container">
+          <div class="row row-30">
+{#              Можно размножить нижний див на три. Сейчас поставил один по центру#}
+            <div class="col-sm-6 col-lg-4 wow-outer" style="margin: auto;">
+              <!-- Box Minimal-->
+              <article class="box-minimal">
+                <a class="wow fadeIn" style="font-size: 40px">☺</a>
+                <div class="box-minimal-main wow-outer">
+                  <h4 class="box-minimal-title wow slideInDown">Дайте денег!</h4>
+                  <p class="wow fadeInUpSmall">Просто так)</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+{#    <!-- Global Mailform Output-->#}
+{#    <div class="snackbars" id="form-output-global"></div>#}
+    <!-- Javascript-->
+    <script src="../../static/js/core.min.js"></script>
+    <script src="../../static/js/script.js"></script>
+  </body>
+</html>
+{% endblock content %}

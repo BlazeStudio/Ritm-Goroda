@@ -1,0 +1,33 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Карта</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="../../static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/fonts.css">
+     <link rel="stylesheet" href="../../static/css/map.css">
+    <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+  <div class="page"><br><br><br>
+      <section class="section novi-background section-md text-center">
+          <h3 style="text-align: center"><b>ИНТЕРАКТИВНАЯ КАРТА</b></h3><br>
+          <p>Все события, представленные на сайте, на одной карте</p></section>
+      <br>
+<div id="map-test" class="map"></div>
+      <section class="section novi-background section-md text-center"></section>
+      </div>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=07b853de-c56b-4c45-9c62-6c0e45ad480e&lang=ru_RU"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>#}
+  <script src="../../static/js/map_script.js"></script>
+  </body>
+</html>
+{% endblock content %}

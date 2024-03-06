@@ -1,0 +1,148 @@
+{
+  "features": [
+    {
+      "id": 1,
+      "title": "Бабушкинская",
+      "type": "sport",
+      "image": "н",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "с",
+      "address": "с",
+      "coordinates": "55.86947077671819,37.664203499999964",
+      "views": 6
+    },
+    {
+      "id": 2,
+      "title": "Свиблово",
+      "type": "music",
+      "image": "п",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "ы",
+      "address": "ы",
+      "coordinates": "55.85513413601704,37.65267391576129",
+      "views": 5
+    },
+    {
+      "id": 3,
+      "title": "Марьина Роща",
+      "type": "culture_study",
+      "image": "с",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "л",
+      "address": "а",
+      "coordinates": "55.79475381457494,37.61647124182736",
+      "views": 4
+    },
+    {
+      "id": 4,
+      "title": "Достоевская",
+      "type": "sport",
+      "image": "6",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "к",
+      "address": "л",
+      "coordinates": "55.781345773825215,37.61435561477465",
+      "views": 5
+    },
+    {
+      "id": 5,
+      "title": "Семёновская",
+      "type": "music",
+      "image": "",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "а",
+      "address": "к",
+      "coordinates": "55.78271123536529,37.71906304402942",
+      "views": 3
+    },
+    {
+      "id": 6,
+      "title": "Ла-Гатта",
+      "type": "art",
+      "image": "",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "https://lagattapizza.ru/",
+      "address": "улица Малыгина, 7",
+      "coordinates": "55.880114, 37.694997",
+      "views": 7
+    },
+    {
+      "id": 7,
+      "title": "Европолис",
+      "type": "art",
+      "image": "",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "https://europolis-msk.ru/",
+      "address": "проспект Мира, 211к2",
+      "coordinates": "55.845991, 37.661784",
+      "views": 2
+    },
+    {
+      "id": 8,
+      "title": "ВДНХ",
+      "type": "culture_study",
+      "image": "",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "https://mosmetro.ru/",
+      "address": "проспект Мира (дублёр)",
+      "coordinates": "55.820289, 37.639958",
+      "views": 3
+    },
+    {
+      "id": 9,
+      "title": "Авиапарк",
+      "type": "culture_study",
+      "image": "",
+      "tiny_description": "0",
+      "description": "0",
+      "link": "https://aviapark.com/",
+      "address": "Ходынский бульвар, 4",
+      "coordinates": "55.790492, 37.531372",
+      "views": 5
+    },
+    {
+      "id": 10,
+      "title": "Любовь",
+      "type": "art",
+      "image": "",
+      "tiny_description": "Давайте",
+      "description": "Огого",
+      "link": "",
+      "address": "",
+      "coordinates": "55.783979001956446,37.66227528076167",
+      "views": 80
+    },
+    {
+      "id": 11,
+      "title": "Выставка «Вселенная BRICS»",
+      "type": "art",
+      "image": "",
+      "tiny_description": "С 1 февраля по 10 марта 2024 года в Музее космонавтики пройдет выставка «Вселенная BRICS».",
+      "description": "На выставке собраны снимки космонавтов Роскосмоса Сергея Владимировича Кудь-Сверчкова и Ивана Викторовича Вагнера. Каждая фотография по-своему уникальна и интересна: с высоты полёта МКС космонавты запечатлели виды креативных городов ЮНЕСКО. Экспозиция, на которой собраны космические фотографии, будет доступна для посещения по входному билету в музей. \r\nМузей космонавтики станет отправной точкой развития выставки, созданной совместно с проектом «Вселенная BRICS». После фенисажа «Вселенная BRICS» выставка отправится в другие города России и стран BRICS — Бразилия, Индия, Китай, Южная Африка, ОАЭ, Саудовская Аравия, Иран, Египет и Эфиопия.",
+      "link": "",
+      "address": "ул. Пушкина, дом Колотушкина!",
+      "coordinates": "55.81063980440791,37.438695471376334",
+      "views": 35
+    },
+    {
+      "id": 12,
+      "title": "Not me",
+      "type": "art",
+      "image": "",
+      "tiny_description": "Family",
+      "description": "In your head",
+      "link": "",
+      "address": "",
+      "coordinates": "55.78670816012947,37.68741643083789",
+      "views": 2
+    }
+  ]
+}

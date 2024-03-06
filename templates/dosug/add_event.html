@@ -1,0 +1,146 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление события</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../static/css/style.css">
+        <style>
+        form {
+            max-width: 600px;
+        }
+
+        label {
+            display: flex;
+            align-items: center; /* Выравнивание элементов по вертикали */
+            margin-bottom: 10px;
+        }
+
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        #map {
+            width: 500px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="page"><br><br>
+      <section class="section novi-background section-md text-center">
+          <h3 style="text-align: center"><b>Добавление своего события</b></h3>
+          <p>Все события, представленные на сайте, на одной карте</p></section>
+
+
+      <br><div style="margin-left: 60px">
+        <h5>Заполните поля</h5><small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
+
+        <form method="POST">
+            {% csrf_token %}
+            <div style="color: black">
+    <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
+    <small><div id="title-count"></div></small> <!-- Счетчик оставшихся символов -->
+<br>
+    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 80px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
+    <small><div id="description-count"></div></small> <!-- Счетчик оставшихся символов -->
+<br>
+    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1000" required></textarea></label>
+    <small><div id="description2-count"></div></small> <!-- Счетчик оставшихся символов -->
+<br>
+    <label for="type"><b>*Тип:</b> <select style="margin-left: 150px" id="type" name="type">
+        <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
+    </select></label>
+<br>
+    <label  for="date"><b>Дата:</b>
+    <input style="margin-left: 150px" type="date" id="date" name="date"></label><br>
+                <!-- Блок для карты -->
+<label for="description"><b>*Карта:</b><div class="input-tab" id="map"></div></label>
+
+<!-- Форма для ввода координат и адреса -->
+    <label for="latitude">Широта:
+    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" readonly>
+    <div style="margin-left: 5px">Долгота:</div>
+    <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly></label>
+    <label for="address">Адрес:
+    <input style="margin-left: 17px" type="text" id="address" name="address"></label>
+<br>
+
+<br>
+    <input type="submit" value="Отправить">
+                </div>
+</form>
+
+    </div>
+
+        </div>
+</div><br><br><br>
+<script>
+    $('textarea').keypress(function(event) {
+   if (event.which == 13) {
+      event.stopPropagation();
+   }
+});
+</script>
+<script>
+    // Функция для отображения оставшихся символов в поле ввода
+    function countCharacters(inputId, countId, maxLength) {
+        var input = document.getElementById(inputId);
+        var count = document.getElementById(countId);
+
+        input.addEventListener('input', function() {
+            var remaining = maxLength - input.value.length;
+            count.textContent = 'Осталось символов: ' + remaining;
+        });
+    }
+
+    countCharacters('title', 'title-count', 100);
+
+    countCharacters('description', 'description-count', 250);
+
+    countCharacters('description2', 'description2-count', 1000);
+</script>
+<script>
+    ymaps.ready(init);
+
+    function init() {
+        var myMap = new ymaps.Map("map", {
+            center: [55.7558, 37.6173], // Москва
+            zoom: 10
+        });
+
+        var placemark = new ymaps.Placemark(myMap.getCenter(), {}, {
+            draggable: false // Устанавливаем метку как недраггируемую
+        });
+
+        // Добавляем метку на карту
+        myMap.geoObjects.add(placemark);
+
+        // Функция для обновления значений полей формы и адреса при клике на карту
+        function updateFormFields(coords) {
+            document.getElementById('latitude').value = coords[0];
+            document.getElementById('longitude').value = coords[1];
+            ymaps.geocode(coords).then(function (res) {
+                var firstGeoObject = res.geoObjects.get(0);
+                var address = firstGeoObject.getAddressLine();
+                document.getElementById('address').value = address;
+            });
+        }
+
+        // Обработчик события клика на карту
+        myMap.events.add('click', function (e) {
+            var coords = e.get('coords');
+            placemark.geometry.setCoordinates(coords);
+            updateFormFields(coords);
+        });
+    }
+</script>
+</body>
+</html>
+{% endblock content %}
+

@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Event(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=30, null=False)
@@ -12,6 +11,8 @@ class Event(models.Model):
     address = models.CharField(max_length=60)
     coordinates = models.CharField(max_length=100)
     views = models.IntegerField(default=0)
+    datetime = models.DateTimeField()
+
 
     def views_add(self):
         self.views += 1

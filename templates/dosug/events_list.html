@@ -2,7 +2,7 @@
 {% block content %}
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>Музыка</title>
+    <title>{{ type }}</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,61 @@
     <link rel="icon" href="../../static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
     <link rel="stylesheet" href="../../static/css/bootstrap.css">
-    <link rel="stylesheet" href="../../static/css/fonts.css">
     <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
-    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
+    .dropbtn {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 98;
+  max-height: 0;
+  min-width: 160px;
+  transition: max-height 0.15s ease-out;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: black;
+  background-color: #f9f9f9;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e2e2e2;
+}
+
+.dropdown:hover .dropdown-content {
+  max-height: 500px;
+  min-width: 160px;
+  transition: max-height 0.25s ease-in;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e0e0e0;
+  transition: max-height 0.25s ease-in;
+}
+
+
+    </style>
   </head>
   <body>
     <div class="page">
@@ -20,7 +72,7 @@
         <div class="breadcrumbs-custom-inner">
           <div class="container breadcrumbs-custom-container">
             <div class="breadcrumbs-custom-main">
-                {% if type == None %}
+                {% if type == 'all' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold">Все события</h1><br>
               <i class="breadcrumbs-custom-subtitle">Главное о главном</i>
                 {% elif type == 'art' %}
@@ -50,12 +102,23 @@
       <section class="section novi-background section-md text-center">
         <div class="container">
           <h3 class="text-uppercase font-weight-bold wow-outer"><span class="wow slideInDown">Все события</span></h3><br>
-        <block style=" padding: 20px; border: 1px solid #ccc; box-sizing: border-box;">
-        {#          {% if type == None %}#}
-              <a href="/events/{{ type }}">Все продукты</a>
-              <a href="/events/{{ type }}/views">По популярности</a>
-              <a href="/events/{{ type }}">По дате добавления</a>
-{#          {% endif %}#}</block>
+        <block style="box-sizing: border-box;">
+<div class="dropdown">
+  <button class="dropbtn" for="btnControl">Фильтры</button>
+  <div class="dropdown-content">
+    {% if type == None %}
+    <a href="/events/all" id="allProducts">Все продукты</a>
+    <a href="/events/all/views" id="popularity">По популярности</a>
+    <a href="/events/all" id="dateAdded">По дате добавления</a>
+    {% else %}
+    <a href="/events/{{ type }}" id="allProducts">Все продукты</a>
+    <a href="/events/{{ type }}/views" id="popularity">По популярности</a>
+    <a href="/events/{{ type }}" id="dateAdded">По дате добавления</a>
+    {% endif %}
+  </div>
+</div>
+
+        </block> <hr style=" width: 350px ">
           <div class="row row-lg-50 row-35 offset-top-2">
               {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}
               {% for event in map_dots|slice:":8" %}
@@ -83,7 +146,22 @@
     <script src="../../static/js/core.min.js"></script>
     <script src="../../static/js/script.js"></script>
   <script>
-  </script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var currentPage = window.location.pathname;
+
+    // Получаем ссылки из меню
+    var links = document.querySelectorAll(".dropdown-content a");
+
+    // Проверяем каждую ссылку
+    links.forEach(function(link) {
+      // Если адрес текущей страницы совпадает с адресом ссылки, добавляем подчёркивание
+      if (link.getAttribute("href") === currentPage) {
+        link.style.textDecoration = "underline";
+      }
+    });
+  });
+</script>
+
   </body>
 </html>
 {% endblock content %}

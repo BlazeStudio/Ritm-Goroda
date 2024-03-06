@@ -47,7 +47,7 @@
     <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
     <small><div id="title-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
-    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 80px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
+    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
     <small><div id="description-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
     <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1000" required></textarea></label>
@@ -57,8 +57,8 @@
         <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
     </select></label>
 <br>
-    <label  for="date"><b>Дата:</b>
-    <input style="margin-left: 150px" type="date" id="date" name="date"></label><br>
+    <label  for="datetime"><b>Дата:</b>
+    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime"></label><br>
                 <!-- Блок для карты -->
 <label for="description"><b>*Карта:</b><div class="input-tab" id="map"></div></label>
 
@@ -136,7 +136,7 @@
         myMap.events.add('click', function (e) {
             var coords = e.get('coords');
             placemark.geometry.setCoordinates(coords);
-            updateFormFields(coords);
+            updateFormFields(coords);1
         });
     }
 </script>

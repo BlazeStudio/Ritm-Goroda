@@ -4,13 +4,14 @@ from dosug.models import Event
 import json, random
 from dosug.forms import EventForm
 from datetime import datetime
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     event = Event.objects.all()
     count = Event.objects.count()
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
-def music(request, type='all', sort=None):
+def music(request, type='all', sort=None, preloader = True):
     end = False
     if type == 'all':
         if sort != None: map_dots = Event.objects.all().order_by('-' + sort)
@@ -18,10 +19,26 @@ def music(request, type='all', sort=None):
     else:
         if sort != None: map_dots = Event.objects.filter(type=type).order_by('-'+sort)
         else: map_dots = Event.objects.filter(type=type)
-    if (len(map_dots) < 8): end = True
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end})
+    paginator = Paginator(map_dots, 8)  # 10 объектов на странице
+
+    page_number = request.GET.get('page')
+    try:
+        map_dots = paginator.page(page_number)
+    except PageNotAnInteger:
+        # Если номер страницы не является целым числом, выводим первую страницу
+        map_dots = paginator.page(1)
+    except EmptyPage:
+        # Если номер страницы больше, чем общее количество страниц, выводим последнюю страницу
+        map_dots = paginator.page(paginator.num_pages)
+
+    if map_dots.has_next():
+        end = False
+    else:
+        end = True
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end, 'preloader': preloader})
 
 def list2(request, type='all', sort=None):
+    preloader = True
     end = False
     if type == 'all':
         if sort != "None": map_dots = Event.objects.all().order_by('-' + sort)
@@ -32,7 +49,22 @@ def list2(request, type='all', sort=None):
     if len(map_dots) > 8:
         map_dots = map_dots[8:]
         if len(map_dots) < 8: end = True
-    return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end})
+    return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end, 'preloader': preloader})
+
+# def list2(request, type='all', sort=None):
+#     preloader = request.GET.get('preloader', False)
+#     print("wedf", preloader)
+#     end = False
+#     if type == 'all':
+#         if sort != "None": map_dots = Event.objects.all().order_by('-' + sort)
+#         else: map_dots = Event.objects.all()
+#     else:
+#         if sort != "None": map_dots = Event.objects.filter(type=type).order_by('-'+sort)
+#         else: map_dots = Event.objects.filter(type=type)
+#     if len(map_dots) > 8:
+#         map_dots = map_dots[8:]
+#         if len(map_dots) < 8: end = True
+#     return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end, 'preloader': preloader})
 
 def random_event(request):
     count = Event.objects.count()

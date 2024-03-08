@@ -18,10 +18,19 @@ function init() {
           clusterCaption: 'Описание в кластере',
           balloonContent: [`
      <div class="balloon">
-     <div class="balloon_title"><h4><b><a href="">${item.title}</a></b></h4></div>
-     <div class="tag">Спортивное мероприятие</div>
+     <div class="balloon_title"><h4><b><a href="/event/${ item.id }" target="_blank">${item.title}</a></b></h4></div>
+        ${item.type === "art" ? 
+            `<div class="tag">Творческое мероприятие</div>` : 
+            item.type === "sport" ?
+            `<div class="tag">Спортивное мероприятие</div>` :
+            item.type === "entertainments" ?
+            `<div class="tag">Развлекательное мероприятие</div>` :
+            item.type === "music" ?
+            `<div class="tag">Музыкальное мероприятие</div>` :
+            `<div class="tag">Культура и образование</div>`
+        }
      <div><img src="static/images/logo.png" width="150px" height="150px"></div>
-     <div class="balloon_adress">${item.description}</div>
+     <div class="balloon_adress">${item.tiny_description}</div>
      <div class="links">
      <a href="${item.link}" target="_blank">${item.link}</a>
 </div>

@@ -11,19 +11,28 @@ def home(request):
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
 def music(request, type='all', sort=None):
+    end = False
     if type == 'all':
-        map_dots = Event.objects.all()
-    elif ((type == 'all') and (sort != None)):
-        map_dots = Event.objects.all().order_by('-' + sort)
-    elif sort != None:
-        map_dots = Event.objects.filter(type=type).order_by('-'+sort)
+        if sort != None: map_dots = Event.objects.all().order_by('-' + sort)
+        else: map_dots = Event.objects.all()
     else:
-        map_dots = Event.objects.filter(type=type)
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type})
+        if sort != None: map_dots = Event.objects.filter(type=type).order_by('-'+sort)
+        else: map_dots = Event.objects.filter(type=type)
+    if (len(map_dots) < 8): end = True
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end})
 
-def music2(request, type=None, sort=None):
-    map_dots = Event.objects.all().order_by('-' + sort)
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type})
+def list2(request, type='all', sort=None):
+    end = False
+    if type == 'all':
+        if sort != "None": map_dots = Event.objects.all().order_by('-' + sort)
+        else: map_dots = Event.objects.all()
+    else:
+        if sort != "None": map_dots = Event.objects.filter(type=type).order_by('-'+sort)
+        else: map_dots = Event.objects.filter(type=type)
+    if len(map_dots) > 8:
+        map_dots = map_dots[8:]
+        if len(map_dots) < 8: end = True
+    return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end})
 
 def random_event(request):
     count = Event.objects.count()

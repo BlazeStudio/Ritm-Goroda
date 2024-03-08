@@ -22,6 +22,7 @@
 }
 
     </style>
+    <link rel="stylesheet" href="../../static/css/map.css">
 </head>
 <body>
 <div class="page">
@@ -48,12 +49,33 @@
             <h5>Информация о событии</h5>
             <p>Дата - {{event.datetime}}</p>
             <p>Адрес - {{ event.address }}</p>
-            <p>Карта</p>
-
+            <p style="text-align: center; margin-bottom: 10px">Карта</p>
+            <div id="event-map" class="map2" data-event="{{ event }}"></div>
+        <section class="section novi-background section-md text-center"></section>
+      </div>
         </div>
     </div>
     </div>
+<div id="map-atrib"
+    data-id="{{ event.id }}"
+    data-title="{{ event.title }}"
+    data-type="{{ event.type }}"
+    data-image="{{ event.image }}"
+    data-tiny-description="{{ event.tiny_description }}"
+    data-description="{{ event.description }}"
+    data-link="{{ event.link }}"
+    data-address="{{ event.address }}"
+    data-coordinates="{{ event.coordinates }}"
+    data-views="{{ event.views }}"
+    data-datetime="{{ event.datetime }}">
+</div>
 
+<br>
+<br>
+<br>
+<br>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=07b853de-c56b-4c45-9c62-6c0e45ad480e&lang=ru_RU"></script>
+<script src="../../static/js/map_script2.js"></script>
 </body>
 </html>
 {% endblock content %}

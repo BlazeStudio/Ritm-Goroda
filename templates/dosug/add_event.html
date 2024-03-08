@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление события</title>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=07b853de-c56b-4c45-9c62-6c0e45ad480e&lang=ru_RU"></script>
     <link rel="stylesheet" href="../../static/css/style.css">
         <style>
         form {
@@ -60,7 +60,7 @@
     <label  for="datetime"><b>Дата:</b>
     <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime"></label><br>
                 <!-- Блок для карты -->
-<label for="description"><b>*Карта:</b><div class="input-tab" id="map"></div></label>
+<b>*Карта:</b><div class="input-tab" id="map"></div>
 
 <!-- Форма для ввода координат и адреса -->
     <label for="latitude">Широта:
@@ -68,7 +68,7 @@
     <div style="margin-left: 5px">Долгота:</div>
     <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly></label>
     <label for="address">Адрес:
-    <input style="margin-left: 17px" type="text" id="address" name="address"></label>
+    <input style="margin-left: 17px" type="text" id="address" name="address" readonly></label>
 <br>
 
 <br>
@@ -113,7 +113,6 @@
             center: [55.7558, 37.6173], // Москва
             zoom: 10
         });
-
         var placemark = new ymaps.Placemark(myMap.getCenter(), {}, {
             draggable: false // Устанавливаем метку как недраггируемую
         });
@@ -125,18 +124,26 @@
         function updateFormFields(coords) {
             document.getElementById('latitude').value = coords[0];
             document.getElementById('longitude').value = coords[1];
-            ymaps.geocode(coords).then(function (res) {
+            var geocoder = ymaps.geocode(coords);
+            geocoder.then(
+                function (res) {
                 var firstGeoObject = res.geoObjects.get(0);
                 var address = firstGeoObject.getAddressLine();
                 document.getElementById('address').value = address;
-            });
+            },
+              function (err) {
+            console.log('Ошибка геокодирования: ' + err.message);
+        }
+            );
         }
 
         // Обработчик события клика на карту
         myMap.events.add('click', function (e) {
+            // e.preventDefault();
+            // window.scrollTo(0, 0);
             var coords = e.get('coords');
             placemark.geometry.setCoordinates(coords);
-            updateFormFields(coords);1
+            updateFormFields(coords);
         });
     }
 </script>

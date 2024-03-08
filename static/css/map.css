@@ -10,7 +10,14 @@
     font-size: 12px;
 }
 
-/*Скрывает условия использования*/
+.map2{
+
+    margin: auto;
+    width: 350px;
+    height: 350px;
+    background: #0d0a0a;
+}
+
 [class*="copyrights-pane"] {
   display: none !important;
 }

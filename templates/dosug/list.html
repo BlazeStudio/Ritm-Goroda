@@ -1,0 +1,28 @@
+{% block content2 %}
+          <div class="row row-lg-50 row-35 offset-top-2">
+              {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}
+              {% for event in map_dots|slice:":8" %}
+              <div class="col-md-3 wow-outer">
+              <!-- Post Modern-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
+                <ul class="post-modern-meta">
+                  <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>
+                </ul>
+                <p style="font-size: 15px">{{ event.tiny_description }}</p>
+              </article>
+            </div>
+              {% endfor %}
+              {% if end == True %}
+              <div class="col-md-12 wow-outer"><p style="font-size: 17px">Больше здесь ничего нет!</p></div>
+              {% else %}
+              <div class="col-md-12 wow-outer"><a class="button button-primary" style="color: white" id="load-more-button" onclick="deleteButton()">Больше</a></div>
+              {% endif %}
+          </div>
+<script>
+    function deleteButton() {
+    var button = document.getElementById("load-more-button");
+    button.remove();
+}
+</script>
+{% endblock content2 %}

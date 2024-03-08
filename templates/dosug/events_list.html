@@ -59,7 +59,6 @@
 
 .dropdown:hover .dropbtn {
   background-color: #f9f9f9;
-  border-bottom: 1px solid #e0e0e0;
   transition: max-height 0.25s ease-in;
 }
 
@@ -118,26 +117,17 @@
   </div>
 </div>
 
-        </block> <hr style=" width: 350px ">
-          <div class="row row-lg-50 row-35 offset-top-2">
-              {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}
-              {% for event in map_dots|slice:":8" %}
-              <div class="col-md-3 wow-outer">
-              <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
-                <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
-                <ul class="post-modern-meta">
-                  <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>
-                </ul>
-                <p style="font-size: 15px">{{ event.tiny_description }}</p>
-              </article>
+        </block> <hr style=" width: 350px "><br><br>
+          <div id="content-container">
+          {% block content2 %}
+          {% include "dosug/list.html" %}
+            {% if end == False %}
+            {% endif %}
+          {% endblock content2 %}
             </div>
-              {% endfor %}
-            <div class="col-md-12 wow-outer"><a class="button button-primary" href="#">Больше</a></div>
-          </div>
         </div>
       </section>
-
+<div id="myElement" data-sort="{{sort}}"></div>
     </div>
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
@@ -161,7 +151,35 @@
     });
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-Km4JHbU5IXY0bYip7bBf/aFMsOKjpa3SmHgAXx4wdPw=" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var currentPage = window.location.pathname;
 
+    // Function to load more content
+    function loadMoreContent() {
+      let element = document.getElementById('myElement');
+      let sort = element.dataset.sort;
+      console.log(sort)
+      $.ajax({
+        url: '/list/' + sort, // Replace with your endpoint
+        method: 'GET',
+        success: function(response) {
+          // Append the fetched content to the container
+          $('#content-container').append(response);
+        },
+        error: function(error) {
+          console.error('Error loading more content:', error);
+        }
+      });
+    }
+
+    // Event listener for the "Больше" button
+    $('#load-more-button').on('click', function() {
+      loadMoreContent();
+    });
+  });
+</script>
   </body>
 </html>
 {% endblock content %}

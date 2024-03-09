@@ -52,6 +52,7 @@ function init() {
 
     map.controls.remove('searchControl');
     map.controls.remove('zoomControl');
+    map.controls.remove('rulerControl'); // удаляем контрол правил
 
     // Создание объекта геокодера
     var geocoder = ymaps.geocode(event.coordinates);

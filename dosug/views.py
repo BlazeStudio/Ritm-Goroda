@@ -1,3 +1,8 @@
+import os
+import shutil
+import uuid
+
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from dosug.models import Event
@@ -56,6 +61,14 @@ def add_event(request):
         link = request.POST.get("url")
         coordinates = latitude + ',' + longitude
         address = request.POST.get("address")
+        image = request.FILES.get('photo')
+        if image == None:
+            filename = "default.jpg"
+        else:
+            filename = str(uuid.uuid4()) + '.' + image.name.split('.')[-1]
+            fs = FileSystemStorage()
+            saved_filename = fs.save(filename, image)
+            # image_path = fs.url(saved_filename)
         new_event = Event.objects.create(title=title,
                                          type=type,
                                          tiny_description=short_description,
@@ -64,7 +77,8 @@ def add_event(request):
                                          address=address,
                                          datetime=date_time_obj,
                                          phone=phone,
-                                         link=link)
+                                         link=link,
+                                         image=filename)
         messages.success(request, 'Событие было успешно добавлено на сайт!')
         return redirect(request.path)
     return render(request, 'dosug/add_event.html', {'form': eventform})

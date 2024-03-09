@@ -41,7 +41,7 @@
       <br><div style="margin-left: 60px">
         <h5>Заполните поля</h5><small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="color: black">
     <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
@@ -63,6 +63,7 @@
     <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>
     <label  for="url"><b>Сайт:</b>
     <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30"/></label><br>
+    <label for="photo"><b>Фотография:</b> <input style="margin-left: 100px" type="file" id="photo" name="photo" accept="image/jpeg, image/jpg, image/png"></label><br>
                 <!-- Блок для карты -->
 <b>*Карта:</b><div class="input-tab" id="map"></div>
 
@@ -125,7 +126,7 @@ document.getElementById("latitude").addEventListener("input", function() {
 
     function init() {
         var myMap = new ymaps.Map("map", {
-            center: [55.7558, 37.6173], // Москва
+            center: [55.7558, 37.6173],
             zoom: 10
         });
         var placemark = new ymaps.Placemark(myMap.getCenter(), {}, {

@@ -3,10 +3,9 @@ from . import views
 
 urlpatterns = [
     path('', views.home),
-    path('events', views.music),
-    path('events/<str:type>', views.music),
-    path('events/all/<str:sort>', views.music),
-    path('events/<str:type>/<str:sort>', views.music),
+    path('events', views.event_list),
+    path('events/<str:type>', views.event_list),
+    path('events/<str:type>/<str:sort>', views.event_list),
     path('map', views.map),
     path('test', views.test),
     path('add_event', views.add_event),

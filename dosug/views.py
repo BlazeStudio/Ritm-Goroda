@@ -16,24 +16,22 @@ def home(request):
     count = Event.objects.count()
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
-def music(request, type='all', sort=None):
+def event_list(request, type='all', sort=None):
     end = False
     if type == 'all':
-        if sort != None: map_dots = Event.objects.all().order_by('-' + sort)
+        if sort != None: map_dots = Event.objects.all().order_by(sort)
         else: map_dots = Event.objects.all()
     else:
-        if sort != None: map_dots = Event.objects.filter(type=type).order_by('-'+sort)
+        if sort != None: map_dots = Event.objects.filter(type=type).order_by(sort)
         else: map_dots = Event.objects.filter(type=type)
-    paginator = Paginator(map_dots, 8)  # 10 объектов на странице
+    paginator = Paginator(map_dots, 8)
 
     page_number = request.GET.get('page')
     try:
         map_dots = paginator.page(page_number)
     except PageNotAnInteger:
-        # Если номер страницы не является целым числом, выводим первую страницу
         map_dots = paginator.page(1)
     except EmptyPage:
-        # Если номер страницы больше, чем общее количество страниц, выводим последнюю страницу
         map_dots = paginator.page(paginator.num_pages)
 
     if map_dots.has_next():

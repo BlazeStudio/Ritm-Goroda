@@ -119,15 +119,10 @@
 <div class="dropdown">
   <button class="dropbtn" for="btnControl">Фильтры</button>
   <div class="dropdown-content">
-    {% if type == None %}
-    <a href="/events/all">Все продукты</a>
-    <a href="/events/all/views">По популярности</a>
-    <a href="/events/all/datetime">По дате добавления</a>
-    {% else %}
     <a href="/events/{{ type }}">Все продукты</a>
-    <a href="/events/{{ type }}/views">По популярности</a>
-    <a href="/events/{{ type }}/datetime">По дате добавления</a>
-    {% endif %}
+    <a href="/events/{{ type }}/-views">Сначала популярные</a>
+    <a href="/events/{{ type }}/views">Сначала непопулярные</a>
+    <a href="/events/{{ type }}/-datetime">Сначала ближайшие</a>
   </div>
 </div>
 

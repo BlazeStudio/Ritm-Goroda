@@ -50,7 +50,7 @@
     <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
     <small><div id="description-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
-    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1000" required></textarea></label>
+    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required></textarea></label>
     <small><div id="description2-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
     <label for="type"><b>*Тип:</b> <select style="margin-left: 150px" id="type" name="type">
@@ -58,13 +58,17 @@
     </select></label>
 <br>
     <label  for="datetime"><b>Дата:</b>
-    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime"></label><br>
+    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label><br>
+    <label  for="phone"><b>Телефон:</b>
+    <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>
+    <label  for="url"><b>Сайт:</b>
+    <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30"/></label><br>
                 <!-- Блок для карты -->
 <b>*Карта:</b><div class="input-tab" id="map"></div>
 
 <!-- Форма для ввода координат и адреса -->
     <label for="latitude">Широта:
-    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" readonly>
+    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required>
     <div style="margin-left: 5px">Долгота:</div>
     <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly></label>
     <label for="address">Адрес:
@@ -80,6 +84,17 @@
 
         </div>
 </div><br><br><br>
+
+<script>
+document.getElementById("latitude").addEventListener("input", function() {
+    if (this.value !== "") {
+        this.setAttribute("required", "");
+    } else {
+        this.removeAttribute("required");
+        this.setCustomValidity("Укажите точку на карте");
+    }
+});
+</script>
 <script>
     $('textarea').keypress(function(event) {
    if (event.which == 13) {
@@ -103,7 +118,7 @@
 
     countCharacters('description', 'description-count', 250);
 
-    countCharacters('description2', 'description2-count', 1000);
+    countCharacters('description2', 'description2-count', 1200);
 </script>
 <script>
     ymaps.ready(init);
@@ -114,7 +129,7 @@
             zoom: 10
         });
         var placemark = new ymaps.Placemark(myMap.getCenter(), {}, {
-            draggable: false // Устанавливаем метку как недраггируемую
+            draggable: false
         });
 
         // Добавляем метку на карту
@@ -146,6 +161,38 @@
             updateFormFields(coords);
         });
     }
+</script>
+<script>
+    // Функция для форматирования номера телефона в реальном времени
+    function formatPhoneNumber(input) {
+        // Убираем все нецифровые символы из введенного значения
+        const cleaned = ('' + input.value).replace(/\D/g, '');
+        // Форматируем номер телефона как +(код страны) (код региона) номер
+        let formatted = '';
+        if (cleaned.length >= 1) {
+            formatted += '+' + cleaned[0];
+        }
+        if (cleaned.length > 1) {
+            formatted += ' (' + cleaned.substring(1, 4);
+        }
+        if (cleaned.length > 4) {
+            formatted += ') ' + cleaned.substring(4, 7);
+        }
+        if (cleaned.length > 7) {
+            formatted += '-' + cleaned.substring(7, 11);
+        }
+        // Выводим отформатированный номер телефона обратно в поле ввода
+        input.value = formatted;
+    }
+
+    // Получаем поле ввода номера телефона
+    const phoneInput = document.getElementById('phone');
+
+    // Слушаем событие ввода в поле номера телефона
+    phoneInput.addEventListener('input', function() {
+        // Форматируем введенный номер телефона
+        formatPhoneNumber(this);
+    });
 </script>
 </body>
 </html>

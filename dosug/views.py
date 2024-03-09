@@ -11,7 +11,7 @@ def home(request):
     count = Event.objects.count()
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
-def music(request, type='all', sort=None, preloader = True):
+def music(request, type='all', sort=None):
     end = False
     if type == 'all':
         if sort != None: map_dots = Event.objects.all().order_by('-' + sort)
@@ -35,36 +35,7 @@ def music(request, type='all', sort=None, preloader = True):
         end = False
     else:
         end = True
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end, 'preloader': preloader})
-
-def list2(request, type='all', sort=None):
-    preloader = True
-    end = False
-    if type == 'all':
-        if sort != "None": map_dots = Event.objects.all().order_by('-' + sort)
-        else: map_dots = Event.objects.all()
-    else:
-        if sort != "None": map_dots = Event.objects.filter(type=type).order_by('-'+sort)
-        else: map_dots = Event.objects.filter(type=type)
-    if len(map_dots) > 8:
-        map_dots = map_dots[8:]
-        if len(map_dots) < 8: end = True
-    return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end, 'preloader': preloader})
-
-# def list2(request, type='all', sort=None):
-#     preloader = request.GET.get('preloader', False)
-#     print("wedf", preloader)
-#     end = False
-#     if type == 'all':
-#         if sort != "None": map_dots = Event.objects.all().order_by('-' + sort)
-#         else: map_dots = Event.objects.all()
-#     else:
-#         if sort != "None": map_dots = Event.objects.filter(type=type).order_by('-'+sort)
-#         else: map_dots = Event.objects.filter(type=type)
-#     if len(map_dots) > 8:
-#         map_dots = map_dots[8:]
-#         if len(map_dots) < 8: end = True
-#     return render(request, 'dosug/list.html', {'map_dots': map_dots, 'type': type, 'end': end, 'preloader': preloader})
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end})
 
 def random_event(request):
     count = Event.objects.count()
@@ -81,10 +52,21 @@ def add_event(request):
         longitude = request.POST.get("longitude")
         date = request.POST.get("datetime")
         date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
+        phone = request.POST.get("phone")
+        link = request.POST.get("url")
         coordinates = latitude + ',' + longitude
         address = request.POST.get("address")
-        new_event = Event.objects.create(title=title, type=type, tiny_description=short_description, description=description, coordinates=coordinates, address=address, datetime=date_time_obj)
+        new_event = Event.objects.create(title=title,
+                                         type=type,
+                                         tiny_description=short_description,
+                                         description=description,
+                                         coordinates=coordinates,
+                                         address=address,
+                                         datetime=date_time_obj,
+                                         phone=phone,
+                                         link=link)
         messages.success(request, 'Событие было успешно добавлено на сайт!')
+        return redirect(request.path)
     return render(request, 'dosug/add_event.html', {'form': eventform})
 
 def map(request):

@@ -2,7 +2,13 @@
 {% block content %}
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>{{ type }}</title>
+      {% if type == "art" %}<title>Творчество</title>
+      {% elif type == "sport" %}<title>Спорт</title>
+      {% elif type == "music" %}<title>Музыка</title>
+      {% elif type == "culture_study" %}<title>Культура и образование</title>
+      {% elif type == "entertainments" %}<title>Развлечения</title>
+      {% else %}<title>Все события</title>
+      {% endif %}
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,7 +67,15 @@
   background-color: #f9f9f9;
   transition: max-height 0.25s ease-in;
 }
-
+.description {
+        font-size: 15px;
+        overflow-wrap: break-word;
+        white-space: normal;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        max-height: 90px;
+        overflow: hidden;
+}
 
     </style>
   </head>
@@ -106,13 +120,13 @@
   <button class="dropbtn" for="btnControl">Фильтры</button>
   <div class="dropdown-content">
     {% if type == None %}
-    <a href="/events/all" id="allProducts">Все продукты</a>
-    <a href="/events/all/views" id="popularity">По популярности</a>
-    <a href="/events/all/datetime" id="dateAdded">По дате добавления</a>
+    <a href="/events/all">Все продукты</a>
+    <a href="/events/all/views">По популярности</a>
+    <a href="/events/all/datetime">По дате добавления</a>
     {% else %}
-    <a href="/events/{{ type }}" id="allProducts">Все продукты</a>
-    <a href="/events/{{ type }}/views" id="popularity">По популярности</a>
-    <a href="/events/{{ type }}/datetime" id="dateAdded">По дате добавления</a>
+    <a href="/events/{{ type }}">Все продукты</a>
+    <a href="/events/{{ type }}/views">По популярности</a>
+    <a href="/events/{{ type }}/datetime">По дате добавления</a>
     {% endif %}
   </div>
 </div>
@@ -124,12 +138,13 @@
               {% for event in map_dots|slice:":8" %}
               <div class="col-md-3 wow-outer">
               <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
+<!--                  src="../../static/images/grid-blog-1-571x353.jpg"-->
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="../../static/images/event_pics/{{ event.image }}" alt="" width="570" height="352"/></a>
                 <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
                 <ul class="post-modern-meta">
                   <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>
                 </ul>
-                <p style="font-size: 15px">{{ event.tiny_description }}</p>
+                <p class="description">{{ event.tiny_description }}</p>
               </article>
             </div>
               {% endfor %}

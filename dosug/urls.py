@@ -7,7 +7,6 @@ urlpatterns = [
     path('events/<str:type>', views.music),
     path('events/all/<str:sort>', views.music),
     path('events/<str:type>/<str:sort>', views.music),
-    path('list/<str:sort>', views.list2),
     path('map', views.map),
     path('test', views.test),
     path('add_event', views.add_event),

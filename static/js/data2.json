@@ -9,6 +9,7 @@
       "description": "0",
       "link": "с",
       "address": "с",
+      "phone": "Отсутствует",
       "coordinates": "55.86947077671819,37.664203499999964",
       "views": 11,
       "datetime": "2024-03-06 19:57:36"
@@ -22,8 +23,9 @@
       "description": "0",
       "link": "ы",
       "address": "ы",
+      "phone": "Отсутствует",
       "coordinates": "55.85513413601704,37.65267391576129",
-      "views": 7,
+      "views": 10,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -35,8 +37,9 @@
       "description": "0",
       "link": "л",
       "address": "а",
+      "phone": "Отсутствует",
       "coordinates": "55.79475381457494,37.61647124182736",
-      "views": 6,
+      "views": 9,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -48,6 +51,7 @@
       "description": "0",
       "link": "к",
       "address": "л",
+      "phone": "Отсутствует",
       "coordinates": "55.781345773825215,37.61435561477465",
       "views": 8,
       "datetime": "2024-03-06 19:57:36"
@@ -61,8 +65,9 @@
       "description": "0",
       "link": "а",
       "address": "к",
+      "phone": "Отсутствует",
       "coordinates": "55.78271123536529,37.71906304402942",
-      "views": 9,
+      "views": 10,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -74,6 +79,7 @@
       "description": "0",
       "link": "https://lagattapizza.ru/",
       "address": "улица Малыгина, 7",
+      "phone": "Отсутствует",
       "coordinates": "55.880114, 37.694997",
       "views": 23,
       "datetime": "2024-03-06 19:57:36"
@@ -87,8 +93,9 @@
       "description": "0",
       "link": "https://europolis-msk.ru/",
       "address": "проспект Мира, 211к2",
+      "phone": "Отсутствует",
       "coordinates": "55.845991, 37.661784",
-      "views": 14,
+      "views": 15,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -100,8 +107,9 @@
       "description": "0",
       "link": "https://mosmetro.ru/",
       "address": "проспект Мира (дублёр)",
+      "phone": "Отсутствует",
       "coordinates": "55.820289, 37.639958",
-      "views": 7,
+      "views": 8,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -113,6 +121,7 @@
       "description": "0",
       "link": "https://aviapark.com/",
       "address": "Ходынский бульвар, 4",
+      "phone": "Отсутствует",
       "coordinates": "55.790492, 37.531372",
       "views": 7,
       "datetime": "2024-03-06 19:57:36"
@@ -126,6 +135,7 @@
       "description": "Огого",
       "link": "",
       "address": "",
+      "phone": "Отсутствует",
       "coordinates": "55.783979001956446,37.66227528076167",
       "views": 95,
       "datetime": "2024-03-06 19:57:36"
@@ -139,8 +149,9 @@
       "description": "На выставке собраны снимки космонавтов Роскосмоса Сергея Владимировича Кудь-Сверчкова и Ивана Викторовича Вагнера. Каждая фотография по-своему уникальна и интересна: с высоты полёта МКС космонавты запечатлели виды креативных городов ЮНЕСКО. Экспозиция, на которой собраны космические фотографии, будет доступна для посещения по входному билету в музей. \r\nМузей космонавтики станет отправной точкой развития выставки, созданной совместно с проектом «Вселенная BRICS». После фенисажа «Вселенная BRICS» выставка отправится в другие города России и стран BRICS — Бразилия, Индия, Китай, Южная Африка, ОАЭ, Саудовская Аравия, Иран, Египет и Эфиопия.",
       "link": "",
       "address": "ул. Пушкина, дом Колотушкина!",
+      "phone": "Отсутствует",
       "coordinates": "55.81063980440791,37.438695471376334",
-      "views": 247,
+      "views": 248,
       "datetime": "2024-03-06 19:57:36"
     },
     {
@@ -152,6 +163,7 @@
       "description": "In your head",
       "link": "",
       "address": "",
+      "phone": "Отсутствует",
       "coordinates": "55.78670816012947,37.68741643083789",
       "views": 4,
       "datetime": "2024-03-06 19:57:36"
@@ -165,6 +177,7 @@
       "description": "Тес т тест кпоока",
       "link": "",
       "address": "улуалаулуалуал",
+      "phone": "Отсутствует",
       "coordinates": "55.787441896192476,37.61150642852779",
       "views": 4,
       "datetime": "2024-03-07 12:00:00"
@@ -178,9 +191,52 @@
       "description": "Прив привыа9цура9рцуашгрцуашицуйгшраищгйнуаищгйнуаи",
       "link": "",
       "address": "Москва, Череповецкая улица, 4к1",
+      "phone": "Отсутствует",
       "coordinates": "55.89795118635914,37.56482145263841",
-      "views": 3,
+      "views": 10,
       "datetime": "2023-03-09 22:00:00"
+    },
+    {
+      "id": 15,
+      "title": "Проверка",
+      "type": "entertainments",
+      "image": "",
+      "tiny_description": "Проверка",
+      "description": "Проверка",
+      "link": "",
+      "address": "Москва, Большая Почтовая улица, 26Вс2",
+      "phone": "+7 (123) 332-3232",
+      "coordinates": "55.7784841271646,37.69969746093745",
+      "views": 1,
+      "datetime": "2222-02-22 22:02:00"
+    },
+    {
+      "id": 16,
+      "title": "Вот и всё",
+      "type": "art",
+      "image": "",
+      "tiny_description": "что было",
+      "description": "не было и нету",
+      "link": "",
+      "address": "Москва, Тверской путепровод",
+      "phone": "",
+      "coordinates": "55.77796171054119,37.58210941772456",
+      "views": 0,
+      "datetime": "2122-02-12 05:05:00"
+    },
+    {
+      "id": 17,
+      "title": "Проверка третьей страницы",
+      "type": "art",
+      "image": "",
+      "tiny_description": "Вот и приколисты мы",
+      "description": "<p>Lorem ipsum dolor sit amet. Qui explicabo incidunt qui iusto autem ad atque consectetur eos tempore distinctio et magni aspernatur sit necessitatibus quam sed autem velit? Ea voluptatem maiores ab nihil ipsa et dolor perspiciatis eos beatae commodi et cumque illum. Ea quasi consectetur aut mollitia consequuntur vel recusandae ratione est quos sunt et voluptates quia et officia ducimus. </p><p>Sed mollitia Quis non soluta porro et molestias perspiciatis hic dolore quasi et repudiandae iure eos sapiente nihil. Et explicabo ipsa aut commodi ipsa ab ducimus dolores. Ea doloribus necessitatibus vel voluptates galisum sit earum velit ex aliquam galisum nam asperiores vero sed quasi nostrum et corrupti dolores. Et optio laboriosam ut quia pariatur eum galisum omnis sit corrupti molestiae vel error omnis. </p><p>Sit molestiae tenetur aut eius culpa qui officiis labore ut impedit provident. Vel voluptas amet et similique doloremque ut impedit fuga At perspiciatis facilis aut recusandae velit ea saepe quia! In nihil repellendus qui quia harum ut voluptatem iusto qui reprehenderit quia quo perspiciatis rerum aut quibusdam dicta. Qui ipsam ipsa et tempora assumenda 33 cupiditate laudantium.",
+      "link": "",
+      "address": "Москва, улица Кипренского, 14",
+      "phone": "",
+      "coordinates": "55.80339818275354,37.497823681640575",
+      "views": 0,
+      "datetime": "0012-12-22 22:22:00"
     }
   ]
 }

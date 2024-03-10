@@ -17,13 +17,20 @@ def home(request):
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
 def event_list(request, type='all', sort=None):
-    end = False
-    if type == 'all':
-        if sort != None: map_dots = Event.objects.all().order_by(sort)
-        else: map_dots = Event.objects.all()
+    search_query = request.POST.get('search_query')
+    print(search_query)
+    if request.method == "POST":
+        map_dots = Event.objects.filter(title__icontains=search_query)
+        if type != 'all':
+            map_dots = map_dots.filter(type=type)
+        if sort is not None:
+            map_dots = map_dots.order_by(sort)
     else:
-        if sort != None: map_dots = Event.objects.filter(type=type).order_by(sort)
-        else: map_dots = Event.objects.filter(type=type)
+        map_dots = Event.objects.all()
+        if type != 'all':
+            map_dots = map_dots.filter(type=type)
+        if sort is not None:
+            map_dots = map_dots.order_by(sort)
     paginator = Paginator(map_dots, 8)
 
     page_number = request.GET.get('page')
@@ -33,12 +40,7 @@ def event_list(request, type='all', sort=None):
         map_dots = paginator.page(1)
     except EmptyPage:
         map_dots = paginator.page(paginator.num_pages)
-
-    if map_dots.has_next():
-        end = False
-    else:
-        end = True
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'end': end})
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'search': search_query})
 
 def random_event(request):
     count = Event.objects.count()

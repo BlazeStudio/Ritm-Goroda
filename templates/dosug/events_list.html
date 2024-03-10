@@ -80,6 +80,15 @@
     </style>
   </head>
   <body>
+<!--  {% if request.method != "POST" %}-->
+<!--      <div class="preloader">-->
+<!--    <div class="preloader-logo"><img src="../../static/images/logo.png" alt="" width="250" height="250" srcset="../../static/images/logo.png"/>-->
+<!--   </div>-->
+<!--    <div class="preloader-body">-->
+<!--         <div class="loadingProgressG" id="loadingProgressG_1"></div>-->
+<!--     </div>-->
+<!--    </div>-->
+<!--  {% endif %}-->
     <div class="page">
       <section class="section novi-background breadcrumbs-custom bg-image context-dark" style="background-image: url(../../static/images/concert.jpg);">
         <div class="breadcrumbs-custom-inner">
@@ -115,18 +124,25 @@
       <section class="section novi-background section-md text-center">
         <div class="container">
           <h3 class="text-uppercase font-weight-bold wow-outer"><span class="wow slideInDown">Все события</span></h3><br>
-        <block style="box-sizing: border-box;">
+        <block  style="box-sizing: border-box; display: flex; align-items: center">
 <div class="dropdown">
   <button class="dropbtn" for="btnControl">Фильтры</button>
   <div class="dropdown-content">
-    <a href="/events/{{ type }}">Все продукты</a>
-    <a href="/events/{{ type }}/-views">Сначала популярные</a>
-    <a href="/events/{{ type }}/views">Сначала непопулярные</a>
-    <a href="/events/{{ type }}/-datetime">Сначала ближайшие</a>
+    <a href="/events/{{ type }}" onclick="document.getElementById('search-form').setAttribute('action', '/events/{{ type }}'); document.getElementById('search-form').submit();">Все продукты</a>
+    <a href="/events/{{ type }}/-views" onclick="document.getElementById('search-form').setAttribute('action', '/events/{{ type }}/-views'); document.getElementById('search-form').submit();">Сначала популярные</a>
+    <a href="/events/{{ type }}/views" onclick="document.getElementById('search-form').setAttribute('action', '/events/{{ type }}/views'); document.getElementById('search-form').submit();">Сначала непопулярные</a>
+    <a href="/events/{{ type }}/-datetime" onclick="document.getElementById('search-form').setAttribute('action', '/events/{{ type }}/-datetime'); document.getElementById('search-form').submit();">Сначала ближайшие</a>
   </div>
 </div>
-
-        </block> <hr style=" width: 350px "><br><br>
+            <input type="hidden" name="search_query" value="{{ search }}">
+            <form id="search-form" method="post"  style="margin-left: auto; width: 38%">
+  {% csrf_token %}
+  <input class="input-tab" type="text" id="search-input" name="search_query" placeholder="Поиск..." style="height: 35px; width: 250px" {% if search != Null %} value="{{search}}" {% endif %}>
+  <button class="btn button-primary-outline" type="submit" href="#" style="margin-bottom: 3px; margin-left: 5px">Искать</button>
+  {% if search != Null %}<a style="color: grey; font-weight: bolder" href="">Очистить поиск</a>{% endif %}
+</form>
+        </block>
+            <br> <hr style=" width: 350px "><br><br>
           <div id="content-container">
           <div class="row row-lg-50 row-35 offset-top-2">
               {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}
@@ -165,7 +181,7 @@
 
             </div>
         </div>
-      </section>
+      </section><br><br><br><br><br><br>
 <div id="myElement" data-sort="{{sort}}"></div>
     </div>
     <!-- Global Mailform Output-->

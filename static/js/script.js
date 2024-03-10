@@ -196,6 +196,12 @@
 
 			}
 		}
+		if (isDesktop && !isNoviBuilder) {
+			$().UItoTop({
+				easingType: 'easeOutQuad',
+				containerClass: 'ui-to-top'
+			});
+		}
 		// Swiper - СВАЙПЕР НА ГЛАВНОЙ СТРАНИЦЕ
 		if (plugins.swiper.length) {
 			for (var i = 0; i < plugins.swiper.length; i++) {

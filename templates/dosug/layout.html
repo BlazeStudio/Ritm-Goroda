@@ -62,6 +62,18 @@ button:hover{
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/add_event">Добавить событие</a><br>
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/map">Карта</a><br>
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/random_event">Мне повезёт!</a>
+                      <div class="dropdown">
+                          {% if user.is_authenticated %}
+                              <img src="/static/images/default.png" width="60" height="60" onclick="toggleDropdown()" style="cursor: pointer;">
+                          <div class="dropdown-content" id="myDropdown" style="z-index: 9999;">
+        <a href="#">Мой профиль</a>
+        <a href="#">Мои события</a>
+        <a href="/logout">Выход</a>
+                          </div>
+                          {% else %}
+                      <a href="/login">Вход</a>
+                      <a href="/register">Регистрация</a>
+                          {% endif %}</div>
                   </div>
                 </div>
               </div>

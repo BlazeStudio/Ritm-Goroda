@@ -1,7 +1,8 @@
 import os
-import shutil
 import uuid
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -16,25 +17,48 @@ def home(request):
     count = Event.objects.count()
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
+def user_register(request):
+    if request.user.is_authenticated:return redirect('/')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
+        user = User.objects.create_user(username, email, password)
+        return redirect('/')
+    return render(request, 'dosug/register.html')
+
+
+def user_login(request):
+    if request.user.is_authenticated:return redirect('/')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Вы успешно вошли на сайт')
+            return redirect('/')
+    return render(request, 'dosug/login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+
+
 def event_list(request, type='all', sort=None, query = None):
     query = request.GET.get('search_query')
-    print(type)
-    print(query)
-    print(sort)
+    map_dots = Event.objects.all()
     if query is not None and sort != "None":
-        print("yes")
-        map_dots = Event.objects.filter(title__icontains=query)
         if type != 'all':
-            print("yes3")
             map_dots = map_dots.filter(type=type)
         if sort is not None and sort != "None":
             map_dots = map_dots.order_by(sort)
+        map_dots = [event for event in map_dots if query.lower() in event.title.lower()]
     else:
         map_dots = Event.objects.all()
         if type != 'all':
             map_dots = map_dots.filter(type=type)
         if sort is not None and sort != "None":
-            print("yes2")
             map_dots = map_dots.order_by(sort)
     paginator = Paginator(map_dots, 8)
 
@@ -45,37 +69,12 @@ def event_list(request, type='all', sort=None, query = None):
         map_dots = paginator.page(1)
     except EmptyPage:
         map_dots = paginator.page(paginator.num_pages)
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'query': query})
-
-# def event_list(request, type='all', sort=None):
-#     search_query = request.POST.get('search_query')
-#     print(search_query)
-#     if request.method == "POST":
-#         map_dots = Event.objects.filter(title__icontains=search_query)
-#         if type != 'all':
-#             map_dots = map_dots.filter(type=type)
-#         if sort is not None:
-#             map_dots = map_dots.order_by(sort)
-#     else:
-#         map_dots = Event.objects.all()
-#         if type != 'all':
-#             map_dots = map_dots.filter(type=type)
-#         if sort is not None:
-#             map_dots = map_dots.order_by(sort)
-#     paginator = Paginator(map_dots, 8)
-#
-#     page_number = request.GET.get('page')
-#     try:
-#         map_dots = paginator.page(page_number)
-#     except PageNotAnInteger:
-#         map_dots = paginator.page(1)
-#     except EmptyPage:
-#         map_dots = paginator.page(paginator.num_pages)
-#     return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'search': search_query})
+    count = len(map_dots)
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'query': query, 'count': count})
 
 def random_event(request):
-    count = Event.objects.count()
-    event = Event.objects.get(id=random.randint(1, count))
+    event_ids = list(Event.objects.values_list('id', flat=True))
+    event = Event.objects.get(id=random.choice(event_ids))
     return redirect(f'/event/{event.id}', {'event': event})
 def add_event(request):
     eventform = EventForm()

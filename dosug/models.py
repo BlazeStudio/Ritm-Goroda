@@ -14,6 +14,7 @@ class Event(models.Model):
     coordinates = models.CharField(max_length=100)
     views = models.IntegerField(default=0)
     datetime = models.DateTimeField()
+    author = models.IntegerField(default=0)
 
 
     def views_add(self):

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% extends "dosug/preloader_messages.html" %}
+{% block layout %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,6 +33,7 @@
     }
 </style>
 <body>
+<div class="page" style="display: none"></div>
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="login_form">
     <h3>Вход</h3>
@@ -40,7 +42,7 @@
         <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username" required></label><br>
         <label for="password">Пароль<br><input name="password" type="password" id="password" style="" required></label><br>
         <button class="button button-primary-outline" style="border: 1px solid grey;border-radius: 5px">Войти</button><br><br>
-        <small><a href="">Ещё не зарегистрированы? Регистрация</a></small><br>
+        <small>Ещё не зарегистрированы? <a href="/register">Регистрация</a></small><br>
         <small><a href="/">На главную</a></small>
     </form>
 
@@ -48,3 +50,4 @@
     </div>
 </body>
 </html>
+{% endblock layout %}

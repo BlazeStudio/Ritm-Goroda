@@ -1,0 +1,61 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои события</title>
+</head>
+<body>
+<div class="page">
+    <br><br><br><br>
+<h3 style="text-align: center">Мои события</h3>
+ <section class="section novi-background section-md text-center">
+        <div class="container" style="border-left: 1px solid lightgray; border-right: 1px solid lightgray; padding: 30px">
+    <div id="content-container">
+          <div class="row row-lg-50 row-35 offset-top-2" style="display: flex; flex-direction: column;">
+              {% for event in events|slice:":10" %}
+              <div class="user_events_cont wow-outer">
+            <article class="post-modern wow slideInLeft" style="display: flex; align-items: flex-start;">
+    <a class="post-modern-media" href="/event/{{ event.id }}"><img src="/static/images/event_pics/{{ event.image }}" alt="" style="max-width: 285px; max-height: 176px; width: auto; height: auto;"/></a>
+    <div style="margin-left: 20px; flex-grow: 1;">
+        <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
+        <ul class="post-modern-meta">
+            <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>
+        </ul>
+        <p class="description">{{ event.tiny_description }}</p>
+    </div>
+    <div style="display: flex; flex-direction: column; justify-content: space-between;">
+        <a href="/edit/{{ event.id }}" class="btn btn-primary-accept" style="margin-bottom: 10px;">Редактировать</a>
+        <a href="/delete/{{ event.id }}" class="btn btn-danger">Удалить</a>
+    </div>
+</article>
+
+            </div>
+              {% endfor %}
+          </div>
+              <br>
+<div class="swiper-pagination swiper-pagination-modern swiper-pagination-marked" style="margin: auto; font-size: 23px; font-weight: bolder">
+    {% if map_dots.has_previous %}
+        <a href="?page={{ map_dots.previous_page_number }}">&lt;</a>
+    {% endif %}
+
+    {% for i in map_dots.paginator.page_range %}
+        {% if map_dots.number == i %}
+            <a style="border-bottom: 2px solid gray">{{ i }}</a>
+        {% else %}
+            <a href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if map_dots.has_next %}
+        <a href="?page={{ map_dots.next_page_number }}">&gt;</a>
+    {% endif %}
+</div>
+
+            </div>
+</div>
+ </section>
+</div>
+</body>
+</html>
+{% endblock content %}

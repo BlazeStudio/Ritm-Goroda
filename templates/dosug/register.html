@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+{% extends "dosug/preloader_messages.html" %}
+{% block layout %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>Регистрация</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,16 +33,17 @@
     }
 </style>
 <body>
+<div class="page" style="display: none"></div>
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="login_form">
     <h3>Регистрация</h3>
     <form method="POST">
         {% csrf_token %}
-        <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username"></label><br>
-        <label for="password" style="margin-top: 10px">Пароль<br><input name="password" type="password" id="password" style=""></label><br>
+        <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username" required minlength="4" maxlength="20"></label><br>
+        <label for="password" style="margin-top: 10px">Пароль<br><input name="password" type="password" id="password" style="" required minlength="4"></label><br>
         <label for="email">Почта<br><input style="" name="email" type="email" id="email"></label><br>
         <button class="button button-primary-outline" style="border: 1px solid grey;border-radius: 5px">Войти</button><br><br>
-        <small>Уже зарегистрированы? <a href="">Войти</a></small><br>
+        <small>Уже зарегистрированы? <a href="/login">Войти</a></small><br>
         <small><a href="/">На главную</a></small>
     </form>
 
@@ -49,3 +51,4 @@
     </div>
 </body>
 </html>
+{% endblock layout %}

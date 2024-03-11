@@ -13,5 +13,7 @@ urlpatterns = [
     path('random_event', views.random_event),
     path('login', views.user_login),
     path('logout', views.user_logout),
-    path('register', views.user_register)
+    path('register', views.user_register),
+    # path('profile/<int:id>', views.user_events),
+    path('user_events', views.user_events)
 ]

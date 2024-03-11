@@ -2,15 +2,6 @@
 {% block layout %}
 <html class="wide wow-animation" lang="en">
   <head>
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <link rel="icon" href="/static/images/icon.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/style.css" id="main-styles-link">
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
 
     button{
@@ -71,10 +62,11 @@ color: #4348bd;
                       <div class="dropdown">
                           {% if user.is_authenticated %}
                               <img src="/static/images/default.png" width="60" height="60" onclick="toggleDropdown()" style="cursor: pointer;">
-                          <div class="dropdown-content" id="myDropdown" style="z-index: 9999;">
-        <a href="#">Мой профиль</a>
-        <a href="#">Мои события</a>
-        <a href="/logout">Выход</a>
+                          <div class="dropdown-content" id="myDropdown" style="z-index: 9999; left: -45px;">
+                              <p style="text-align: center; margin-top: 5px">{{user.username}}</p><hr style="margin-top: 10px">
+                                <a href="#">Мой профиль</a>
+                                <a href="/user_events">Мои события</a>
+                                <a href="/logout">Выход</a>
                           </div>
                           {% else %}
                       <a href="/login" class="login_button">Вход</a>
@@ -120,11 +112,6 @@ color: #4348bd;
     </div>
 {#    <!-- Global Mailform Output-->#}
 {#    <div class="snackbars" id="form-output-global"></div>#}
-    <!-- Javascript-->
-    <script src="/static/js/core.min.js"></script>
-    <script src="/static/js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
 {% endblock layout %}

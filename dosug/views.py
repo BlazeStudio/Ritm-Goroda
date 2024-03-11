@@ -16,22 +16,28 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     event = Event.objects.all()
     count = Event.objects.count()
-    messages.success(request, 'Вы успешно вошли на сайт')
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
 def user_register(request):
     if request.user.is_authenticated:return redirect('/')
+    username_base = [user.username for user in User.objects.all()]
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
         email = request.POST.get("email")
-        user = User.objects.create_user(username, email, password)
-        return redirect('/')
+        if username in username_base:
+            messages.error(request, 'Указанное имя пользователя уже занято')
+            return redirect(request.path)
+        else:
+            user = User.objects.create_user(username, email, password)
+            login(request, user)
+            messages.success(request, 'Вы успешно зарегистрированы')
+            return redirect('/')
     return render(request, 'dosug/register.html')
 
 
 def user_login(request):
-    if request.user.is_authenticated:return redirect('/')
+    if request.user.is_authenticated: return redirect('/')
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -41,6 +47,7 @@ def user_login(request):
             messages.success(request, 'Вы успешно вошли на сайт')
             return redirect('/')
         else:
+            messages.error(request, 'Неверный логин или пароль')
             return redirect(request.path)
     return render(request, 'dosug/login.html')
 
@@ -50,7 +57,19 @@ def user_logout(request):
     logout(request)
     return redirect('/')
 
+def user_events(request):
+    if not request.user.is_authenticated: return redirect('/')
+    if request.user.is_superuser:
+        events = Event.objects.all()
+    else:
+        events = Event.objects.filter(author=request.user.id)
+    return render(request, 'dosug/user_events.html', {'events': events})
 
+# def profile(request, id):
+#     if request.user.is_authenticated:
+#         if request.user.id == id:
+#         print("yes")
+#     return render(request, 'dosug/user_events.html')
 def event_list(request, type='all', sort=None, query = None):
     query = request.GET.get('search_query')
     map_dots = Event.objects.all()

@@ -37,8 +37,8 @@
     <h3>Вход</h3>
     <form method="POST">
         {% csrf_token %}
-        <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username"></label><br>
-        <label for="password">Пароль<br><input name="password" type="password" id="password" style=""></label><br>
+        <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username" required></label><br>
+        <label for="password">Пароль<br><input name="password" type="password" id="password" style="" required></label><br>
         <button class="button button-primary-outline" style="border: 1px solid grey;border-radius: 5px">Войти</button><br><br>
         <small><a href="">Ещё не зарегистрированы? Регистрация</a></small><br>
         <small><a href="/">На главную</a></small>

@@ -2,6 +2,7 @@ import os
 import uuid
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
@@ -15,6 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     event = Event.objects.all()
     count = Event.objects.count()
+    messages.success(request, 'Вы успешно вошли на сайт')
     return render(request, 'dosug/home.html', {'event': event, 'count': count})
 
 def user_register(request):
@@ -38,8 +40,12 @@ def user_login(request):
             login(request, user)
             messages.success(request, 'Вы успешно вошли на сайт')
             return redirect('/')
+        else:
+            return redirect(request.path)
     return render(request, 'dosug/login.html')
 
+#Для теста - потом убрать
+@login_required(login_url="/login")
 def user_logout(request):
     logout(request)
     return redirect('/')

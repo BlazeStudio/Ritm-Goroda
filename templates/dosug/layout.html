@@ -1,4 +1,5 @@
- <!DOCTYPE html>
+{% extends "dosug/preloader_messages.html" %}
+{% block layout %}
 <html class="wide wow-animation" lang="en">
   <head>
     <meta name="format-detection" content="telephone=no">
@@ -9,27 +10,32 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/style.css" id="main-styles-link">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
-button{
+
+    button{
     background: #4348bd;
     font-family: "Georgia";
     color: white;
 }
-button:hover{
-    background:#373b97;
+button:hover {
+    background: #373b97;
+}
+.login_button{
+    color: grey;
+}
+.login_button:hover{
+color: #4348bd;
+}
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
 }
     </style>
   </head>
   <body>
-<!--  {% if preloader != True %}-->
-    <div class="preloader">
-    <div class="preloader-logo"><img src="/static/images/logo.png" alt="" width="250" height="250" srcset="/static/images/logo.png"/>
-   </div>
-    <div class="preloader-body">
-         <div class="loadingProgressG" id="loadingProgressG_1"></div>
-     </div>
-    </div>
-<!--  {% endif %}-->
     <div class="page">
       <header class="section novi-background page-header">
         <!-- RD Navbar-->
@@ -71,8 +77,8 @@ button:hover{
         <a href="/logout">Выход</a>
                           </div>
                           {% else %}
-                      <a href="/login">Вход</a>
-                      <a href="/register">Регистрация</a>
+                      <a href="/login" class="login_button">Вход</a>
+                      <a href="/register" class="login_button">Регистрация</a>
                           {% endif %}</div>
                   </div>
                 </div>
@@ -103,16 +109,6 @@ button:hover{
           </nav>
         </div>
       </header>
-         {% if messages %}
-        <br><br><br>
-		<div class="messages" style="text-align: center; background: limegreen; color: white; width: 400px; margin: auto; border-radius: 15px">
-		{% for message in messages %}
-			<div class="alert  {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
-				{{ message }}
-			</div>
-		{% endfor %}
-		</div>
-	{% endif %}
         {% block content %}{% endblock %}
           <footer class="section novi-background footer-advanced" style="background: #4b4c5a">
         <div class="footer-advanced-aside">
@@ -127,5 +123,8 @@ button:hover{
     <!-- Javascript-->
     <script src="/static/js/core.min.js"></script>
     <script src="/static/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
+{% endblock layout %}

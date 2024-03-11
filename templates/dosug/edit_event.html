@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление события</title>
+    <title>Редактирование</title>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=07b853de-c56b-4c45-9c62-6c0e45ad480e&lang=ru_RU"></script>
         <style>
         form {
@@ -32,49 +32,54 @@
 <body>
 <div class="page"><br><br>
       <section class="section novi-background section-md text-center">
-          <h3 style="text-align: center"><b>Добавление своего события</b></h3>
-          <p>Добавьте своё собственное событие</p></section>
+          <h3 style="text-align: center"><b>Редактирование мероприятия</b></h3>
+      <p>Сейчас вы редактируете мероприятие под названием <a href="/event/{{ event.id }}" target="_blank" style="font-weight: bold">«{{event.title}}»</a></p>
+      </section>
 
-    <div style="margin-left: 60px">
-        <h5>Заполните поля</h5><small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
+
+      <br><div style="margin-left: 60px">
+        <h5>Отредактируйте поля</h5><small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="color: black">
-    <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
+    <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2" value="{{event.title}}"></label>
     <small><div id="title-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
-    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
+    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required>{{event.tiny_description}}</textarea></label>
     <small><div id="description-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
-    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required></textarea></label>
+    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required>{{event.description}}</textarea></label>
     <small><div id="description2-count"></div></small> <!-- Счетчик оставшихся символов -->
 <br>
     <label for="type"><b>*Тип:</b> <select style="margin-left: 150px" id="type" name="type">
-        <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
+        <option value="art" {% if event.type == 'art' %}selected{% endif %}>Творчество</option>
+        <option value="music" {% if event.type == 'music' %}selected{% endif %}>Музыка</option>
+        <option value="entertainments" {% if event.type == 'entertainments' %}selected{% endif %}>Развлечения</option>
+        <option value="culture_study" {% if event.type == 'culture_study' %}selected{% endif %}>Культура и образование</option>
+        <option value="sport" {% if event.type == 'sport' %}selected{% endif %}>Спорт</option>
     </select></label>
 <br>
     <label  for="datetime"><b>*Дата:</b>
-    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label><br>
+    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59" value="{{event.datetime}}"></label><br>
     <label  for="phone"><b>Телефон:</b>
-    <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>
+    <input type="tel" style="margin-left: 117px" id="phone" name="phone" value="{{event.phone}}"></label><br>
     <label  for="url"><b>Сайт:</b>
-    <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30"/></label><br>
+    <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30" value="{{event.link}}"/></label><br>
     <label for="photo"><b>Фотография:</b> <input style="margin-left: 100px" type="file" id="photo" name="photo" accept="image/jpeg, image/jpg, image/png"></label><br>
                 <!-- Блок для карты -->
 <b>*Карта:</b><div class="input-tab" id="map"></div>
-
 <!-- Форма для ввода координат и адреса -->
     <label for="latitude">Широта:
-    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required>
+    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required value="{{latitude}}">
     <div style="margin-left: 5px">Долгота:</div>
-    <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly></label>
+    <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly value="{{longitude}}"></label>
     <label for="address">Адрес:
-    <input style="margin-left: 17px" type="text" id="address" name="address" readonly></label>
+    <input style="margin-left: 17px" type="text" id="address" name="address" readonly value="{{event.address}}"></label>
 <br>
 
 <br>
-    <input type="submit" value="Отправить">
+    <input type="submit" value="Сохранить">
                 </div>
 </form>
 
@@ -101,6 +106,7 @@ document.getElementById("latitude").addEventListener("input", function() {
 });
 </script>
 <script>
+    // Функция для отображения оставшихся символов в поле ввода
     function countCharacters(inputId, countId, maxLength) {
         var input = document.getElementById(inputId);
         var count = document.getElementById(countId);
@@ -117,7 +123,11 @@ document.getElementById("latitude").addEventListener("input", function() {
 
     countCharacters('description2', 'description2-count', 1200);
 </script>
-<script src="/static/js/add_event_map.js"></script>
+<div id="map-atrib"
+    data-coordinates="{{ event.coordinates }}"
+    data-datetime="{{ event.datetime }}">
+</div>
+<script src="/static/js/edit_event_map.js"></script>
 <script>
     // Функция для форматирования номера телефона в реальном времени
     function formatPhoneNumber(input) {

@@ -63,7 +63,19 @@ def user_events(request):
         events = Event.objects.all()
     else:
         events = Event.objects.filter(author=request.user.id)
-    return render(request, 'dosug/user_events.html', {'events': events})
+    query = request.GET.get('search_query')
+    if query:
+        events = [event for event in events if query.lower() in event.title.lower()]
+    paginator = Paginator(events, 10)
+
+    page_number = request.GET.get('page')
+    try:
+        events = paginator.page(page_number)
+    except PageNotAnInteger:
+        events = paginator.page(1)
+    except EmptyPage:
+        events = paginator.page(paginator.num_pages)
+    return render(request, 'dosug/user_events.html', {'events': events, 'query': query})
 
 # def profile(request, id):
 #     if request.user.is_authenticated:
@@ -137,6 +149,50 @@ def add_event(request):
         messages.success(request, 'Событие было успешно добавлено на сайт!')
         return redirect(request.path)
     return render(request, 'dosug/add_event.html', {'form': eventform})
+
+def edit_event(request, id):
+    event = Event.objects.filter(id = id).first()
+    if (not request.user.is_superuser) and (request.user.id != event.author):
+        redirect(request.path)
+    latitude, longitude = event.coordinates.split(',')
+    eventform = EventForm()
+    if request.method == "POST":
+        title = request.POST.get("title")
+        type = request.POST.get("type")
+        short_description = request.POST.get("description")
+        description = request.POST.get("description2")
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
+        date = request.POST.get("datetime")
+        date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
+        phone = request.POST.get("phone")
+        link = request.POST.get("url")
+        coordinates = latitude + ',' + longitude
+        address = request.POST.get("address")
+        image = request.FILES.get('photo')
+        new_event = Event.objects.filter(id=id).update(title=title,
+                                         type=type,
+                                         tiny_description=short_description,
+                                         description=description,
+                                         coordinates=coordinates,
+                                         address=address,
+                                         datetime=date_time_obj,
+                                         phone=phone,
+                                         link=link)
+        if image == None:
+            pass
+        else:
+            fs = FileSystemStorage()
+            if (event.image != "default.jpg"):
+                filename = str(event.image)
+                fs.delete(filename)
+            filename = str(uuid.uuid4()) + '.' + image.name.split('.')[-1]
+            saved_filename = fs.save(filename, image)
+            # image_path = fs.url(saved_filename)
+            new_event = Event.objects.filter(id=id).update(image=filename)
+        messages.success(request, 'Событие было успешно обновлено')
+        return redirect(request.path)
+    return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
 
 def map(request):
     map_dots = Event.objects.all()

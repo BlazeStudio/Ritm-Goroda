@@ -1,18 +1,61 @@
 ymaps.ready(init);
 
+var map;
+var clusterer;
+var myGeoObjects;
+var filterState;
+
 function init() {
-  var map = new ymaps.Map("map-test", {
-    center: [55.753000452722546,37.62084863478474],
+  map = new ymaps.Map("map-test", {
+    center: [55.753000452722546, 37.62084863478474],
     zoom: 15,
   });
+
+  filterState = {
+    sport: true,
+    art: true,
+    music: true,
+    culture_study: true,
+    entertainments: true
+  };
+
+  var listBoxItems = [
+    new ymaps.control.ListBoxItem({ data: { content: 'Спорт' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Творчество и искусство' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Музыка' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Культура и образование' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Развлечения' } })
+  ];
+
+  var filterControl = new ymaps.control.ListBox({
+    data: {
+      content: 'Фильтр'
+    },
+    items: listBoxItems,
+    options: {
+      itemSelectOnClick: false
+    }
+  });
+
+  filterControl.events.add('select', function (event) {
+    var item = event.get('target');
+    if (item && item.data.get('content')) {
+      var eventType = item.data.get('content');
+      toggleFilter(eventType);
+    }
+  });
+
+  function toggleFilter(eventType) {
+    filterState[eventType.toLowerCase()] = !filterState[eventType.toLowerCase()];
+    showFilteredPoints();
+  }
+
   $.getJSON('static/js/data2.json', function(data) {
-    // Создадим объект точек из data.Points
-    var myGeoObjects = data.features.map(item => {
+    myGeoObjects = data.features.map(item => {
       return new ymaps.GeoObject({
         geometry: {
           type: "Point",
-          // Переведем строку с координатами в массив
-          coordinates: (item.coordinates).split(',')
+          coordinates: item.coordinates.split(',')
         },
         properties: {
           clusterCaption: 'Описание в кластере',
@@ -35,32 +78,65 @@ function init() {
      <a href="${item.link}" target="_blank">${item.link}</a>
 </div>
 </div>
-     `].join('')
+     `].join(''),
+          type: item.type
         }
       }, {
-        preset: "islands#blueIcon",
+        preset: getIconPreset(item.type),
       });
-    })
-    // Создадим кластеризатор после получения и добавления точек
-    var clusterer = new ymaps.Clusterer({
+    });
+
+    clusterer = new ymaps.Clusterer({
       preset: 'islands#BlueClusterIcons',
       clusterBalloonContentLayoutWidth: 800,
       clusterBalloonLeftColumnWidth: 160
     });
+
     clusterer.add(myGeoObjects);
     map.geoObjects.add(clusterer);
     map.setBounds(clusterer.getBounds(), {
       checkZoomRange: true
     });
-  })
+  });
 
-  map.controls.remove('searchControl'); // удаляем поиск
-  // map.controls.remove('trafficControl'); // удаляем контроль трафика
-  // map.controls.remove('typeSelector'); // удаляем тип
-  // map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
-  map.controls.remove('zoomControl'); // удаляем контрол зуммирования
-  map.controls.remove('rulerControl'); // удаляем контрол правил
+  map.controls.add(filterControl, { float: 'left' });
+  map.controls.remove('searchControl');
+  map.controls.remove('zoomControl');
+  map.controls.remove('rulerControl');
+}
 
+function showFilteredPoints() {
+  var filteredGeoObjects = myGeoObjects.filter(function (geoObject) {
+    var type = geoObject.properties.get('type');
+    return filterState[type];
+  });
 
+  var filteredClusterer = new ymaps.Clusterer({
+    preset: 'islands#BlueClusterIcons',
+    clusterBalloonContentLayoutWidth: 800,
+    clusterBalloonLeftColumnWidth: 160
+  });
 
+  filteredClusterer.add(filteredGeoObjects);
+  map.geoObjects.remove(clusterer);
+  map.geoObjects.add(filteredClusterer);
+
+  clusterer = filteredClusterer;
+}
+
+function getIconPreset(type) {
+  switch (type) {
+    case 'sport':
+      return 'islands#redIcon';
+    case 'art':
+      return 'islands#greenIcon';
+    case 'entertainments':
+      return 'islands#orangeIcon';
+    case 'music':
+      return 'islands#violetIcon';
+    case 'culture_study':
+      return 'islands#darkBlueIcon';
+    default:
+      return 'islands#grayIcon';
+  }
 }

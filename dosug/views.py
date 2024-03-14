@@ -194,6 +194,16 @@ def edit_event(request, id):
         return redirect(request.path)
     return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
 
+def delete_event(request, id):
+    event = Event.objects.filter(id=id).first()
+    if (request.user.is_superuser) or (request.user.id == event.author):
+        Event.objects.filter(id=id).delete()
+        messages.success(request, 'Событие было успешно удалено')
+    else:
+        messages.error(request, 'Не удалось удалить событие')
+    return redirect(f'/user_events')
+
+
 def map(request):
     map_dots = Event.objects.all()
     data = list(map_dots.values())

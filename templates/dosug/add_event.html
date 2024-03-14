@@ -54,8 +54,72 @@
         <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
     </select></label>
 <br>
-    <label  for="datetime"><b>*Дата:</b>
+
+     <label for="datetime"><b>*Дата:</b>
     <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label><br>
+
+
+<!--<label for="date_type"><b>Выберите тип даты:</b></label>-->
+<!--<select id="date_type" onchange="showFields()">-->
+<!--  <option value="datetime">Дата и время</option>-->
+<!--  <option value="date_range">Дата и время от и до</option>-->
+<!--  <option value="date">Только дата</option>-->
+<!--  <option value="time">Только время</option>-->
+<!--</select>-->
+
+<!--<br><br>-->
+
+<!--<div id="datetime_fields">-->
+<!--  <label for="datetime"><b>*Дата и время:</b>-->
+<!--  <input style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label>-->
+<!--</div>-->
+<!--<div id="date_range_fields" style="display:none;">-->
+<!--  <label for="date_range_from"><b>Дата и время от:</b>-->
+<!--  <input type="datetime-local" style="margin-left: 97px" id="date_range_from" name="date_range_from" required></label>-->
+<!--  <label for="date_range_to"><b>Дата и время до:</b>-->
+<!--  <input type="datetime-local" style="margin-left: 95px" id="date_range_to" name="date_range_to" required></label>-->
+<!--</div>-->
+
+<!--<div id="date_fields" style="display:none;">-->
+<!--  <label for="date"><b>Дата:</b>-->
+<!--  <input type="date" style="margin-left: 150px" id="date" name="date_range_from" required></label>-->
+<!--</div>-->
+
+<!--<div id="time_fields" style="display:none;">-->
+<!--  <label for="time_from"><b>Время от:</b>-->
+<!--  <input type="time" style="margin-left: 138px" id="time_from" name="date_range_from" required></label>-->
+<!--  <label for="time_to"><b>Время до:</b>-->
+<!--  <input type="time" style="margin-left: 137px" id="time_to" name="date_range_to" required></label>-->
+<!--</div>-->
+<!--<br>-->
+<!--<script>-->
+<!--function showFields() {-->
+<!--  var selectedValue = document.getElementById("date_type").value;-->
+<!--  var datetimeFields = document.getElementById("datetime_fields");-->
+<!--  var dateRangeFields = document.getElementById("date_range_fields");-->
+<!--  var dateFields = document.getElementById("date_fields");-->
+<!--  var timeFields = document.getElementById("time_fields");-->
+
+<!--  datetimeFields.style.display = "none";-->
+<!--  dateRangeFields.style.display = "none";-->
+<!--  dateFields.style.display = "none";-->
+<!--  timeFields.style.display = "none";-->
+
+<!--  if (selectedValue === "datetime") {-->
+<!--    datetimeFields.style.display = "block";-->
+<!--  } else if (selectedValue === "date_range") {-->
+<!--    dateRangeFields.style.display = "block";-->
+<!--  } else if (selectedValue === "date") {-->
+<!--    dateFields.style.display = "block";-->
+<!--  } else if (selectedValue === "time") {-->
+<!--    timeFields.style.display = "block";-->
+<!--  }-->
+<!--}-->
+
+<!--// Показываем соответствующие поля при загрузке страницы-->
+<!--showFields();-->
+<!--</script>-->
+
     <label  for="phone"><b>Телефон:</b>
     <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>
     <label  for="url"><b>Сайт:</b>
@@ -67,6 +131,11 @@
 <!-- Форма для ввода координат и адреса -->
     <label for="latitude">Широта:
     <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required>
+        <script>
+document.getElementById("latitude").addEventListener("input", function() {
+    this.value = ""; // Очищаем значение поля ввода
+});
+</script>
     <div style="margin-left: 5px">Долгота:</div>
     <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly></label>
     <label for="address">Адрес:

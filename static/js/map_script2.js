@@ -94,7 +94,7 @@
                             // Формирование ссылки на Яндекс.Карты с координатами метро
                             var metroLink = 'https://yandex.ru/maps/?text=' + encodeURIComponent(metroNameWithoutWord);
                             // Вывод только названия и ссылки на ближайшую станцию метро в HTML
-                            document.getElementById('nearest-metro').innerHTML = `Ближайшая станция метро -  <a href="${metroLink}" target="_blank">${metroNameWithoutWord}</a>`;
+                            document.getElementById('nearest-metro').innerHTML = `Ближайшая станция -  <a href="${metroLink}" target="_blank">${metroNameWithoutWord}</a>`;
                         });
 
 

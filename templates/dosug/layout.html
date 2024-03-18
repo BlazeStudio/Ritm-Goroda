@@ -64,7 +64,7 @@ color: #4348bd;
                               <img src="/static/images/default.png" width="60" height="60" onclick="toggleDropdown()" style="cursor: pointer;">
                           <div class="dropdown-content" id="myDropdown" style="z-index: 9999; left: -45px;">
                               <p style="text-align: center; margin-top: 5px">{{user.username}}</p><hr style="margin-top: 10px">
-                                <a href="#">Мой профиль</a>
+                                <a href="/profile/{{user.id}}">Мой профиль</a>
                                 <a href="/user_events">Мои события</a>
                                 <a href="/logout">Выход</a>
                           </div>

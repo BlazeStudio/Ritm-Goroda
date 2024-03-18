@@ -23,3 +23,11 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+class DateTimeData(models.Model):
+    datetime_value = models.DateTimeField(null=True, blank=True)
+    date_range_from = models.DateTimeField(null=True, blank=True)
+    date_range_to = models.DateTimeField(null=True, blank=True)
+    date_value = models.DateField(null=True, blank=True)
+    time_from = models.TimeField(null=True, blank=True)
+    time_to = models.TimeField(null=True, blank=True)

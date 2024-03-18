@@ -11,7 +11,7 @@
       "address": "с",
       "phone": "Отсутствует",
       "coordinates": "55.86947077671819,37.664203499999964",
-      "views": 76,
+      "views": 78,
       "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
@@ -221,7 +221,7 @@
       "address": "Москва, Большая Почтовая улица, 26Вс2",
       "phone": "+7 (123) 332-3232",
       "coordinates": "55.7784841271646,37.69969746093745",
-      "views": 21,
+      "views": 22,
       "datetime": "2222-02-22 22:02:00",
       "author": 0
     },
@@ -271,21 +271,6 @@
       "author": 0
     },
     {
-      "id": 19,
-      "title": "цуацуа",
-      "type": "art",
-      "image": "default.jpg",
-      "tiny_description": "цуацуацуа",
-      "description": "цуацуацуа",
-      "link": "",
-      "address": "Москва, Юго-Восточный административный округ, район Лефортово",
-      "phone": "",
-      "coordinates": "55.74859713801881,37.70931049804684",
-      "views": 0,
-      "datetime": "1231-12-22 23:01:00",
-      "author": 0
-    },
-    {
       "id": 32,
       "title": "wtf 3",
       "type": "art",
@@ -311,23 +296,8 @@
       "address": "Москва, Восточный административный округ, район Метрогородок",
       "phone": "",
       "coordinates": "55.823271498798476,37.76218220214839",
-      "views": 7,
+      "views": 8,
       "datetime": "1231-03-21 23:23:00",
-      "author": 0
-    },
-    {
-      "id": 34,
-      "title": "LOLOLOL",
-      "type": "art",
-      "image": "default.jpg",
-      "tiny_description": "wdqqwd",
-      "description": "qwdqwdqwd",
-      "link": "",
-      "address": "Москва, Нижняя Красносельская улица, 40/12к8",
-      "phone": "",
-      "coordinates": "55.77492365385013,37.67223164062495",
-      "views": 1,
-      "datetime": "1121-02-21 21:12:00",
       "author": 0
     },
     {
@@ -343,36 +313,6 @@
       "coordinates": "55.69573534667745,37.80818745117183",
       "views": 2,
       "datetime": "1212-12-12 12:12:00",
-      "author": 0
-    },
-    {
-      "id": 36,
-      "title": "Тестинг",
-      "type": "entertainments",
-      "image": "default.jpg",
-      "tiny_description": "йцавйцв",
-      "description": "йцвйцвйцв",
-      "link": "",
-      "address": "Москва, Алтуфьевское шоссе (дублёр)",
-      "phone": "",
-      "coordinates": "55.87864993016563,37.585808071485424",
-      "views": 1,
-      "datetime": "1312-12-12 03:23:00",
-      "author": 0
-    },
-    {
-      "id": 37,
-      "title": "Тест станции",
-      "type": "art",
-      "image": "default.jpg",
-      "tiny_description": "вйцйцввйцйцв",
-      "description": "йвцйцвйцвйвц",
-      "link": "",
-      "address": "Москва, Северо-Восточный административный округ, Лосиноостровский район",
-      "phone": "",
-      "coordinates": "55.87906483761237,37.69832416992183",
-      "views": 1,
-      "datetime": "1231-03-21 23:13:00",
       "author": 0
     }
   ]

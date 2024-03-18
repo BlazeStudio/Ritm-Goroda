@@ -92,7 +92,7 @@
               {% for event in map_dots|slice:":8" %}
               <div class="col-md-3 wow-outer">
               <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="/static/images/event_pics/{{ event.image }}" alt="" width="570" height="352"/></a>
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{ event.id }}"><img src="/static/images/event_pics/{{ event.image }}" alt="" style="width: 571px; height: 150px; object-fit: cover;"/></a>
                 <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
                 <ul class="post-modern-meta">
                   <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>

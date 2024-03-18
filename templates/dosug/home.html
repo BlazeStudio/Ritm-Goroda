@@ -14,7 +14,7 @@
                 </div>
                 <h1 class="text-uppercase text-white font-weight-bold wow-outer"><span class="wow slideInDown" data-wow-delay=".2s">Брось вызов рутине</span></h1>
                 <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">Все грани молодёжной жизни Москвы на одном сайте</span></p>
-                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#"  data-wow-delay=".4s">Выбрать</button></div>
+                <div class="wow-outer button-outer"><a class="button button-primary main-btn wow slideInDown" href="/events/all" style="font-weight: bold"  data-wow-delay=".4s">Выбрать</a></div>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
                 </div>
                 <h1 class="text-uppercase text-white font-weight-bold wow-outer" style="margin: auto"><span class="wow slideInDown" data-wow-delay=".2s">От спортивных соревнований</span></h1>
                 <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">До уроков игры на диджериду</span></p>
-                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#" data-wow-delay=".4s">Занятие найдётся каждому</button></div>
+                <div class="wow-outer button-outer"><button class="button button-primary wow slideInDown" href="#" style="font-weight: bold" data-wow-delay=".4s">Занятие найдётся каждому</button></div>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 </div>
                 <h1 class="text-uppercase text-white font-weight-bold wow-outer" style="margin: auto"><span class="wow slideInDown" data-wow-delay=".2s">Выбери себе занятие по душе</span></h1>
                 <p class="text-white wow-outer"><span class="wow slideInDown" data-wow-delay=".35s" style="font-size: 20px">Проведи время с пользой и заведи новых друзей</span></p>
-                <div class="wow-outer button-outer"><button class="btn btn-lg wow slideInDown" href="#" data-wow-delay=".4s">Вперёд</button></div>
+                <div class="wow-outer button-outer"><button class="button button-primary wow slideInDown" href="#" style="font-weight: bold" data-wow-delay=".4s">Вперёд</button></div>
               </div>
             </div>
           </div>
@@ -50,52 +50,20 @@
         <div class="container">
           <h3 class="text-uppercase font-weight-bold wow-outer"><span class="wow slideInDown">Популярные события</span></h3>
           <div class="row row-lg-50 row-35 offset-top-2">
-<!--              {#              Каждый див класс обхватывать классом ссылки, чтобы не писать Пример - а див /див /a#}-->
+            {% for event in popular %}
               <div class="col-md-4 wow-outer">
               <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
-                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Тест</a></h4>
+              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 200px; object-fit: cover;" alt=""/></a>
+                <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{event.title}}</a></h4>
                 <ul class="post-modern-meta">
 <!--                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>-->
-                  <li>Дата</li>
+                  <li>{{event.datetime}}</li>
                 </ul>
-                <p style="font-size: 15px">Тест 2</p>
+                <p style="font-size: 15px">{{ event.tiny_description }}</p>
               </article>
             </div>
-              <div class="col-md-4 wow-outer">
-              <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
-                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Тест</a></h4>
-                <ul class="post-modern-meta">
-<!--                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>-->
-                  <li>Дата</li>
-                </ul>
-                <p style="font-size: 15px">Тест 2</p>
-              </article>
-            </div>
-              <div class="col-md-4 wow-outer">
-              <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
-                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Test</a></h4>
-                <ul class="post-modern-meta">
-<!--                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>-->
-                  <li>Дата</li>
-                </ul>
-                <p style="font-size: 15px">Test</p>
-              </article>
-            </div>
-              <div class="col-md-4 wow-outer">
-              <!-- Post Modern-->
-              <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="#"><img src="../../static/images/grid-blog-1-571x353.jpg" alt="" width="571" height="353"/></a>
-                <h4 class="post-modern-title"><a class="post-modern-title" href="#">Lorem Ipsum</a></h4>
-                <ul class="post-modern-meta">
-<!--                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>-->
-                  <li>Дата</li>
-                </ul>
-                <p style="font-size: 15px">Test 6</p>
-              </article>
-            </div>
-            <div class="col-md-12 wow-outer"><a class="button button-primary" href="#">Больше</a></div>
+              {% endfor %}
+            <div class="col-md-12 wow-outer"><a class="button button-primary" href="/events/all/-views">Больше</a></div>
           </div>
         </div>
       </section>

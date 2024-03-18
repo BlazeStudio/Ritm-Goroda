@@ -9,14 +9,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from dosug.models import Event
 import json, random
-from dosug.forms import EventForm
+from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     event = Event.objects.all()
+    popular = Event.objects.order_by("-views")[:6]
     count = Event.objects.count()
-    return render(request, 'dosug/home.html', {'event': event, 'count': count})
+    return render(request, 'dosug/home.html', {'event': event, 'count': count, 'popular':popular})
 
 def user_register(request):
     if request.user.is_authenticated:return redirect('/')
@@ -77,11 +78,12 @@ def user_events(request):
         events = paginator.page(paginator.num_pages)
     return render(request, 'dosug/user_events.html', {'events': events, 'query': query})
 
-# def profile(request, id):
-#     if request.user.is_authenticated:
-#         if request.user.id == id:
-#         print("yes")
-#     return render(request, 'dosug/user_events.html')
+def profile(request, id, edit = 0):
+    user_prof = User.objects.filter(id=id).first()
+    if request.user.is_authenticated:
+        if request.user.id == id:
+            edit = 1
+    return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof})
 def event_list(request, type='all', sort=None, query = None):
     query = request.GET.get('search_query')
     map_dots = Event.objects.all()
@@ -112,9 +114,10 @@ def event_list(request, type='all', sort=None, query = None):
 def random_event(request):
     event_ids = list(Event.objects.values_list('id', flat=True))
     event = Event.objects.get(id=random.choice(event_ids))
+    print(event.datetime)
     return redirect(f'/event/{event.id}', {'event': event})
 def add_event(request):
-    eventform = EventForm()
+    eventform = DateTimeDataForm()
     if request.method == "POST":
         title = request.POST.get("title")
         type = request.POST.get("type")
@@ -123,12 +126,13 @@ def add_event(request):
         latitude = request.POST.get("latitude")
         longitude = request.POST.get("longitude")
         date = request.POST.get("datetime")
-        date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
+        # date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         coordinates = latitude + ',' + longitude
         address = request.POST.get("address")
         image = request.FILES.get('photo')
+        datetime_add(request)
         if image == None:
             filename = "default.jpg"
         else:
@@ -142,7 +146,6 @@ def add_event(request):
                                          description=description,
                                          coordinates=coordinates,
                                          address=address,
-                                         datetime=date_time_obj,
                                          phone=phone,
                                          link=link,
                                          image=filename)
@@ -193,6 +196,31 @@ def edit_event(request, id):
         messages.success(request, 'Событие было успешно обновлено')
         return redirect(request.path)
     return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
+
+# def datetime_add(request):
+#     datetime = request.POST.get("datetime")
+#     if datetime != "":
+#
+#
+#     date_range_from = request.POST.get("date_range_from")
+#     print(date_range_from)
+#     if date_range_from == "": print("True2")
+#     date_range_to = request.POST.get("date_range_to")
+#     print("date_range_from - ", date_range_from)
+#     print("date_range_to - ", date_range_to)
+#
+#
+#     datetime_from_date = request.POST.get("datetime_from_date")
+#     datetime_from_time = request.POST.get("datetime_from_time")
+#     datetime_to_date = request.POST.get("datetime_to_date")
+#     datetime_to_time = request.POST.get("datetime_to_time")
+#     print("datetime_from_date - ", datetime_from_date)
+#     print("datetime_from_time - ", datetime_from_time)
+#     print("datetime_to_date - ", datetime_to_date)
+#     print("datetime_to_time - ", datetime_to_time)
+#     return 0
+
+
 
 def delete_event(request, id):
     event = Event.objects.filter(id=id).first()

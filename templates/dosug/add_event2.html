@@ -55,82 +55,70 @@
     </select></label>
 <br>
 
-<label for="date_type"><b>Выберите тип даты:</b></label>
-<select id="date_type" onchange="showFields()">
-  <option value="datetime">Дата и время</option>
-  <option value="date_range">Дата от и до</option>
-  <option value="datetime_range">Дата и время от и до</option>
-  <option value="daily">Ежедневно</option>
-  <option value="no_date">Нет даты</option>
-</select>
-
-<br><br>
-
-<div id="datetime_fields">
-  <label for="datetime"><b>*Дата и время:</b>
-  <input style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" max="9999-12-31T23:59"></label>
-</div>
-<div id="date_range_fields" style="display:none;">
-  <label for="date_range_from"><b>Дата от:</b>
-  <input type="date" style="margin-left: 97px" id="date_range_from" name="date_range_from"></label>
-  <label for="date_range_to"><b>Дата до:</b>
-  <input type="date" style="margin-left: 95px" id="date_range_to" name="date_range_to"></label>
-</div>
-
-<div id="datetime_range_fields" style="display:none;">
-  <label for="datetime_from_date"><b>Дата от:</b>
-      <input type="date" style="margin-left: 98px" id="datetime_from_date" name="datetime_from_date"></label>
-  <label for="datetime_from_time"><b>Время от:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_from_time" name="datetime_from_time"></label>
-  <label for="datetime_to_date"><b>Дата до:</b>
-      <input type="date" style="margin-left: 90px" id="datetime_to_date" name="datetime_to_date"></label>
-  <label for="datetime_to_time"><b>Время до:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_to_time" name="datetime_to_time"></label>
-</div>
-
-<div id="daily_fields" style="display:none;">
-  <b>Ежедневно</b>
-</div>
-
-<div id="no_date_fields" style="display:none;">
-  <b>Нет даты</b>
-</div>
-<br>
-<script>
-function showFields() {
-  var selectedValue = document.getElementById("date_type").value;
-  var datetimeFields = document.getElementById("datetime_fields");
-  var dateRangeFields = document.getElementById("date_range_fields");
-  var datetimeRangeFields = document.getElementById("datetime_range_fields");
-  var dailyFields = document.getElementById("daily_fields");
-  var noDateFields = document.getElementById("no_date_fields");
-
-  // Скрыть все поля перед отображением новых
-  datetimeFields.style.display = "none";
-  dateRangeFields.style.display = "none";
-  datetimeRangeFields.style.display = "none";
-  dailyFields.style.display = "none";
-  noDateFields.style.display = "none";
-
-  // Отображаем соответствующие поля в зависимости от выбранного вида даты
-  if (selectedValue === "datetime") {
-    datetimeFields.style.display = "block";
-  } else if (selectedValue === "date_range") {
-    dateRangeFields.style.display = "block";
-  } else if (selectedValue === "datetime_range") {
-    datetimeRangeFields.style.display = "block";
-  } else if (selectedValue === "daily") {
-    dailyFields.style.display = "block";
-  } else if (selectedValue === "no_date") {
-    noDateFields.style.display = "block";
-  }
-}
-
-// Показываем соответствующие поля при загрузке страницы
-showFields();
-</script>
+<!--     <label for="datetime"><b>*Дата:</b>-->
+<!--    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label><br>-->
 
 
+<!--<label for="date_type"><b>Выберите тип даты:</b></label>-->
+<!--<select id="date_type" onchange="showFields()">-->
+<!--  <option value="datetime">Дата и время</option>-->
+<!--  <option value="date_range">Дата и время от и до</option>-->
+<!--  <option value="date">Только дата</option>-->
+<!--  <option value="time">Только время</option>-->
+<!--</select>-->
+
+<!--<br><br>-->
+
+<!--<div id="datetime_fields">-->
+<!--  <label for="datetime"><b>*Дата и время:</b>-->
+<!--  <input style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59"></label>-->
+<!--</div>-->
+<!--<div id="date_range_fields" style="display:none;">-->
+<!--  <label for="date_range_from"><b>Дата и время от:</b>-->
+<!--  <input type="datetime-local" style="margin-left: 97px" id="date_range_from" name="date_range_from" required></label>-->
+<!--  <label for="date_range_to"><b>Дата и время до:</b>-->
+<!--  <input type="datetime-local" style="margin-left: 95px" id="date_range_to" name="date_range_to" required></label>-->
+<!--</div>-->
+
+<!--<div id="date_fields" style="display:none;">-->
+<!--  <label for="date"><b>Дата:</b>-->
+<!--  <input type="date" style="margin-left: 150px" id="date" name="date_range_from" required></label>-->
+<!--</div>-->
+
+<!--<div id="time_fields" style="display:none;">-->
+<!--  <label for="time_from"><b>Время от:</b>-->
+<!--  <input type="time" style="margin-left: 138px" id="time_from" name="date_range_from" required></label>-->
+<!--  <label for="time_to"><b>Время до:</b>-->
+<!--  <input type="time" style="margin-left: 137px" id="time_to" name="date_range_to" required></label>-->
+<!--</div>-->
+<!--<br>-->
+<!--<script>-->
+<!--function showFields() {-->
+<!--  var selectedValue = document.getElementById("date_type").value;-->
+<!--  var datetimeFields = document.getElementById("datetime_fields");-->
+<!--  var dateRangeFields = document.getElementById("date_range_fields");-->
+<!--  var dateFields = document.getElementById("date_fields");-->
+<!--  var timeFields = document.getElementById("time_fields");-->
+
+<!--  datetimeFields.style.display = "none";-->
+<!--  dateRangeFields.style.display = "none";-->
+<!--  dateFields.style.display = "none";-->
+<!--  timeFields.style.display = "none";-->
+
+<!--  if (selectedValue === "datetime") {-->
+<!--    datetimeFields.style.display = "block";-->
+<!--  } else if (selectedValue === "date_range") {-->
+<!--    dateRangeFields.style.display = "block";-->
+<!--  } else if (selectedValue === "date") {-->
+<!--    dateFields.style.display = "block";-->
+<!--  } else if (selectedValue === "time") {-->
+<!--    timeFields.style.display = "block";-->
+<!--  }-->
+<!--}-->
+
+<!--// Показываем соответствующие поля при загрузке страницы-->
+<!--showFields();-->
+<!--</script>-->
 
     <label  for="phone"><b>Телефон:</b>
     <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>

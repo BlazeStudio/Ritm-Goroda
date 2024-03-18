@@ -1,0 +1,36 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Профиль</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="../../static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+  <div class="page"><br><br><br>
+      <section class="section novi-background section-md text-center">
+          <h3 style="text-align: center"><b>Мой профиль</b></h3><br></section>
+      <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: center">
+          <h3>{{user_prof.username}}</h3>
+<br>
+          <form method="POST">
+              <h4>Редактирование</h4><br>
+          <label><span style="margin-right: 15px">Имя пользователя</span><input type="text" name="" id="username" value="{{user_prof.username}}"></label><br><br>
+          <label><span style="margin-right: 15px">Пароль</span><input type="password" name="" id="password" style="position: absolute"></label><br>
+              <button class="button btn-primary-accept">Принять</button>
+<!--          <img src="/static/images/event_pics/{{user.image}}" alt="">-->
+              </form>
+      </div>
+      </div>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>#}
+  </body>
+</html>
+{% endblock content %}

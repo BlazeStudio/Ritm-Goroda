@@ -13,7 +13,6 @@ class Event(models.Model):
     phone = models.CharField(max_length=30)
     coordinates = models.CharField(max_length=100)
     views = models.IntegerField(default=0)
-    datetime = models.DateTimeField()
     author = models.IntegerField(default=0)
 
 
@@ -25,9 +24,12 @@ class Event(models.Model):
         return self.title
 
 class DateTimeData(models.Model):
-    datetime_value = models.DateTimeField(null=True, blank=True)
-    date_range_from = models.DateTimeField(null=True, blank=True)
-    date_range_to = models.DateTimeField(null=True, blank=True)
-    date_value = models.DateField(null=True, blank=True)
-    time_from = models.TimeField(null=True, blank=True)
-    time_to = models.TimeField(null=True, blank=True)
+    event_id = models.IntegerField()
+    datetime = models.DateTimeField(null=True, blank=True)
+    date_range_from = models.DateField(null=True, blank=True)
+    date_range_to = models.DateField(null=True, blank=True)
+    datetime_from_date = models.DateField(null=True, blank=True)
+    datetime_to_date = models.DateField(null=True, blank=True)
+    datetime_from_time = models.TimeField(null=True, blank=True)
+    datetime_to_time = models.TimeField(null=True, blank=True)
+    every_day = models.CharField(max_length=30, null=True)

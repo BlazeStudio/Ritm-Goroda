@@ -5,9 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Max
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from dosug.models import Event
+from dosug.models import Event, DateTimeData
 import json, random
 from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
@@ -125,14 +126,11 @@ def add_event(request):
         description = request.POST.get("description2")
         latitude = request.POST.get("latitude")
         longitude = request.POST.get("longitude")
-        date = request.POST.get("datetime")
-        # date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         coordinates = latitude + ',' + longitude
         address = request.POST.get("address")
         image = request.FILES.get('photo')
-        datetime_add(request)
         if image == None:
             filename = "default.jpg"
         else:
@@ -140,6 +138,7 @@ def add_event(request):
             fs = FileSystemStorage()
             saved_filename = fs.save(filename, image)
             # image_path = fs.url(saved_filename)
+        datetime_add(request)
         new_event = Event.objects.create(title=title,
                                          type=type,
                                          tiny_description=short_description,
@@ -197,30 +196,67 @@ def edit_event(request, id):
         return redirect(request.path)
     return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
 
-# def datetime_add(request):
-#     datetime = request.POST.get("datetime")
-#     if datetime != "":
-#
-#
-#     date_range_from = request.POST.get("date_range_from")
-#     print(date_range_from)
-#     if date_range_from == "": print("True2")
-#     date_range_to = request.POST.get("date_range_to")
-#     print("date_range_from - ", date_range_from)
-#     print("date_range_to - ", date_range_to)
-#
-#
-#     datetime_from_date = request.POST.get("datetime_from_date")
-#     datetime_from_time = request.POST.get("datetime_from_time")
-#     datetime_to_date = request.POST.get("datetime_to_date")
-#     datetime_to_time = request.POST.get("datetime_to_time")
-#     print("datetime_from_date - ", datetime_from_date)
-#     print("datetime_from_time - ", datetime_from_time)
-#     print("datetime_to_date - ", datetime_to_date)
-#     print("datetime_to_time - ", datetime_to_time)
-#     return 0
+def datetime_add(request):
+    max_id = Event.objects.aggregate(Max('id'))['id__max'] + 1
+    datetime_try = request.POST.get("datetime")
+    if datetime_try != "":
+        datetime_real = datetime.strptime(datetime_try, "%Y-%m-%dT%H:%M")
+        return DateTimeData.objects.create(event_id=max_id, datetime=datetime_real)
 
+    date_range_from = request.POST.get("date_range_from")
+    if date_range_from != "":
+        date_range_to = request.POST.get("date_range_to")
+        date_range_from_real = datetime.strptime(date_range_from, "%Y-%m-%d")
+        date_range_to_real = datetime.strptime(date_range_to, "%Y-%m-%d")
+        return DateTimeData.objects.create(event_id=max_id, date_range_from=date_range_from_real,
+                                           date_range_to=date_range_to_real)
 
+    datetime_from_date = request.POST.get("datetime_from_date")
+    if datetime_from_date != "":
+        datetime_from_time = request.POST.get("datetime_from_time")
+        datetime_to_date = request.POST.get("datetime_to_date")
+        datetime_to_time = request.POST.get("datetime_to_time")
+        datetime_from_date_real = datetime.strptime(datetime_from_date, "%Y-%m-%d")
+        datetime_to_date_real = datetime.strptime(datetime_to_date, "%Y-%m-%d")
+        datetime_from_time_real = datetime.strptime(datetime_from_time, "%H:%M")
+        datetime_to_time_real = datetime.strptime(datetime_to_time, "%H:%M")
+        return DateTimeData.objects.create(event_id=max_id,
+                                           datetime_from_date=datetime_from_date_real,
+                                           datetime_to_date=datetime_to_date_real,
+                                           datetime_from_time=datetime_from_time_real,
+                                           datetime_to_time=datetime_to_time_real)
+    every_day = request.POST.get("daily_fields")
+    if every_day != "":
+        print("YES")
+        print(every_day)
+        return DateTimeData.objects.create(event_id=max_id, every_day=every_day)
+    return 0
+
+def datetime_view(request, id):
+    months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
+              "ноября", "декабря"]
+    date_output = "Не указана"
+    date_base = DateTimeData.objects.filter(event_id=id).first()
+    if date_base is None: pass
+    elif date_base.datetime is not None:
+        dt_object = datetime.strptime(str(date_base.datetime), "%Y-%m-%d %H:%M:%S")
+        date_output = dt_object.strftime("%d") + " " + months[dt_object.month - 1] + " " + str(dt_object.year) + ", " + dt_object.strftime("%H:%M:%S")
+    elif date_base.date_range_from is not None:
+        dt_object = datetime.strptime(str(date_base.date_range_from), "%Y-%m-%d")
+        dt_object2 = datetime.strptime(str(date_base.date_range_to), "%Y-%m-%d")
+        date_output = f'От {dt_object.strftime("%d")} {months[dt_object.month - 1]} {str(dt_object.year)} ' \
+                      f'до {dt_object2.strftime("%d")} {months[dt_object2.month - 1]} {str(dt_object2.year)}'
+    elif date_base.datetime_from_date is not None:
+        dt_object = datetime.strptime(str(date_base.datetime_from_date), "%Y-%m-%d")
+        dt_object2 = datetime.strptime(str(date_base.datetime_to_date), "%Y-%m-%d")
+        dt_object3 = datetime.strptime(str(date_base.datetime_from_time), "%H:%M:%S")
+        dt_object4 = datetime.strptime(str(date_base.datetime_to_time), "%H:%M:%S")
+        date_output = f'От {dt_object.strftime("%d")} {months[dt_object.month - 1]} {str(dt_object.year)} ' \
+                      f'до {dt_object2.strftime("%d")} {months[dt_object2.month - 1]} {str(dt_object2.year)}, ' \
+                      f'{dt_object3.strftime("%H:%M")} - {dt_object4.strftime("%H:%M")}'
+    elif date_base.every_day is not None:
+        date_output = "Ежедневно"
+    return date_output
 
 def delete_event(request, id):
     event = Event.objects.filter(id=id).first()
@@ -250,4 +286,5 @@ def test(request):
 def event_detail(request, id):
     event = Event.objects.get(id=id)
     event.views_add()
-    return render(request, 'dosug/event.html', {'event': event})
+    datetime = datetime_view(request, id)
+    return render(request, 'dosug/event.html', {'event': event, 'datetime': datetime})

@@ -64,7 +64,9 @@
         </div>
         <div class="block" style="width: 50%;">
             <h5>Информация о событии</h5>
-            <p>Дата - {{event.datetime}}</p>
+            <p>Дата -
+                {{datetime}} {% if datetime == "Не указана" %}<a style="color: #4348bd;" data-tooltip="Автор решил не указывать дату. Скорее всего, её можно найти в описании или на сайте организатора.">(?)</a>
+                {% endif %}
             <p>Адрес - {{ event.address }}</p>
             <p style="text-align: center; margin-bottom: 10px"><u>Карта</u></p>
             <div id="event-map" class="map2" data-event="{{ event }}"></div>

@@ -14,6 +14,10 @@ from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+# def error_404(request, exception):
+#     print("Yes")
+#     return render(request, '404.html', status=404)
+
 def home(request):
     event = Event.objects.all()
     popular = Event.objects.order_by("-views")[:6]
@@ -60,7 +64,9 @@ def user_logout(request):
     return redirect('/')
 
 def user_events(request):
-    if not request.user.is_authenticated: return redirect('/')
+    if not request.user.is_authenticated:
+        messages.warning(request, "Невозможно получить доступ к этой странице")
+        return redirect('/')
     if request.user.is_superuser:
         events = Event.objects.all()
     else:
@@ -101,7 +107,7 @@ def event_list(request, type='all', sort=None, query = None):
         if sort is not None and sort != "None":
             map_dots = map_dots.order_by(sort)
     paginator = Paginator(map_dots, 8)
-
+    count = len(map_dots)
     page_number = request.GET.get('page')
     try:
         map_dots = paginator.page(page_number)
@@ -109,26 +115,37 @@ def event_list(request, type='all', sort=None, query = None):
         map_dots = paginator.page(1)
     except EmptyPage:
         map_dots = paginator.page(paginator.num_pages)
-    count = len(map_dots)
     return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'query': query, 'count': count})
 
 def random_event(request):
     event_ids = list(Event.objects.values_list('id', flat=True))
-    event = Event.objects.get(id=random.choice(event_ids))
-    print(event.datetime)
-    return redirect(f'/event/{event.id}', {'event': event})
+    number = random.choice(event_ids)
+    event = Event.objects.get(id=number)
+    event.views_add()
+    datetime = datetime_view(request, number)
+    return redirect(f'/event/{event.id}', {'event': event, 'datetime': datetime})
 def add_event(request):
     eventform = DateTimeDataForm()
     if request.method == "POST":
+        latitude_str = request.POST.get("latitude")
+        longitude_str = request.POST.get("longitude")
+        if latitude_str and longitude_str:
+            try:
+                latitude = float(latitude_str)
+                longitude = float(longitude_str)
+            except ValueError:
+                messages.warning(request, "Не удалось прочитать координаты")
+                return redirect(request.path)
+        if not(latitude >= 55.503749 and latitude <= 56.009657 and longitude >= 37.345276 and longitude  <= 37.967190):
+            messages.warning(request, "Координаты не соответсвуют г. Москве.")
+            return redirect(request.path)
         title = request.POST.get("title")
         type = request.POST.get("type")
         short_description = request.POST.get("description")
         description = request.POST.get("description2")
-        latitude = request.POST.get("latitude")
-        longitude = request.POST.get("longitude")
         phone = request.POST.get("phone")
         link = request.POST.get("url")
-        coordinates = latitude + ',' + longitude
+        coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')
         if image == None:
@@ -158,16 +175,27 @@ def add_event(request):
 def edit_event(request, id):
     event = Event.objects.filter(id = id).first()
     if (not request.user.is_superuser) and (request.user.id != event.author):
-        redirect(request.path)
+        messages.warning(request, "Невозможно получить доступ к странице")
+        return redirect('/')
     latitude, longitude = event.coordinates.split(',')
     eventform = EventForm()
     if request.method == "POST":
+        latitude_str = request.POST.get("latitude")
+        longitude_str = request.POST.get("longitude")
+        if latitude_str and longitude_str:
+            try:
+                latitude = float(latitude_str)
+                longitude = float(longitude_str)
+            except ValueError:
+                messages.warning(request, "Не удалось прочитать координаты")
+                return redirect(request.path)
+        if not(latitude >= 55.503749 and latitude <= 56.009657 and longitude >= 37.345276 and longitude  <= 37.967190):
+            messages.warning(request, "Координаты не соответсвуют г. Москве.")
+            return redirect(request.path)
         title = request.POST.get("title")
         type = request.POST.get("type")
         short_description = request.POST.get("description")
         description = request.POST.get("description2")
-        latitude = request.POST.get("latitude")
-        longitude = request.POST.get("longitude")
         DateTimeData.objects.filter(event_id=id).delete()
         check = datetime_add(request, id)
         if check is False:
@@ -175,7 +203,7 @@ def edit_event(request, id):
             return redirect(request.path)
         phone = request.POST.get("phone")
         link = request.POST.get("url")
-        coordinates = latitude + ',' + longitude
+        coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')
         new_event = Event.objects.filter(id=id).update(title=title,
@@ -272,7 +300,8 @@ def delete_event(request, id):
         Event.objects.filter(id=id).delete()
         messages.success(request, 'Событие было успешно удалено')
     else:
-        messages.error(request, 'Не удалось удалить событие')
+        messages.warning(request, 'Не удалось удалить событие')
+        return redirect('/')
     return redirect(f'/user_events')
 
 
@@ -280,19 +309,17 @@ def map(request):
     map_dots = Event.objects.all()
     data = list(map_dots.values())
     file_path = 'static\js\data2.json'
-    for item in data:
-        item['datetime'] = item['datetime'].strftime("%Y-%m-%d %H:%M:%S")
     new_data = {"features": data}
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(new_data, json_file, ensure_ascii=False, indent=2)
         return render(request, 'dosug/map.html')
 
-def test(request):
-    posts = Event.objects.all
-    return render(request, 'dosug/test.html', {'posts': posts})
-
 def event_detail(request, id):
-    event = Event.objects.get(id=id)
-    event.views_add()
-    datetime = datetime_view(request, id)
-    return render(request, 'dosug/event.html', {'event': event, 'datetime': datetime})
+    try:
+        event = Event.objects.get(id=id)
+        event.views_add()
+        datetime = datetime_view(request, id)
+        return render(request, 'dosug/event.html', {'event': event, 'datetime': datetime})
+    except Event.DoesNotExist:
+        messages.warning(request, "Событие не найдено")
+        return redirect('/')

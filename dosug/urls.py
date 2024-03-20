@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views
 
+# handler404 = views.error_404
+
 urlpatterns = [
     path('', views.home),
     path('events', views.event_list),
     path('events/<str:type>', views.event_list),
     path('events/<str:type>/<str:sort>', views.event_list),
     path('map', views.map),
-    path('test', views.test),
     path('add_event', views.add_event),
     path('edit/<int:id>', views.edit_event),
     path('delete/<int:id>', views.delete_event),

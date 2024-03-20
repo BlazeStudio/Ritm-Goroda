@@ -118,13 +118,26 @@ function showFields() {
   dailyFields.style.display = "none";
   noDateFields.style.display = "none";
 
+  // Удалить атрибут required у всех полей
+  var allFields = document.querySelectorAll("input[type='datetime-local'], input[type='date'], input[type='time']");
+  allFields.forEach(function(field) {
+    field.removeAttribute("required");
+  });
+
   // Отображаем соответствующие поля в зависимости от выбранного вида даты
   if (selectedValue === "datetime") {
     datetimeFields.style.display = "block";
+    document.getElementById("datetime").setAttribute("required", "");
   } else if (selectedValue === "date_range") {
     dateRangeFields.style.display = "block";
+    document.getElementById("date_range_from").setAttribute("required", "");
+    document.getElementById("date_range_to").setAttribute("required", "");
   } else if (selectedValue === "datetime_range") {
     datetimeRangeFields.style.display = "block";
+    document.getElementById("datetime_from_date").setAttribute("required", "");
+    document.getElementById("datetime_from_time").setAttribute("required", "");
+    document.getElementById("datetime_to_date").setAttribute("required", "");
+    document.getElementById("datetime_to_time").setAttribute("required", "");
   } else if (selectedValue === "daily") {
     dailyFields.style.display = "block";
   } else if (selectedValue === "no_date") {
@@ -152,11 +165,9 @@ showFields();
     <label  for="url"><b>Сайт:</b>
     <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30" value="{{event.link}}"/></label><br>
     <label for="photo"><b>Фотография:</b> <input style="margin-left: 100px" type="file" id="photo" name="photo" accept="image/jpeg, image/jpg, image/png"></label><br>
-                <!-- Блок для карты -->
 <b>*Карта:</b><div class="input-tab" id="map"></div>
-<!-- Форма для ввода координат и адреса -->
     <label for="latitude">Широта:
-    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required value="{{latitude}}">
+    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" readonly value="{{latitude}}">
     <div style="margin-left: 5px">Долгота:</div>
     <input style="margin-left: 5px" type="text" id="longitude" name="longitude" readonly value="{{longitude}}"></label>
     <label for="address">Адрес:

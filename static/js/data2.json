@@ -11,8 +11,7 @@
       "address": "с",
       "phone": "Отсутствует",
       "coordinates": "55.86947077671819,37.664203499999964",
-      "views": 78,
-      "datetime": "2024-03-06 19:57:36",
+      "views": 84,
       "author": 0
     },
     {
@@ -27,7 +26,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.85513413601704,37.65267391576129",
       "views": 12,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -42,7 +40,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.79475381457494,37.61647124182736",
       "views": 13,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -57,7 +54,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.781345773825215,37.61435561477465",
       "views": 9,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -72,7 +68,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.78271123536529,37.71906304402942",
       "views": 14,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -87,7 +82,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.880114, 37.694997",
       "views": 27,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -101,8 +95,7 @@
       "address": "проспект Мира, 211к2",
       "phone": "Отсутствует",
       "coordinates": "55.845991, 37.661784",
-      "views": 16,
-      "datetime": "2024-03-06 19:57:36",
+      "views": 17,
       "author": 0
     },
     {
@@ -117,7 +110,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.820289, 37.639958",
       "views": 9,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -132,7 +124,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.790492, 37.531372",
       "views": 12,
-      "datetime": "2024-03-06 19:57:36",
       "author": 0
     },
     {
@@ -146,8 +137,7 @@
       "address": "",
       "phone": "",
       "coordinates": "55.783979001956446,37.66227528076167",
-      "views": 98,
-      "datetime": "2024-03-06 19:57:36",
+      "views": 99,
       "author": 0
     },
     {
@@ -161,8 +151,7 @@
       "address": "ул. Пушкина, дом Колотушкина!",
       "phone": "Отсутствует",
       "coordinates": "55.81063980440791,37.438695471376334",
-      "views": 290,
-      "datetime": "2024-03-06 19:57:36",
+      "views": 291,
       "author": 0
     },
     {
@@ -176,8 +165,7 @@
       "address": "",
       "phone": "Отсутствует",
       "coordinates": "55.78670816012947,37.68741643083789",
-      "views": 5,
-      "datetime": "2024-03-06 19:57:36",
+      "views": 6,
       "author": 0
     },
     {
@@ -192,7 +180,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.787441896192476,37.61150642852779",
       "views": 5,
-      "datetime": "2024-03-07 12:00:00",
       "author": 0
     },
     {
@@ -207,7 +194,6 @@
       "phone": "Отсутствует",
       "coordinates": "55.89795118635914,37.56482145263841",
       "views": 26,
-      "datetime": "2023-03-09 22:00:00",
       "author": 0
     },
     {
@@ -221,8 +207,7 @@
       "address": "Москва, Большая Почтовая улица, 26Вс2",
       "phone": "+7 (123) 332-3232",
       "coordinates": "55.7784841271646,37.69969746093745",
-      "views": 22,
-      "datetime": "2222-02-22 22:02:00",
+      "views": 24,
       "author": 0
     },
     {
@@ -237,7 +222,6 @@
       "phone": "",
       "coordinates": "55.77796171054119,37.58210941772456",
       "views": 5,
-      "datetime": "2122-02-12 05:05:00",
       "author": 0
     },
     {
@@ -252,7 +236,6 @@
       "phone": "",
       "coordinates": "55.80339818275354,37.497823681640575",
       "views": 5,
-      "datetime": "0012-12-22 22:22:00",
       "author": 0
     },
     {
@@ -267,7 +250,6 @@
       "phone": "",
       "coordinates": "55.74627333373237,37.72029682617182",
       "views": 8,
-      "datetime": "1231-03-21 23:12:00",
       "author": 0
     },
     {
@@ -281,8 +263,7 @@
       "address": "Москва, Малая Тульская улица, 15",
       "phone": "",
       "coordinates": "55.70907381807038,37.62004658203121",
-      "views": 10,
-      "datetime": "1231-03-21 23:23:00",
+      "views": 63,
       "author": 0
     },
     {
@@ -296,8 +277,7 @@
       "address": "Москва, Восточный административный округ, район Метрогородок",
       "phone": "",
       "coordinates": "55.823271498798476,37.76218220214839",
-      "views": 8,
-      "datetime": "1231-03-21 23:23:00",
+      "views": 9,
       "author": 0
     },
     {
@@ -312,7 +292,188 @@
       "phone": "",
       "coordinates": "55.69573534667745,37.80818745117183",
       "views": 2,
-      "datetime": "1212-12-12 12:12:00",
+      "author": 0
+    },
+    {
+      "id": 36,
+      "title": "Временное",
+      "type": "art",
+      "image": "cdf08b96-6118-4c13-816f-a31d765528a9.jpg",
+      "tiny_description": "132",
+      "description": "123123",
+      "link": "",
+      "address": "Москва, Андроньевский проезд, 5",
+      "phone": "+1 (212) 121-231",
+      "coordinates": "55.748768998352524,37.67223164062495",
+      "views": 1,
+      "author": 0
+    },
+    {
+      "id": 37,
+      "title": "3123",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "123123",
+      "description": "1231",
+      "link": "",
+      "address": "Москва, историческая местность Троице-Голенищево",
+      "phone": "",
+      "coordinates": "55.730000954941474,37.52666279296871",
+      "views": 0,
+      "author": 0
+    },
+    {
+      "id": 38,
+      "title": "wdqqdw",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qwdqwd",
+      "description": "qwdqwd",
+      "link": "",
+      "address": "Москва, Шмитовский проезд",
+      "phone": "",
+      "coordinates": "55.7578889033082,37.54863544921869",
+      "views": 1,
+      "author": 0
+    },
+    {
+      "id": 41,
+      "title": "Test 3",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qwfqwfqwf",
+      "description": "wqfqwfqwf",
+      "link": "",
+      "address": "Москва, Юго-Восточный административный округ, район Лефортово",
+      "phone": "",
+      "coordinates": "55.74476790714306,37.71068378906246",
+      "views": 10,
+      "author": 0
+    },
+    {
+      "id": 42,
+      "title": "qwdqwd",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qwdqwd",
+      "description": "qwdqwd",
+      "link": "",
+      "address": "Москва, Нижегородская улица, 83Б",
+      "phone": "",
+      "coordinates": "55.731566030479684,37.72304340820309",
+      "views": 9,
+      "author": 0
+    },
+    {
+      "id": 43,
+      "title": "fwqfqwf",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "vwqvqwd",
+      "description": "wqdqwd",
+      "link": "",
+      "address": "Москва, парк Московской сельскохозяйственной академии имени К.А. Тимирязева",
+      "phone": "",
+      "coordinates": "55.81780920758843,37.54176899414058",
+      "views": 3,
+      "author": 0
+    },
+    {
+      "id": 44,
+      "title": "vqevwe",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "wefwef",
+      "description": "qwdqwdqwd",
+      "link": "",
+      "address": "Москва, Северо-Западный административный округ, район Щукино",
+      "phone": "",
+      "coordinates": "55.80775642750557,37.488210644531215",
+      "views": 1,
+      "author": 0
+    },
+    {
+      "id": 45,
+      "title": "йцвйц",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "йцвйцв",
+      "description": "цйвйцв",
+      "link": "",
+      "address": "Москва, Ленинский проспект (дублёр)",
+      "phone": "",
+      "coordinates": "55.69512809221824,37.55687519531246",
+      "views": 0,
+      "author": 0
+    },
+    {
+      "id": 46,
+      "title": "berberberb",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "efbwewbew",
+      "description": "verbrtnrrtn",
+      "link": "",
+      "address": "Москва, Тимирязевская улица, 14А",
+      "phone": "",
+      "coordinates": "55.81365057466083,37.56923481445309",
+      "views": 1,
+      "author": 0
+    },
+    {
+      "id": 47,
+      "title": "asvasv",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "asvasvasv",
+      "description": "asvasvasvvsaasv",
+      "link": "",
+      "address": "Москва, Западный административный округ, Можайский район",
+      "phone": "",
+      "coordinates": "55.709862508829616,37.44975849609371",
+      "views": 0,
+      "author": 0
+    },
+    {
+      "id": 48,
+      "title": "wdqqdw",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qwdqwd",
+      "description": "qwdqwd",
+      "link": "",
+      "address": "Москва, Смоленская площадь, 3",
+      "phone": "",
+      "coordinates": "55.7478357950421,37.581594433593715",
+      "views": 1,
+      "author": 0
+    },
+    {
+      "id": 49,
+      "title": "ntrrnrtntrn",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "nrtnrtnrtn",
+      "description": "rtnrtnrtn",
+      "link": "",
+      "address": "Москва, Перовская эстакада",
+      "phone": "",
+      "coordinates": "55.73311590565061,37.771108593749965",
+      "views": 2,
+      "author": 0
+    },
+    {
+      "id": 50,
+      "title": "wqdwqdqw",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "vervever",
+      "description": "veververv",
+      "link": "",
+      "address": "Москва, площадь Академика Курчатова, 1с112",
+      "phone": "",
+      "coordinates": "55.79273598810327,37.467611279296825",
+      "views": 3,
       "author": 0
     }
   ]

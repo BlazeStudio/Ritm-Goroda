@@ -60,8 +60,93 @@
         <option value="sport" {% if event.type == 'sport' %}selected{% endif %}>Спорт</option>
     </select></label>
 <br>
-    <label  for="datetime"><b>*Дата:</b>
-    <input style="margin-left: 150px" type="datetime-local" id="datetime" name="datetime" required max="9999-12-31T23:59" value="{{event.datetime}}"></label><br>
+
+<label for="date_type"><b>Выберите тип даты:</b></label>
+<select id="date_type" onchange="showFields(); clearFields();">
+  <option value="datetime">Дата и время</option>
+  <option value="date_range">Дата от и до</option>
+  <option value="datetime_range">Дата и время от и до</option>
+  <option value="daily">Ежедневно</option>
+  <option value="no_date">Нет даты</option>
+</select>
+
+<br><br>
+
+<div id="datetime_fields">
+  <label for="datetime"><b>*Дата и время:</b>
+  <input style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" max="9999-12-31T23:59"></label>
+</div>
+<div id="date_range_fields" style="display:none;">
+  <label for="date_range_from"><b>Дата от:</b>
+  <input type="date" style="margin-left: 97px" id="date_range_from" name="date_range_from" max="9999-12-31"></label>
+  <label for="date_range_to"><b>Дата до:</b>
+  <input type="date" style="margin-left: 95px" id="date_range_to" name="date_range_to" max="9999-12-31"></label>
+</div>
+
+<div id="datetime_range_fields" style="display:none;">
+  <label for="datetime_from_date"><b>Дата от:</b>
+      <input type="date" style="margin-left: 98px" id="datetime_from_date" name="datetime_from_date" max="9999-12-31"></label>
+  <label for="datetime_to_date"><b>Дата до:</b>
+      <input type="date" style="margin-left: 90px" id="datetime_to_date" name="datetime_to_date" max="9999-12-31"></label>
+  <label for="datetime_from_time"><b>Время от:</b>
+  <input type="time" style="margin-left: 40px" id="datetime_from_time" name="datetime_from_time" max="23:59"></label>
+  <label for="datetime_to_time"><b>Время до:</b>
+  <input type="time" style="margin-left: 40px" id="datetime_to_time" name="datetime_to_time" max="23:59"></label>
+</div>
+
+<label for="daily_fields">
+  <input type="text" id="daily_fields" name="daily_fields" value="Ежедневно" readonly>
+</label>
+
+<div id="no_date_fields" style="display:none;">
+  <b>Нет даты</b>
+</div>
+<br>
+<script>
+function showFields() {
+  var selectedValue = document.getElementById("date_type").value;
+  var datetimeFields = document.getElementById("datetime_fields");
+  var dateRangeFields = document.getElementById("date_range_fields");
+  var datetimeRangeFields = document.getElementById("datetime_range_fields");
+  var dailyFields = document.getElementById("daily_fields");
+  var noDateFields = document.getElementById("no_date_fields");
+
+  // Скрыть все поля перед отображением новых
+  datetimeFields.style.display = "none";
+  dateRangeFields.style.display = "none";
+  datetimeRangeFields.style.display = "none";
+  dailyFields.style.display = "none";
+  noDateFields.style.display = "none";
+
+  // Отображаем соответствующие поля в зависимости от выбранного вида даты
+  if (selectedValue === "datetime") {
+    datetimeFields.style.display = "block";
+  } else if (selectedValue === "date_range") {
+    dateRangeFields.style.display = "block";
+  } else if (selectedValue === "datetime_range") {
+    datetimeRangeFields.style.display = "block";
+  } else if (selectedValue === "daily") {
+    dailyFields.style.display = "block";
+  } else if (selectedValue === "no_date") {
+    noDateFields.style.display = "block";
+  }
+}
+
+function clearFields() {
+  document.getElementById("datetime").value = "";
+  document.getElementById("date_range_from").value = "";
+  document.getElementById("date_range_to").value = "";
+  document.getElementById("datetime_from_date").value = "";
+  document.getElementById("datetime_from_time").value = "";
+  document.getElementById("datetime_to_date").value = "";
+  document.getElementById("datetime_to_time").value = "";
+}
+
+showFields();
+</script>
+
+
+
     <label  for="phone"><b>Телефон:</b>
     <input type="tel" style="margin-left: 117px" id="phone" name="phone" value="{{event.phone}}"></label><br>
     <label  for="url"><b>Сайт:</b>

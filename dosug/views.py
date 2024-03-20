@@ -138,7 +138,10 @@ def add_event(request):
             fs = FileSystemStorage()
             saved_filename = fs.save(filename, image)
             # image_path = fs.url(saved_filename)
-        datetime_add(request)
+        check = datetime_add(request)
+        if check is False:
+            messages.error(request, 'Событие не добавлено! Неверный формат даты!')
+            return redirect(request.path)
         new_event = Event.objects.create(title=title,
                                          type=type,
                                          tiny_description=short_description,
@@ -165,8 +168,11 @@ def edit_event(request, id):
         description = request.POST.get("description2")
         latitude = request.POST.get("latitude")
         longitude = request.POST.get("longitude")
-        date = request.POST.get("datetime")
-        date_time_obj = datetime.strptime(date, "%Y-%m-%dT%H:%M")
+        DateTimeData.objects.filter(event_id=id).delete()
+        check = datetime_add(request, id)
+        if check is False:
+            messages.error(request, 'Событие не добавлено! Неверный формат даты!')
+            return redirect(request.path)
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         coordinates = latitude + ',' + longitude
@@ -178,7 +184,6 @@ def edit_event(request, id):
                                          description=description,
                                          coordinates=coordinates,
                                          address=address,
-                                         datetime=date_time_obj,
                                          phone=phone,
                                          link=link)
         if image == None:
@@ -196,8 +201,11 @@ def edit_event(request, id):
         return redirect(request.path)
     return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
 
-def datetime_add(request):
-    max_id = Event.objects.aggregate(Max('id'))['id__max'] + 1
+def datetime_add(request, edit = 0):
+    if edit == 0: max_id = Event.objects.aggregate(Max('id'))['id__max'] + 1
+    else:
+        print(edit)
+        max_id = edit
     datetime_try = request.POST.get("datetime")
     if datetime_try != "":
         datetime_real = datetime.strptime(datetime_try, "%Y-%m-%dT%H:%M")
@@ -208,6 +216,7 @@ def datetime_add(request):
         date_range_to = request.POST.get("date_range_to")
         date_range_from_real = datetime.strptime(date_range_from, "%Y-%m-%d")
         date_range_to_real = datetime.strptime(date_range_to, "%Y-%m-%d")
+        if date_range_from_real >= date_range_to_real:return False
         return DateTimeData.objects.create(event_id=max_id, date_range_from=date_range_from_real,
                                            date_range_to=date_range_to_real)
 
@@ -220,6 +229,7 @@ def datetime_add(request):
         datetime_to_date_real = datetime.strptime(datetime_to_date, "%Y-%m-%d")
         datetime_from_time_real = datetime.strptime(datetime_from_time, "%H:%M")
         datetime_to_time_real = datetime.strptime(datetime_to_time, "%H:%M")
+        if datetime_from_date >= datetime_to_date: return False
         return DateTimeData.objects.create(event_id=max_id,
                                            datetime_from_date=datetime_from_date_real,
                                            datetime_to_date=datetime_to_date_real,
@@ -227,8 +237,6 @@ def datetime_add(request):
                                            datetime_to_time=datetime_to_time_real)
     every_day = request.POST.get("daily_fields")
     if every_day != "":
-        print("YES")
-        print(every_day)
         return DateTimeData.objects.create(event_id=max_id, every_day=every_day)
     return 0
 

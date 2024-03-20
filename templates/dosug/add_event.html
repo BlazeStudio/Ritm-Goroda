@@ -42,13 +42,13 @@
             {% csrf_token %}
             <div style="color: black">
     <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
-    <small><div id="title-count"></div></small> <!-- Счетчик оставшихся символов -->
+    <small><div id="title-count"></div></small>
 <br>
     <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
-    <small><div id="description-count"></div></small> <!-- Счетчик оставшихся символов -->
+    <small><div id="description-count"></div></small>
 <br>
     <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required></textarea></label>
-    <small><div id="description2-count"></div></small> <!-- Счетчик оставшихся символов -->
+    <small><div id="description2-count"></div></small>
 <br>
     <label for="type"><b>*Тип:</b> <select style="margin-left: 150px" id="type" name="type">
         <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
@@ -56,7 +56,7 @@
 <br>
 
 <label for="date_type"><b>Выберите тип даты:</b></label>
-<select id="date_type" onchange="showFields()">
+<select id="date_type" onchange="showFields(); clearFields();">
   <option value="datetime">Дата и время</option>
   <option value="date_range">Дата от и до</option>
   <option value="datetime_range">Дата и время от и до</option>
@@ -72,20 +72,20 @@
 </div>
 <div id="date_range_fields" style="display:none;">
   <label for="date_range_from"><b>Дата от:</b>
-  <input type="date" style="margin-left: 97px" id="date_range_from" name="date_range_from"></label>
+  <input type="date" style="margin-left: 97px" id="date_range_from" name="date_range_from" max="9999-12-31"></label>
   <label for="date_range_to"><b>Дата до:</b>
-  <input type="date" style="margin-left: 95px" id="date_range_to" name="date_range_to"></label>
+  <input type="date" style="margin-left: 95px" id="date_range_to" name="date_range_to" max="9999-12-31"></label>
 </div>
 
 <div id="datetime_range_fields" style="display:none;">
   <label for="datetime_from_date"><b>Дата от:</b>
-      <input type="date" style="margin-left: 98px" id="datetime_from_date" name="datetime_from_date"></label>
-  <label for="datetime_from_time"><b>Время от:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_from_time" name="datetime_from_time"></label>
+      <input type="date" style="margin-left: 98px" id="datetime_from_date" name="datetime_from_date" max="9999-12-31"></label>
   <label for="datetime_to_date"><b>Дата до:</b>
-      <input type="date" style="margin-left: 90px" id="datetime_to_date" name="datetime_to_date"></label>
+      <input type="date" style="margin-left: 90px" id="datetime_to_date" name="datetime_to_date" max="9999-12-31"></label>
+  <label for="datetime_from_time"><b>Время от:</b>
+  <input type="time" style="margin-left: 40px" id="datetime_from_time" name="datetime_from_time" max="23:59"></label>
   <label for="datetime_to_time"><b>Время до:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_to_time" name="datetime_to_time"></label>
+  <input type="time" style="margin-left: 40px" id="datetime_to_time" name="datetime_to_time" max="23:59"></label>
 </div>
 
 <label for="daily_fields">
@@ -126,9 +126,19 @@ function showFields() {
   }
 }
 
-// Показываем соответствующие поля при загрузке страницы
+function clearFields() {
+  document.getElementById("datetime").value = "";
+  document.getElementById("date_range_from").value = "";
+  document.getElementById("date_range_to").value = "";
+  document.getElementById("datetime_from_date").value = "";
+  document.getElementById("datetime_from_time").value = "";
+  document.getElementById("datetime_to_date").value = "";
+  document.getElementById("datetime_to_time").value = "";
+}
+
 showFields();
 </script>
+
 
 
 

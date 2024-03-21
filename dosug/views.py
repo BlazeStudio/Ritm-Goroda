@@ -1,4 +1,3 @@
-import os
 import uuid
 
 from django.contrib.auth import authenticate, login, logout
@@ -21,8 +20,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     event = Event.objects.all()
     popular = Event.objects.order_by("-views")[:6]
+    new = Event.objects.order_by("-created_at")[:4]
     count = Event.objects.count()
-    return render(request, 'dosug/home.html', {'event': event, 'count': count, 'popular':popular})
+    return render(request, 'dosug/home.html', {'event': event, 'count': count, 'popular': popular, 'new': new})
 
 def user_register(request):
     if request.user.is_authenticated:return redirect('/')
@@ -57,7 +57,6 @@ def user_login(request):
             return redirect(request.path)
     return render(request, 'dosug/login.html')
 
-#Для теста - потом убрать
 @login_required(login_url="/login")
 def user_logout(request):
     logout(request)
@@ -91,9 +90,14 @@ def profile(request, id, edit = 0):
         if request.user.id == id:
             edit = 1
     return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof})
-def event_list(request, type='all', sort=None, query = None):
+def event_list(request, type='all', sort=None):
     query = request.GET.get('search_query')
-    map_dots = Event.objects.all()
+    max_price = request.GET.get('max_price')
+    min_price = request.GET.get('min_price')
+    if (max_price is None) or (min_price is None):
+        max_price = 10000
+        min_price = 0
+    map_dots = Event.objects.filter(price__gte=min_price, price__lte=max_price)
     if query is not None and sort != "None":
         if type != 'all':
             map_dots = map_dots.filter(type=type)
@@ -101,7 +105,6 @@ def event_list(request, type='all', sort=None, query = None):
             map_dots = map_dots.order_by(sort)
         map_dots = [event for event in map_dots if query.lower() in event.title.lower()]
     else:
-        map_dots = Event.objects.all()
         if type != 'all':
             map_dots = map_dots.filter(type=type)
         if sort is not None and sort != "None":
@@ -115,7 +118,13 @@ def event_list(request, type='all', sort=None, query = None):
         map_dots = paginator.page(1)
     except EmptyPage:
         map_dots = paginator.page(paginator.num_pages)
-    return render(request, 'dosug/events_list.html', {'map_dots': map_dots, 'type': type, 'sort': sort, 'query': query, 'count': count})
+    return render(request, 'dosug/events_list.html', {'map_dots': map_dots,
+                                                      'type': type,
+                                                      'sort': sort,
+                                                      'query': query,
+                                                      'count': count,
+                                                      'max_price': max_price,
+                                                      'min_price': min_price})
 
 def random_event(request):
     event_ids = list(Event.objects.values_list('id', flat=True))
@@ -146,8 +155,11 @@ def add_event(request):
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         price = request.POST.get("price_paid")
-        if price == "":
+        print(price)
+        if price == None:
             price = 0
+        else:
+            price = int(price)
         coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')
@@ -316,6 +328,8 @@ def map(request):
     map_dots = Event.objects.all()
     data = list(map_dots.values())
     file_path = 'static\js\data2.json'
+    for item in data:
+        item['created_at'] = item['created_at'].strftime("%Y-%m-%d %H:%M:%S")
     new_data = {"features": data}
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(new_data, json_file, ensure_ascii=False, indent=2)

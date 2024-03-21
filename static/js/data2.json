@@ -9,10 +9,12 @@
       "description": "0",
       "link": "с",
       "address": "с",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.86947077671819,37.664203499999964",
-      "views": 84,
-      "author": 0
+      "views": 85,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 2,
@@ -23,10 +25,12 @@
       "description": "0",
       "link": "ы",
       "address": "ы",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.85513413601704,37.65267391576129",
       "views": 12,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 3,
@@ -35,12 +39,14 @@
       "image": "default.jpg",
       "tiny_description": "0",
       "description": "0",
-      "link": "л",
+      "link": "",
       "address": "а",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.79475381457494,37.61647124182736",
-      "views": 13,
-      "author": 0
+      "views": 17,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 4,
@@ -51,10 +57,12 @@
       "description": "0",
       "link": "к",
       "address": "л",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.781345773825215,37.61435561477465",
       "views": 9,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 5,
@@ -65,10 +73,12 @@
       "description": "0",
       "link": "а",
       "address": "к",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.78271123536529,37.71906304402942",
       "views": 14,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 6,
@@ -79,10 +89,12 @@
       "description": "0",
       "link": "https://lagattapizza.ru/",
       "address": "улица Малыгина, 7",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.880114, 37.694997",
       "views": 27,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 7,
@@ -93,10 +105,12 @@
       "description": "0",
       "link": "https://europolis-msk.ru/",
       "address": "проспект Мира, 211к2",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.845991, 37.661784",
       "views": 17,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 8,
@@ -107,10 +121,12 @@
       "description": "0",
       "link": "https://mosmetro.ru/",
       "address": "проспект Мира (дублёр)",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.820289, 37.639958",
       "views": 9,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 9,
@@ -121,10 +137,12 @@
       "description": "0",
       "link": "https://aviapark.com/",
       "address": "Ходынский бульвар, 4",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.790492, 37.531372",
       "views": 12,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 10,
@@ -135,10 +153,12 @@
       "description": "Огого",
       "link": "",
       "address": "",
+      "price": 0,
       "phone": "",
       "coordinates": "55.783979001956446,37.66227528076167",
-      "views": 99,
-      "author": 0
+      "views": 100,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 11,
@@ -149,10 +169,12 @@
       "description": "На выставке собраны снимки космонавтов Роскосмоса Сергея Владимировича Кудь-Сверчкова и Ивана Викторовича Вагнера. Каждая фотография по-своему уникальна и интересна: с высоты полёта МКС космонавты запечатлели виды креативных городов ЮНЕСКО. Экспозиция, на которой собраны космические фотографии, будет доступна для посещения по входному билету в музей. \r\nМузей космонавтики станет отправной точкой развития выставки, созданной совместно с проектом «Вселенная BRICS». После фенисажа «Вселенная BRICS» выставка отправится в другие города России и стран BRICS — Бразилия, Индия, Китай, Южная Африка, ОАЭ, Саудовская Аравия, Иран, Египет и Эфиопия.",
       "link": "",
       "address": "ул. Пушкина, дом Колотушкина!",
+      "price": 499,
       "phone": "Отсутствует",
       "coordinates": "55.81063980440791,37.438695471376334",
-      "views": 291,
-      "author": 0
+      "views": 294,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 12,
@@ -163,10 +185,12 @@
       "description": "In your head",
       "link": "",
       "address": "",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.78670816012947,37.68741643083789",
       "views": 6,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 13,
@@ -177,10 +201,12 @@
       "description": "Тес т тест кпоока",
       "link": "",
       "address": "улуалаулуалуал",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.787441896192476,37.61150642852779",
       "views": 5,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 14,
@@ -191,10 +217,12 @@
       "description": "Прив привыа9цура9рцуашгрцуашицуйгшраищгйнуаищгйнуаи",
       "link": "",
       "address": "Москва, Череповецкая улица, 4к1",
+      "price": 0,
       "phone": "Отсутствует",
       "coordinates": "55.89795118635914,37.56482145263841",
       "views": 26,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 15,
@@ -205,10 +233,12 @@
       "description": "Проверка",
       "link": "https://mosmetro.ru/",
       "address": "Москва, Большая Почтовая улица, 26Вс2",
+      "price": 0,
       "phone": "+7 (123) 332-3232",
       "coordinates": "55.7784841271646,37.69969746093745",
       "views": 24,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 16,
@@ -219,10 +249,12 @@
       "description": "не было и нету",
       "link": "",
       "address": "Москва, Тверской путепровод",
+      "price": 0,
       "phone": "",
       "coordinates": "55.77796171054119,37.58210941772456",
-      "views": 5,
-      "author": 0
+      "views": 7,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 17,
@@ -233,10 +265,12 @@
       "description": "<p>Lorem ipsum dolor sit amet. Qui explicabo incidunt qui iusto autem ad atque consectetur eos tempore distinctio et magni aspernatur sit necessitatibus quam sed autem velit? Ea voluptatem maiores ab nihil ipsa et dolor perspiciatis eos beatae commodi et cumque illum. Ea quasi consectetur aut mollitia consequuntur vel recusandae ratione est quos sunt et voluptates quia et officia ducimus. </p><p>Sed mollitia Quis non soluta porro et molestias perspiciatis hic dolore quasi et repudiandae iure eos sapiente nihil. Et explicabo ipsa aut commodi ipsa ab ducimus dolores. Ea doloribus necessitatibus vel voluptates galisum sit earum velit ex aliquam galisum nam asperiores vero sed quasi nostrum et corrupti dolores. Et optio laboriosam ut quia pariatur eum galisum omnis sit corrupti molestiae vel error omnis. </p><p>Sit molestiae tenetur aut eius culpa qui officiis labore ut impedit provident. Vel voluptas amet et similique doloremque ut impedit fuga At perspiciatis facilis aut recusandae velit ea saepe quia! In nihil repellendus qui quia harum ut voluptatem iusto qui reprehenderit quia quo perspiciatis rerum aut quibusdam dicta. Qui ipsam ipsa et tempora assumenda 33 cupiditate laudantium.",
       "link": "",
       "address": "Москва, улица Кипренского, 14",
+      "price": 0,
       "phone": "",
       "coordinates": "55.80339818275354,37.497823681640575",
       "views": 5,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 18,
@@ -247,10 +281,12 @@
       "description": "цуацуа",
       "link": "",
       "address": "Москва, Авиамоторная улица, 28/6",
+      "price": 0,
       "phone": "",
       "coordinates": "55.74627333373237,37.72029682617182",
       "views": 8,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 32,
@@ -261,10 +297,12 @@
       "description": "qwdqwd",
       "link": "",
       "address": "Москва, Малая Тульская улица, 15",
+      "price": 0,
       "phone": "",
       "coordinates": "55.70907381807038,37.62004658203121",
-      "views": 63,
-      "author": 0
+      "views": 66,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 33,
@@ -275,10 +313,12 @@
       "description": "Edited2",
       "link": "",
       "address": "Москва, Восточный административный округ, район Метрогородок",
+      "price": 0,
       "phone": "",
       "coordinates": "55.823271498798476,37.76218220214839",
       "views": 9,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 35,
@@ -289,10 +329,12 @@
       "description": "Дмитирй",
       "link": "",
       "address": "Москва, Волгоградский проспект",
+      "price": 0,
       "phone": "",
       "coordinates": "55.69573534667745,37.80818745117183",
       "views": 2,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 36,
@@ -303,10 +345,12 @@
       "description": "123123",
       "link": "",
       "address": "Москва, Андроньевский проезд, 5",
+      "price": 0,
       "phone": "+1 (212) 121-231",
       "coordinates": "55.748768998352524,37.67223164062495",
       "views": 1,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 37,
@@ -317,10 +361,12 @@
       "description": "1231",
       "link": "",
       "address": "Москва, историческая местность Троице-Голенищево",
+      "price": 0,
       "phone": "",
       "coordinates": "55.730000954941474,37.52666279296871",
       "views": 0,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 38,
@@ -331,10 +377,12 @@
       "description": "qwdqwd",
       "link": "",
       "address": "Москва, Шмитовский проезд",
+      "price": 0,
       "phone": "",
       "coordinates": "55.7578889033082,37.54863544921869",
       "views": 1,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 41,
@@ -345,10 +393,12 @@
       "description": "wqfqwfqwf",
       "link": "",
       "address": "Москва, Юго-Восточный административный округ, район Лефортово",
+      "price": 0,
       "phone": "",
       "coordinates": "55.74476790714306,37.71068378906246",
       "views": 10,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 42,
@@ -359,10 +409,12 @@
       "description": "qwdqwd",
       "link": "",
       "address": "Москва, Нижегородская улица, 83Б",
+      "price": 0,
       "phone": "",
       "coordinates": "55.731566030479684,37.72304340820309",
       "views": 9,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 43,
@@ -373,10 +425,12 @@
       "description": "wqdqwd",
       "link": "",
       "address": "Москва, парк Московской сельскохозяйственной академии имени К.А. Тимирязева",
+      "price": 0,
       "phone": "",
       "coordinates": "55.81780920758843,37.54176899414058",
       "views": 3,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 44,
@@ -387,10 +441,12 @@
       "description": "qwdqwdqwd",
       "link": "",
       "address": "Москва, Северо-Западный административный округ, район Щукино",
+      "price": 0,
       "phone": "",
       "coordinates": "55.80775642750557,37.488210644531215",
       "views": 1,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 45,
@@ -401,10 +457,12 @@
       "description": "цйвйцв",
       "link": "",
       "address": "Москва, Ленинский проспект (дублёр)",
+      "price": 0,
       "phone": "",
       "coordinates": "55.69512809221824,37.55687519531246",
       "views": 0,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 46,
@@ -415,10 +473,12 @@
       "description": "verbrtnrrtn",
       "link": "",
       "address": "Москва, Тимирязевская улица, 14А",
+      "price": 0,
       "phone": "",
       "coordinates": "55.81365057466083,37.56923481445309",
       "views": 1,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 47,
@@ -429,10 +489,12 @@
       "description": "asvasvasvvsaasv",
       "link": "",
       "address": "Москва, Западный административный округ, Можайский район",
+      "price": 0,
       "phone": "",
       "coordinates": "55.709862508829616,37.44975849609371",
       "views": 0,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 48,
@@ -443,10 +505,12 @@
       "description": "qwdqwd",
       "link": "",
       "address": "Москва, Смоленская площадь, 3",
+      "price": 0,
       "phone": "",
       "coordinates": "55.7478357950421,37.581594433593715",
       "views": 1,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 49,
@@ -457,10 +521,12 @@
       "description": "rtnrtnrtn",
       "link": "",
       "address": "Москва, Перовская эстакада",
+      "price": 0,
       "phone": "",
       "coordinates": "55.73311590565061,37.771108593749965",
       "views": 2,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
     },
     {
       "id": 50,
@@ -471,10 +537,108 @@
       "description": "veververv",
       "link": "",
       "address": "Москва, площадь Академика Курчатова, 1с112",
+      "price": 0,
       "phone": "",
       "coordinates": "55.79273598810327,37.467611279296825",
       "views": 3,
-      "author": 0
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
+    },
+    {
+      "id": 51,
+      "title": "qwd",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qwd",
+      "description": "qwd",
+      "link": "",
+      "address": "Москва, Большой Строченовский переулок, 7",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.72922600362955,37.631032910156215",
+      "views": 2,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
+    },
+    {
+      "id": 52,
+      "title": "STEREOLETO",
+      "type": "music",
+      "image": "46ba9d0f-092c-4823-b28e-37bdd946f256.jpg",
+      "tiny_description": "Международный музыкальный фестиваль STEREOLETO возвращается в Москву: Лев Лещенко, Хаски, Найк Борзов, Антоха МС, SHIRAN (Израиль) и другие артисты выступят 6 июля в саду «Эрмитаж»!",
+      "description": "Ежегодно проходящий в Санкт-Петербурге с 2002 года, фестиваль STEREOLETO давно стал визитной карточкой города, наряду с белыми ночами, разводными мостами и корюшкой. За 22-летнюю историю на сценах STEREOLETO выступили более 1000 исполнителей из 30 стран, в том числе Franz Ferdinand, Sigur Rós, Massive Attack, Morcheeba, Nick Cave and the Bad Seeds, Röyksopp, Buenа Vista Social Club, Rag’n’Bone Man, Леонид Агутин, Жанна Агузарова, Баста, Лев Лещенко, Zoloto и многие другие. Фестиваль проходил в Москве четыре раза, – в 2006, 2007, 2008 и 2016 годах, – и был отлично принят публикой. В этом году STEREOLETO возвращается в столицу вновь: 6 июля в саду «Эрмитаж» выступят самые яркие музыканты из России и других стран. Это и живая легенда российской эстрады Лев Лещенко, и классик отечественного инди-рока Найк Борзов, и самый солнечный и позитивный российский хип-хоп исполнитель Антоха МС с живым бэндом, и Хаски – один из самых громких и оригинальных голосов в русском рэпе, а также фантастический израильский дуэт SHIRAN, смешивающий в своей музыке актуальную электронику и мотивы ближневосточного фолка.",
+      "link": "",
+      "address": "ул. Каретный ряд, дом 3",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.770796,37.609272",
+      "views": 1,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
+    },
+    {
+      "id": 53,
+      "title": "Test_final",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "1232213",
+      "description": "123123",
+      "link": "",
+      "address": "dw",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.770796,37.609272",
+      "views": 0,
+      "author": 0,
+      "created_at": "2024-03-21 19:13:58"
+    },
+    {
+      "id": 54,
+      "title": "Time test1",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "qdwqwdwqdqwdqwd",
+      "description": "wqdwqqwd",
+      "link": "",
+      "address": "Москва, Краснодонская улица",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.68193999488385,37.74913593749995",
+      "views": 0,
+      "author": 0,
+      "created_at": "2024-03-21 19:18:24"
+    },
+    {
+      "id": 55,
+      "title": "Time test2",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "wqdqwdwqd",
+      "description": "qwdqwddwq",
+      "link": "",
+      "address": "Москва, парк Печатники",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.681123331051985,37.71480366210933",
+      "views": 1,
+      "author": 0,
+      "created_at": "2024-03-21 19:18:44"
+    },
+    {
+      "id": 57,
+      "title": "evwewv",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "brerebbre",
+      "description": "veverve",
+      "link": "",
+      "address": "Москва, Юго-Восточный административный округ, Южнопортовый район, микрорайон Н",
+      "price": 123,
+      "phone": "",
+      "coordinates": "55.72304114089118,37.670858349609325",
+      "views": 3,
+      "author": 0,
+      "created_at": "2024-03-21 19:25:58"
     }
   ]
 }

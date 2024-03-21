@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 class Event(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -15,6 +15,7 @@ class Event(models.Model):
     coordinates = models.CharField(max_length=100)
     views = models.IntegerField(default=0)
     author = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=datetime.now, blank=True)
 
 
     def views_add(self):

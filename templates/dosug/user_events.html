@@ -39,9 +39,15 @@
     <a class="post-modern-media" href="/event/{{ event.id }}"><img src="/static/images/event_pics/{{ event.image }}" alt="" style="width: 271px; height: 150px; object-fit: cover;"/></a>
     <div style="margin-left: 20px; flex-grow: 1;">
         <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{ event.title }}</a></h4>
-<!--        <ul class="post-modern-meta">-->
-<!--            <li style="color: #4348bd; font-size: 15px">{{ event.datetime}}</li>-->
-<!--        </ul>-->
+                <ul class="post-modern-meta">
+                  <li>
+                      {%if event.price == 0%}
+                      <a style="color: forestgreen">Бесплатно</a>
+                    {% else %}
+                      <a style="color: #4348bd">{{event.price}} ₽</a>
+                    {% endif %}
+                    </li>
+                </ul>
         <p class="description" style="word-wrap: break-word;">{{ event.tiny_description }}</p>
     </div>
     <div style="display: flex; flex-direction: column; justify-content: space-between; position: absolute; right: 0; top: 0;">

@@ -145,6 +145,9 @@ def add_event(request):
         description = request.POST.get("description2")
         phone = request.POST.get("phone")
         link = request.POST.get("url")
+        price = request.POST.get("price_paid")
+        if price == "":
+            price = 0
         coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')
@@ -165,6 +168,7 @@ def add_event(request):
                                          description=description,
                                          coordinates=coordinates,
                                          address=address,
+                                         price=price,
                                          phone=phone,
                                          link=link,
                                          image=filename)
@@ -203,6 +207,9 @@ def edit_event(request, id):
             return redirect(request.path)
         phone = request.POST.get("phone")
         link = request.POST.get("url")
+        price = request.POST.get("price_paid")
+        if price == "":
+            price = 0
         coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')

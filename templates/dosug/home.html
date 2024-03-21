@@ -52,12 +52,16 @@
           <div class="row row-lg-50 row-35 offset-top-2">
             {% for event in popular %}
               <div class="col-md-4 wow-outer">
-              <!-- Post Modern-->
               <article class="post-modern wow slideInLeft"><a class="post-modern-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 200px; object-fit: cover;" alt=""/></a>
                 <h4 class="post-modern-title"><a class="post-modern-title" href="/event/{{ event.id }}">{{event.title}}</a></h4>
                 <ul class="post-modern-meta">
-<!--                  <li><a class="" style="color: #4348bd">от 0 руб.</a></li>-->
-                  <li>{{event.datetime}}</li>
+                  <li>
+                      {%if event.price == 0%}
+                      <a style="color: forestgreen">Бесплатно</a>
+                    {% else %}
+                      <a style="color: #4348bd">{{event.price}} ₽</a>
+                    {% endif %}
+                    </li>
                 </ul>
                 <p style="font-size: 15px">{{ event.tiny_description }}</p>
               </article>

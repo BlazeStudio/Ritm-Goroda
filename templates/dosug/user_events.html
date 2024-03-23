@@ -26,7 +26,7 @@
 <div class="search-container">
   {% csrf_token %}
 <input class="input-tab" type="text" id="search-input" name="search_query" placeholder="Поиск..." style="height: 35px; width: 250px" {% if query != Null %} value="{{query}}" {% endif %}>
-<a class="btn button-primary-outline" id="search-button" style="margin-bottom: 3px; margin-left: 5px;" href="">Искать</a><br>
+<a class="btn button-primary-outline" id="search-button" style="margin-bottom: 3px; margin-left: 5px; border: 1px solid darkgray;" href="">Искать</a><br>
 {% if query != Null %}<a id="clear-search" style="color: grey; font-weight: bolder" href="/user_events">Очистить поиск</a>{% endif %}
 </div>
         </block><hr style=" width: 350px; margin-top: 10px; "></div>

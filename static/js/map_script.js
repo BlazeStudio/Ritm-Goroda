@@ -17,45 +17,39 @@ function init() {
     entertainments: true
   };
 
-var listBoxItems = [
+  var listBoxItems = [
     new ymaps.control.ListBoxItem({ data: { content: 'Спорт', type: 'sport'} }),
     new ymaps.control.ListBoxItem({ data: { content: 'Творчество и искусство', type: 'art' } }),
     new ymaps.control.ListBoxItem({ data: { content: 'Музыка', type: 'music' } }),
     new ymaps.control.ListBoxItem({ data: { content: 'Культура и образование', type: 'culture_study' } }),
     new ymaps.control.ListBoxItem({ data: { content: 'Развлечения', type: 'entertainments' } })
-];
-listBoxItems.forEach(item => item.state.set('selected', true));
-var filterControl = new ymaps.control.ListBox({
+  ];
+  listBoxItems.forEach(item => item.state.set('selected', true));
+  var filterControl = new ymaps.control.ListBox({
     data: {
-        content: 'Фильтр',
+      content: 'Фильтр',
     },
     items: listBoxItems,
     options: {
-        itemSelectOnClick: true,
-        iconContent: '✓'
+      itemSelectOnClick: true,
+      iconContent: '✓'
     }
-});
+  });
 
-filterControl.events.add('select', function (event) {
+  filterControl.events.add('select', function (event) {
     handleFilterChange(event);
-});
+  });
 
-filterControl.events.add('deselect', function (event) {
+  filterControl.events.add('deselect', function (event) {
     handleFilterChange(event);
-});
+  });
 
-function handleFilterChange(event) {
+  function handleFilterChange(event) {
     var selectedItem = event.get('target');
     if (selectedItem && selectedItem.data.get('content')) {
-        var selectedType = selectedItem.data.get('type').toLowerCase();
-        filterState[selectedType] = !filterState[selectedType];
-        showFilteredPoints();
-    }
-}
-
-  function resetFilterState() {
-    for (var type in filterState) {
-      filterState[type] = false;
+      var selectedType = selectedItem.data.get('type').toLowerCase();
+      filterState[selectedType] = !filterState[selectedType];
+      showFilteredPoints();
     }
   }
 
@@ -72,7 +66,7 @@ function handleFilterChange(event) {
             <div class="balloon">
               <div class="balloon_title"><h4><b><a href="/event/${ item.id }" target="_blank">${item.title}</a></b></h4></div>
               <div class="tag">${getTag(item.type)}</div>
-              <div><img src="static/images/logo.png" width="150px" height="150px"></div>
+<!--              <div><img src="static/images/logo.png" width="150px" height="150px"></div>-->
               <div class="balloon_adress">${item.tiny_description}</div>
               <div class="links">
                 <a href="${item.link}" target="_blank">${item.link}</a>
@@ -85,8 +79,6 @@ function handleFilterChange(event) {
         preset: getIconPreset(item.type),
       });
     });
-
-    console.log("Loaded GeoObjects:", myGeoObjects);
 
     clusterer = new ymaps.Clusterer({
       preset: 'islands#invertedBlueClusterIcons',

@@ -12,6 +12,7 @@ import json, random
 from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.hashers import check_password, make_password
 
 # def error_404(request, exception):
 #     print("Yes")
@@ -89,6 +90,29 @@ def profile(request, id, edit = 0):
     if request.user.is_authenticated:
         if request.user.id == id:
             edit = 1
+            if request.method == "POST":
+                old_password = request.POST.get("old_password")
+                if old_password is not None or old_password != '':
+                    new_password = request.POST.get("new_password")
+                    if check_password(old_password, request.user.password):
+                        request.user.password = new_password
+                        request.user.set_password(request.user.password)
+                        request.user.save()
+                        user = authenticate(username=request.user.username, password=request.user.password)
+                        login(request, user)
+                        messages.success(request, "Пароль успешно изменён")
+                    else:
+                        messages.error(request, "Неверный пароль")
+                else:
+                    username = request.POST.get("username") #not(User.objects.filter(username=username).exists())
+                    password = request.POST.get("password")
+                    if not(username == request.user.username):
+                        if check_password(password, request.user.password):
+                            User.objects.filter(id=request.user.id).update(username=username)
+                            messages.success(request, "Имя пользователя успешно изменено")
+                        else:
+                            messages.error(request, "Неверный пароль")
+                return redirect(request.path)
     return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof})
 def event_list(request, type='all', sort=None):
     query = request.GET.get('search_query')
@@ -156,7 +180,7 @@ def add_event(request):
         link = request.POST.get("url")
         price = request.POST.get("price_paid")
         print(price)
-        if price == None:
+        if price == None or price == '':
             price = 0
         else:
             price = int(price)

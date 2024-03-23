@@ -37,15 +37,51 @@
       <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: center">
           <h3>{{user_prof.username}}</h3><hr style="width: 25%">
 <br>
-          <form method="POST" style="margin: 0 auto; text-align: center">
-              {% csrf_token %}
-              <h4>Редактирование</h4><br>
-                      <label for="username"><b>Имя пользователя:</b> <input class="input-tab" type="text" id="username" name="username" maxlength="100" required minlength="2" value="{{user_prof.username}}"></label>
-<br>
-<label for="password"><b>Пароль:</b> <input class="input-tab" style="margin-left: 187px" type="password" id="password" name="password" maxlength="100" required minlength="2" value="{{user_prof.username}}"></label>
-                  <button class="button btn-primary-accept">Принять</button>
-<!--          <img src="/static/images/event_pics/{{user.image}}" alt="">-->
-              </form>
+          <button id="toggleFormButton" class="btn btn-primary">Изменить имя пользователя</button>
+                    <button id="toggleFormButton2" class="btn btn-primary">Изменить пароль</button>
+<div id="editFormContainer" style="display: none;">
+    <form method="POST" style="margin: 0 auto; text-align: center">
+        {% csrf_token %}
+        <h4>Изменение имени пользователя</h4><br>
+        <label for="username"><b>Имя пользователя:</b> <input class="input-tab" type="text" id="username" name="username" maxlength="100" required minlength="2" value="{{user_prof.username}}"></label><br>
+        <label for="password"><b>Подтверждение пароля:</b> <input class="input-tab" style="margin-left: 58px" type="password" id="password" name="password" maxlength="100" required minlength="2"></label>
+        <button class="button btn-primary-accept">Принять</button>
+    </form>
+</div>
+<script>
+    document.getElementById('toggleFormButton').addEventListener('click', function() {
+        var formContainer = document.getElementById('editFormContainer');
+        var formContainer2 = document.getElementById('editFormContainer2');
+        if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+            formContainer.style.display = 'block';
+            formContainer2.style.display = 'none';
+        } else {
+            formContainer.style.display = 'none';
+        }
+    });
+</script>
+
+<div id="editFormContainer2" style="display: none;">
+    <form method="POST" style="margin: 0 auto; text-align: center">
+        {% csrf_token %}
+        <h4>Изменение пароля</h4><br>
+        <label for="old_password"><b>Старый пароль:</b> <input class="input-tab" type="password" id="old_password" name="old_password" maxlength="100" required minlength="2"></label><br>
+        <label for="new_password"><b>Новый пароль:</b> <input class="input-tab" style="margin-left: 106px" type="password" id="new_password" name="new_password" maxlength="100" required minlength="2"></label>
+        <button class="button btn-primary-accept">Принять</button>
+    </form>
+</div>
+<script>
+    document.getElementById('toggleFormButton2').addEventListener('click', function() {
+        var formContainer = document.getElementById('editFormContainer2');
+        var formContainer2 = document.getElementById('editFormContainer');
+        if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+            formContainer.style.display = 'block';
+            formContainer2.style.display = 'none';
+        } else {
+            formContainer.style.display = 'none';
+        }
+    });
+</script>
       </div>
       <br><br>
       </div>

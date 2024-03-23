@@ -1,13 +1,15 @@
 ymaps.ready(init);
 
 function init() {
+    var eventElement = document.getElementById('map-atrib');
+    coordinates = eventElement.getAttribute('data-coordinates')
     var moscowBounds = [
-        [55.503749, 37.345276], // Юго-западный угол границ Москвы
-        [56.009657, 37.967190]  // Северо-восточный угол границ Москвы
+        [55.503749, 37.345276],
+        [56.009657, 37.967190]
     ];
 
     var myMap = new ymaps.Map("map", {
-        center: [55.7558, 37.6173],
+        center: coordinates.split(','),
         zoom: 10,
         restrictMapArea: moscowBounds // Устанавливаем ограничения на карту
     });
@@ -48,4 +50,29 @@ function init() {
             alert("Пожалуйста, выберите место в пределах Москвы.");
         }
     });
+
+    function updateMarkerAndAddress() {
+        var latitude = parseFloat(document.getElementById('latitude').value);
+        var longitude = parseFloat(document.getElementById('longitude').value);
+        var coords = [latitude, longitude];
+
+        if (isNaN(latitude) || isNaN(longitude)) {
+            alert('Пожалуйста, введите корректные координаты.');
+            return;
+        }
+
+        // Проверяем, находятся ли координаты в пределах Москвы
+        if (latitude >= moscowBounds[0][0] && latitude <= moscowBounds[1][0] &&
+            longitude >= moscowBounds[0][1] && longitude <= moscowBounds[1][1]) {
+            placemark.geometry.setCoordinates(coords);
+            updateFormFields(coords);
+            myMap.setCenter(coords);
+        } else {
+            alert("Пожалуйста, выберите место в пределах Москвы.");
+        }
+    }
+
+    document.getElementById('latitude').addEventListener('input', updateMarkerAndAddress);
+    document.getElementById('longitude').addEventListener('input', updateMarkerAndAddress);
 }
+

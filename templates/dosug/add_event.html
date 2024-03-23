@@ -159,11 +159,11 @@ function clearFields2() {
 
 
     <label for="latitude">Широта:
-    <input class="input-tab" style="margin-left: 5px" type="text" id="latitude" name="latitude" required value="{{latitude}}">
+    <input class="input-tab" style="margin-left: 5px" type="text" id="latitude" name="latitude" required value="{% if edit == 1 %}{{latitude}}{% else %}55.7558{% endif %}">
     <div style="margin-left: 5px">Долгота:</div>
-    <input class="input-tab" style="margin-left: 5px" type="text" id="longitude" name="longitude" required value="{{longitude}}"></label>
+    <input class="input-tab" style="margin-left: 5px" type="text" id="longitude" name="longitude" required value="{% if edit == 1 %}{{latitude}}{% else %}37.6173{% endif %}"></label>
     <label for="address">Адрес:
-    <input class="input-tab" style="margin-left: 17px" type="text" id="address" name="address" required {%if edit == 1%}value="{{event.address}}"{%endif%}></label>
+    <input class="input-tab" style="margin-left: 17px" type="text" id="address" name="address" required value="{%if edit == 1%}{{event.address}}{% else %}Москва, Красная площадь, 1{%endif%}"></label>
 <br>
 
 <br>
@@ -175,7 +175,10 @@ function clearFields2() {
 
         </div>
 </div><br><br><br>
-
+<div id="map-atrib"
+    data-coordinates="{% if edit == 1 %}{{ event.coordinates }}{% else %}55.7558,37.6173{% endif %}"
+    data-datetime="{{ event.datetime }}">
+</div>
 <script>
     $('textarea').keypress(function(event) {
    if (event.which == 13) {

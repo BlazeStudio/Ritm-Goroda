@@ -1,5 +1,3 @@
-ymaps.ready(init);
-
 var map;
 var clusterer;
 var myGeoObjects;
@@ -19,35 +17,46 @@ function init() {
     entertainments: true
   };
 
-  var listBoxItems = [
-    new ymaps.control.ListBoxItem({ data: { content: 'Спорт' } }),
-    new ymaps.control.ListBoxItem({ data: { content: 'Творчество и искусство' } }),
-    new ymaps.control.ListBoxItem({ data: { content: 'Музыка' } }),
-    new ymaps.control.ListBoxItem({ data: { content: 'Культура и образование' } }),
-    new ymaps.control.ListBoxItem({ data: { content: 'Развлечения' } })
-  ];
-
-  var filterControl = new ymaps.control.ListBox({
+var listBoxItems = [
+    new ymaps.control.ListBoxItem({ data: { content: 'Спорт', type: 'sport'} }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Творчество и искусство', type: 'art' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Музыка', type: 'music' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Культура и образование', type: 'culture_study' } }),
+    new ymaps.control.ListBoxItem({ data: { content: 'Развлечения', type: 'entertainments' } })
+];
+listBoxItems.forEach(item => item.state.set('selected', true));
+var filterControl = new ymaps.control.ListBox({
     data: {
-      content: 'Фильтр'
+        content: 'Фильтр',
     },
     items: listBoxItems,
     options: {
-      itemSelectOnClick: false
+        itemSelectOnClick: true,
+        iconContent: '✓'
     }
-  });
+});
 
-  filterControl.events.add('select', function (event) {
-    var item = event.get('target');
-    if (item && item.data.get('content')) {
-      var eventType = item.data.get('content');
-      toggleFilter(eventType);
+filterControl.events.add('select', function (event) {
+    handleFilterChange(event);
+});
+
+filterControl.events.add('deselect', function (event) {
+    handleFilterChange(event);
+});
+
+function handleFilterChange(event) {
+    var selectedItem = event.get('target');
+    if (selectedItem && selectedItem.data.get('content')) {
+        var selectedType = selectedItem.data.get('type').toLowerCase();
+        filterState[selectedType] = !filterState[selectedType];
+        showFilteredPoints();
     }
-  });
+}
 
-  function toggleFilter(eventType) {
-    filterState[eventType.toLowerCase()] = !filterState[eventType.toLowerCase()];
-    showFilteredPoints();
+  function resetFilterState() {
+    for (var type in filterState) {
+      filterState[type] = false;
+    }
   }
 
   $.getJSON('static/js/data2.json', function(data) {
@@ -60,25 +69,16 @@ function init() {
         properties: {
           clusterCaption: 'Описание в кластере',
           balloonContent: [`
-     <div class="balloon">
-     <div class="balloon_title"><h4><b><a href="/event/${ item.id }" target="_blank">${item.title}</a></b></h4></div>
-        ${item.type === "art" ? 
-            `<div class="tag">Творческое мероприятие</div>` : 
-            item.type === "sport" ?
-            `<div class="tag">Спортивное мероприятие</div>` :
-            item.type === "entertainments" ?
-            `<div class="tag">Развлекательное мероприятие</div>` :
-            item.type === "music" ?
-            `<div class="tag">Музыкальное мероприятие</div>` :
-            `<div class="tag">Культура и образование</div>`
-        }
-     <div><img src="static/images/logo.png" width="150px" height="150px"></div>
-     <div class="balloon_adress">${item.tiny_description}</div>
-     <div class="links">
-     <a href="${item.link}" target="_blank">${item.link}</a>
-</div>
-</div>
-     `].join(''),
+            <div class="balloon">
+              <div class="balloon_title"><h4><b><a href="/event/${ item.id }" target="_blank">${item.title}</a></b></h4></div>
+              <div class="tag">${getTag(item.type)}</div>
+              <div><img src="static/images/logo.png" width="150px" height="150px"></div>
+              <div class="balloon_adress">${item.tiny_description}</div>
+              <div class="links">
+                <a href="${item.link}" target="_blank">${item.link}</a>
+              </div>
+            </div>
+          `].join(''),
           type: item.type
         }
       }, {
@@ -86,8 +86,10 @@ function init() {
       });
     });
 
+    console.log("Loaded GeoObjects:", myGeoObjects);
+
     clusterer = new ymaps.Clusterer({
-      preset: 'islands#BlueClusterIcons',
+      preset: 'islands#invertedBlueClusterIcons',
       clusterBalloonContentLayoutWidth: 800,
       clusterBalloonLeftColumnWidth: 160
     });
@@ -106,37 +108,56 @@ function init() {
 }
 
 function showFilteredPoints() {
+  map.geoObjects.remove(clusterer);
+
   var filteredGeoObjects = myGeoObjects.filter(function (geoObject) {
-    var type = geoObject.properties.get('type');
+    var type = geoObject.properties.get('type').toLowerCase();
     return filterState[type];
   });
 
-  var filteredClusterer = new ymaps.Clusterer({
-    preset: 'islands#BlueClusterIcons',
+  clusterer = new ymaps.Clusterer({
+    preset: 'islands#invertedBlueClusterIcons',
     clusterBalloonContentLayoutWidth: 800,
     clusterBalloonLeftColumnWidth: 160
   });
 
-  filteredClusterer.add(filteredGeoObjects);
-  map.geoObjects.remove(clusterer);
-  map.geoObjects.add(filteredClusterer);
-
-  clusterer = filteredClusterer;
+  clusterer.add(filteredGeoObjects);
+  map.geoObjects.add(clusterer);
 }
 
+
 function getIconPreset(type) {
-  switch (type) {
+  switch (type.toLowerCase()) {
     case 'sport':
-      return 'islands#redIcon';
+      return 'islands#blueSportIcon';
     case 'art':
-      return 'islands#greenIcon';
+      return 'islands#blueTheaterIcon';
     case 'entertainments':
-      return 'islands#orangeIcon';
+      return 'islands#blueBarIcon';
     case 'music':
-      return 'islands#violetIcon';
+      return 'islands#blueStarIcon';
     case 'culture_study':
-      return 'islands#darkBlueIcon';
+      return 'islands#blueBookIcon';
     default:
       return 'islands#grayIcon';
   }
 }
+
+function getTag(type) {
+  switch (type) {
+    case 'art':
+      return 'Творческое мероприятие';
+    case 'sport':
+      return 'Спортивное мероприятие';
+    case 'entertainments':
+      return 'Развлекательное мероприятие';
+    case 'music':
+      return 'Музыкальное мероприятие';
+    case 'culture_study':
+      return 'Культура и образование';
+    default:
+      return 'Другое';
+  }
+}
+
+ymaps.ready(init);

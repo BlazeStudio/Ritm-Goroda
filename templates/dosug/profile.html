@@ -11,23 +11,43 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800%7CPoppins:300,400,700">
     <link rel="stylesheet" href="../../static/css/bootstrap.css">
     <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
-    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
+<style>
+        form {
+            max-width: 600px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+
+        input, textarea {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    </style>
   <body>
   <div class="page"><br><br><br>
       <section class="section novi-background section-md text-center">
-          <h3 style="text-align: center"><b>Мой профиль</b></h3><br></section>
+          <h3 style="text-align: center"><b>Мой профиль</b></h3></section>
       <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: center">
-          <h3>{{user_prof.username}}</h3>
+          <h3>{{user_prof.username}}</h3><hr style="width: 25%">
 <br>
-          <form method="POST">
+          <form method="POST" style="margin: 0 auto; text-align: center">
+              {% csrf_token %}
               <h4>Редактирование</h4><br>
-          <label><span style="margin-right: 15px">Имя пользователя</span><input type="text" name="" id="username" value="{{user_prof.username}}"></label><br><br>
-          <label><span style="margin-right: 15px">Пароль</span><input type="password" name="" id="password" style="position: absolute"></label><br>
-              <button class="button btn-primary-accept">Принять</button>
+                      <label for="username"><b>Имя пользователя:</b> <input class="input-tab" type="text" id="username" name="username" maxlength="100" required minlength="2" value="{{user_prof.username}}"></label>
+<br>
+<label for="password"><b>Пароль:</b> <input class="input-tab" style="margin-left: 187px" type="password" id="password" name="password" maxlength="100" required minlength="2" value="{{user_prof.username}}"></label>
+                  <button class="button btn-primary-accept">Принять</button>
 <!--          <img src="/static/images/event_pics/{{user.image}}" alt="">-->
               </form>
       </div>
+      <br><br>
       </div>
 {#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
 {#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>#}

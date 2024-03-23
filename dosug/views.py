@@ -94,7 +94,7 @@ def event_list(request, type='all', sort=None):
     query = request.GET.get('search_query')
     max_price = request.GET.get('max_price')
     min_price = request.GET.get('min_price')
-    if (max_price is None) or (min_price is None):
+    if (max_price is None) or (min_price is None) or (max_price == '') or (min_price == ''):
         max_price = 10000
         min_price = 0
     map_dots = Event.objects.filter(price__gte=min_price, price__lte=max_price)
@@ -188,7 +188,7 @@ def add_event(request):
         return redirect(request.path)
     return render(request, 'dosug/add_event.html', {'form': eventform})
 
-def edit_event(request, id):
+def edit_event(request, id, edit=1):
     event = Event.objects.filter(id = id).first()
     if (not request.user.is_superuser) and (request.user.id != event.author):
         messages.warning(request, "Невозможно получить доступ к странице")
@@ -246,7 +246,11 @@ def edit_event(request, id):
             new_event = Event.objects.filter(id=id).update(image=filename)
         messages.success(request, 'Событие было успешно обновлено')
         return redirect(request.path)
-    return render(request, 'dosug/edit_event.html', {'form': eventform, 'latitude': latitude, 'longitude':longitude, 'event': event})
+    return render(request, 'dosug/add_event.html', {'form': eventform,
+                                                    'latitude': latitude,
+                                                    'longitude':longitude,
+                                                    'event': event,
+                                                    'edit': edit})
 
 def datetime_add(request, edit = 0):
     if edit == 0: max_id = Event.objects.aggregate(Max('id'))['id__max'] + 1

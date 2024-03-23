@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление события</title>
+    <title>{% if edit == 1 %}Редактирование события{% else %}Добавление события{% endif %}</title>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=07b853de-c56b-4c45-9c62-6c0e45ad480e&lang=ru_RU"></script>
         <style>
         form {
@@ -32,64 +32,84 @@
 <body>
 <div class="page"><br><br>
       <section class="section novi-background section-md text-center">
+          {% if edit == 1 %}
+          <h3 style="text-align: center"><b>Редактирование мероприятия</b></h3>
+      <p>Сейчас вы редактируете мероприятие под названием <a href="/event/{{ event.id }}" target="_blank" style="font-weight: bold">«{{event.title}}»</a></p>
+            {% else %}
           <h3 style="text-align: center"><b>Добавление своего события</b></h3>
-          <p>Добавьте своё собственное событие</p></section>
+          <p>Добавьте своё собственное событие</p>
+          {% endif %}
+      </section>
 
     <div style="margin-left: 60px">
-        <h5>Заполните поля</h5><small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
+                  {% if edit == 1 %}
+        <h5>Отредактируйте поля</h5>
+                    {% else %}
+        <h5>Заполните поля</h5>
+                  {% endif %}
+        <small>* - поля, обязательные к заполнению</small><br><br><div style="color: black; font-size: 17px">
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="color: black">
-    <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2"></label>
+    <label for="title"><b>*Название:</b> <input class="input-tab" type="text" id="title" name="title" maxlength="100" required minlength="2" {%if edit == 1%}value="{{event.title}}"{%endif%}></label>
     <small><div id="title-count"></div></small>
 <br>
-    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b> <textarea style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required></textarea></label>
+    <label for="description"><b><a style="color: #4348bd; margin-right: 5px" data-tooltip="Это описание, которое будет показано на странице поиска">(?)</a>*Краткое описание:</b>
+        <textarea class="input-tab2" style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required>{%if edit == 1%}{{event.tiny_description}}{%endif%}</textarea></label>
     <small><div id="description-count"></div></small>
 <br>
-    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required></textarea></label>
+    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required>{%if edit == 1%}{{event.description}}{%endif%}</textarea></label>
     <small><div id="description2-count"></div></small>
 <br>
-    <label for="type"><b>*Тип:</b> <select style="margin-left: 150px" id="type" name="type">
-        <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
+    <label for="type"><b>*Тип:</b> <select class="input-tab" style="margin-left: 150px" id="type" name="type">
+                        {% if edit == 1 %}
+        <option value="art" {% if event.type == 'art' %}selected{% endif %}>Творчество</option>
+        <option value="music" {% if event.type == 'music' %}selected{% endif %}>Музыка</option>
+        <option value="entertainments" {% if event.type == 'entertainments' %}selected{% endif %}>Развлечения</option>
+        <option value="culture_study" {% if event.type == 'culture_study' %}selected{% endif %}>Культура и образование</option>
+        <option value="sport" {% if event.type == 'sport' %}selected{% endif %}>Спорт</option>
+            {% else %}
+         <option value="art">Творчество</option><option value="music">Музыка</option><option value="entertainments">Развлечения</option><option value="culture_study">Культура и образование</option><option value="sport">Спорт</option>
+                    {% endif %}
     </select></label>
 <br>
 
-<label for="date_type"><b>Выберите тип даты:</b></label>
-<select id="date_type" onchange="showFields(); clearFields();">
+<label for="date_type"><b>Выберите тип даты:</b>
+<select class="input-tab2" id="date_type" onchange="showFields(); clearFields();">
   <option value="datetime">Дата и время</option>
   <option value="date_range">Дата от и до</option>
   <option value="datetime_range">Дата и время от и до</option>
   <option value="daily">Ежедневно</option>
   <option value="no_date">Нет даты</option>
-</select>
+</select></label>
 
 <br><br>
 
 <div id="datetime_fields">
   <label for="datetime"><b>*Дата и время:</b>
-  <input style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" max="9999-12-31T23:59"></label>
+  <input class="input-tab" style="margin-left: 107px" type="datetime-local" id="datetime" name="datetime" max="9999-12-31T23:59"></label>
 </div>
 <div id="date_range_fields" style="display:none;">
   <label for="date_range_from"><b>Дата от:</b>
-  <input type="date" style="margin-left: 97px" id="date_range_from" name="date_range_from" max="9999-12-31"></label>
+  <input class="input-tab" type="date" style="margin-left: 127px" id="date_range_from" name="date_range_from" max="9999-12-31"></label>
   <label for="date_range_to"><b>Дата до:</b>
-  <input type="date" style="margin-left: 95px" id="date_range_to" name="date_range_to" max="9999-12-31"></label>
+  <input class="input-tab" type="date" style="margin-left: 125px" id="date_range_to" name="date_range_to" max="9999-12-31"></label>
 </div>
 
 <div id="datetime_range_fields" style="display:none;">
   <label for="datetime_from_date"><b>Дата от:</b>
-      <input type="date" style="margin-left: 98px" id="datetime_from_date" name="datetime_from_date" max="9999-12-31"></label>
+      <input class="input-tab" type="date" style="margin-left: 127px" id="datetime_from_date" name="datetime_from_date" max="9999-12-31"></label>
   <label for="datetime_to_date"><b>Дата до:</b>
-      <input type="date" style="margin-left: 90px" id="datetime_to_date" name="datetime_to_date" max="9999-12-31"></label>
+      <input class="input-tab" type="date" style="margin-left: 125px" id="datetime_to_date" name="datetime_to_date" max="9999-12-31"></label>
   <label for="datetime_from_time"><b>Время от:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_from_time" name="datetime_from_time" max="23:59"></label>
+  <input class="input-tab" type="time" style="margin-left: 114px" id="datetime_from_time" name="datetime_from_time" max="23:59"></label>
   <label for="datetime_to_time"><b>Время до:</b>
-  <input type="time" style="margin-left: 40px" id="datetime_to_time" name="datetime_to_time" max="23:59"></label>
+  <input class="input-tab" type="time" style="margin-left: 112px" id="datetime_to_time" name="datetime_to_time" max="23:59"></label>
 </div>
 
 <label for="daily_fields">
-  <input type="text" id="daily_fields" name="daily_fields" value="Ежедневно" readonly>
+  <input class="input-tab" style="margin-left: 194px" type="text" id="daily_fields" name="daily_fields" value="Ежедневно" readonly>
 </label>
 
 <div id="no_date_fields" style="display:none;">
@@ -100,12 +120,12 @@
 
 
 <label for="price_type"><b>Цена: </b>
-<select style="margin-left: 145px" id="price_type" onchange="showFields2(); clearFields2();">
+<select class="input-tab" style="margin-left: 145px" id="price_type" onchange="showFields2(); clearFields2();">
     <option value="price_free">Бесплатно</option>
     <option value="price_paid">Платно</option>
 </select>
 
-    <input type="number" style="margin-left: 128px; display: none" id="price_paid" name="price_paid" oninput="validateInput(this)">
+    <input class="input-tab" type="number" style="margin-left: 128px; display: none" id="price_paid" name="price_paid" oninput="validateInput(this)">
     <span id="rub" style="margin-left: 5px; display: none">₽</span></label><br>
                 <script>
 function validateInput(input) {
@@ -131,20 +151,19 @@ function clearFields2() {
 </script>
 
     <label  for="phone"><b>Телефон:</b>
-    <input type="tel" style="margin-left: 117px" id="phone" name="phone"></label><br>
+    <input class="input-tab" type="tel" style="margin-left: 117px" id="phone" name="phone" {%if edit == 1%}value="{{event.phone}}"{%endif%}></label><br>
     <label  for="url"><b>Сайт:</b>
-    <input type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30"/></label><br>
+    <input class="input-tab" type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30" {%if edit == 1%}value="{{event.link}}"{%endif%}></label><br>
     <label for="photo"><b>Фотография:</b> <input style="margin-left: 100px" type="file" id="photo" name="photo" accept="image/jpeg, image/jpg, image/png"></label><br>
-                <!-- Блок для карты -->
 <b>*Карта:</b><div class="input-tab" id="map"></div>
 
 
     <label for="latitude">Широта:
-    <input style="margin-left: 5px" type="text" id="latitude" name="latitude" required>
+    <input class="input-tab" style="margin-left: 5px" type="text" id="latitude" name="latitude" required value="{{latitude}}">
     <div style="margin-left: 5px">Долгота:</div>
-    <input style="margin-left: 5px" type="text" id="longitude" name="longitude" required></label>
+    <input class="input-tab" style="margin-left: 5px" type="text" id="longitude" name="longitude" required value="{{longitude}}"></label>
     <label for="address">Адрес:
-    <input style="margin-left: 17px" type="text" id="address" name="address" required></label>
+    <input class="input-tab" style="margin-left: 17px" type="text" id="address" name="address" required {%if edit == 1%}value="{{event.address}}"{%endif%}></label>
 <br>
 
 <br>

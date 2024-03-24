@@ -32,11 +32,14 @@ def user_register(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         email = request.POST.get("email")
+        account_type = request.POST.get("type_field")
         if username in username_base:
             messages.error(request, 'Указанное имя пользователя уже занято')
             return redirect(request.path)
         else:
             user = User.objects.create_user(username, email, password)
+            User.objects.filter(id=user.id).update(type=account_type)
+
             login(request, user)
             messages.success(request, 'Вы успешно зарегистрированы')
             return redirect('/')
@@ -87,6 +90,9 @@ def user_events(request):
 
 def profile(request, id, edit = 0):
     user_prof = User.objects.filter(id=id).first()
+    if user_prof is None:
+        messages.warning(request, "Указанный профиль не найден")
+        return redirect('/')
     if request.user.is_authenticated:
         if request.user.id == id:
             edit = 1
@@ -179,7 +185,6 @@ def add_event(request):
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         price = request.POST.get("price_paid")
-        print(price)
         if price == None or price == '':
             price = 0
         else:
@@ -197,6 +202,9 @@ def add_event(request):
         check = datetime_add(request)
         if check is False:
             messages.error(request, 'Событие не добавлено! Неверный формат даты!')
+            return redirect(request.path)
+        elif check == "Wrong":
+            messages.error(request, 'Событие не добавлено! Устаревшая дата!')
             return redirect(request.path)
         new_event = Event.objects.create(title=title,
                                          type=type,
@@ -241,11 +249,13 @@ def edit_event(request, id, edit=1):
         if check is False:
             messages.error(request, 'Событие не добавлено! Неверный формат даты!')
             return redirect(request.path)
+        elif check == "Wrong":
+            messages.error(request, 'Событие не добавлено! Устаревшая дата!')
+            return redirect(request.path)
         phone = request.POST.get("phone")
         link = request.POST.get("url")
         price = request.POST.get("price_paid")
-        if price == "":
-            price = 0
+        if price == "": price = 0
         coordinates = str(latitude) + ',' + str(longitude)
         address = request.POST.get("address")
         image = request.FILES.get('photo')
@@ -279,11 +289,11 @@ def edit_event(request, id, edit=1):
 def datetime_add(request, edit = 0):
     if edit == 0: max_id = Event.objects.aggregate(Max('id'))['id__max'] + 1
     else:
-        print(edit)
         max_id = edit
     datetime_try = request.POST.get("datetime")
     if datetime_try != "":
         datetime_real = datetime.strptime(datetime_try, "%Y-%m-%dT%H:%M")
+        if datetime_real < datetime.now():return "Wrong"
         return DateTimeData.objects.create(event_id=max_id, datetime=datetime_real)
 
     date_range_from = request.POST.get("date_range_from")
@@ -291,7 +301,8 @@ def datetime_add(request, edit = 0):
         date_range_to = request.POST.get("date_range_to")
         date_range_from_real = datetime.strptime(date_range_from, "%Y-%m-%d")
         date_range_to_real = datetime.strptime(date_range_to, "%Y-%m-%d")
-        if date_range_from_real >= date_range_to_real:return False
+        if date_range_from_real >= date_range_to_real: return False
+        if date_range_to_real < datetime.now(): return "Wrong"
         return DateTimeData.objects.create(event_id=max_id, date_range_from=date_range_from_real,
                                            date_range_to=date_range_to_real)
 
@@ -305,6 +316,7 @@ def datetime_add(request, edit = 0):
         datetime_from_time_real = datetime.strptime(datetime_from_time, "%H:%M")
         datetime_to_time_real = datetime.strptime(datetime_to_time, "%H:%M")
         if datetime_from_date >= datetime_to_date: return False
+        if datetime_to_date < datetime.now(): return "Wrong"
         return DateTimeData.objects.create(event_id=max_id,
                                            datetime_from_date=datetime_from_date_real,
                                            datetime_to_date=datetime_to_date_real,
@@ -323,7 +335,7 @@ def datetime_view(request, id):
     if date_base is None: pass
     elif date_base.datetime is not None:
         dt_object = datetime.strptime(str(date_base.datetime), "%Y-%m-%d %H:%M:%S")
-        date_output = dt_object.strftime("%d") + " " + months[dt_object.month - 1] + " " + str(dt_object.year) + ", " + dt_object.strftime("%H:%M:%S")
+        date_output = dt_object.strftime("%d") + " " + months[dt_object.month - 1] + " " + str(dt_object.year) + ", " + dt_object.strftime("%H:%M")
     elif date_base.date_range_from is not None:
         dt_object = datetime.strptime(str(date_base.date_range_from), "%Y-%m-%d")
         dt_object2 = datetime.strptime(str(date_base.date_range_to), "%Y-%m-%d")

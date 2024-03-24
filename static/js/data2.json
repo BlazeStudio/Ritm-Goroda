@@ -268,7 +268,7 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.80339818275354,37.497823681640575",
-      "views": 5,
+      "views": 9,
       "author": 0,
       "created_at": "2024-03-21 19:13:58"
     },
@@ -460,7 +460,7 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.69512809221824,37.55687519531246",
-      "views": 0,
+      "views": 2,
       "author": 0,
       "created_at": "2024-03-21 19:13:58"
     },
@@ -493,38 +493,6 @@
       "phone": "",
       "coordinates": "55.709862508829616,37.44975849609371",
       "views": 0,
-      "author": 0,
-      "created_at": "2024-03-21 19:13:58"
-    },
-    {
-      "id": 48,
-      "title": "wdqqdw",
-      "type": "art",
-      "image": "default.jpg",
-      "tiny_description": "qwdqwd",
-      "description": "qwdqwd",
-      "link": "",
-      "address": "Москва, Смоленская площадь, 3",
-      "price": 0,
-      "phone": "",
-      "coordinates": "55.7478357950421,37.581594433593715",
-      "views": 1,
-      "author": 0,
-      "created_at": "2024-03-21 19:13:58"
-    },
-    {
-      "id": 49,
-      "title": "ntrrnrtntrn",
-      "type": "art",
-      "image": "default.jpg",
-      "tiny_description": "nrtnrtnrtn",
-      "description": "rtnrtnrtn",
-      "link": "",
-      "address": "Москва, Перовская эстакада",
-      "price": 0,
-      "phone": "",
-      "coordinates": "55.73311590565061,37.771108593749965",
-      "views": 2,
       "author": 0,
       "created_at": "2024-03-21 19:13:58"
     },
@@ -636,7 +604,7 @@
       "price": 123,
       "phone": "",
       "coordinates": "55.72304114089118,37.670858349609325",
-      "views": 3,
+      "views": 4,
       "author": 0,
       "created_at": "2024-03-21 19:25:58"
     }

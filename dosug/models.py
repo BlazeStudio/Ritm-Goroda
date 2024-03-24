@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 
@@ -35,3 +36,6 @@ class DateTimeData(models.Model):
     datetime_from_time = models.TimeField(null=True, blank=True)
     datetime_to_time = models.TimeField(null=True, blank=True)
     every_day = models.CharField(max_length=30, null=True)
+
+
+User.add_to_class('type', models.CharField(max_length=60, default="Пользователь"))

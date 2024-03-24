@@ -50,12 +50,18 @@
                 </ul>
         <p class="description" style="word-wrap: break-word;">{{ event.tiny_description }}</p>
     </div>
-    <div style="display: flex; flex-direction: column; justify-content: space-between; position: absolute; right: 0; top: 0;">
-        <a href="/edit/{{ event.id }}" class="btn btn-primary-accept" style="margin-bottom: 10px;">Редактировать</a>
-        <a href="/delete/{{ event.id }}" class="btn btn-danger">Удалить</a>
-    </div>
+        <div style="display: flex; flex-direction: column; justify-content: space-between; position: absolute; right: 0; top: 0;">
+            <a href="/edit/{{ event.id }}" class="btn btn-primary-accept" style="margin-bottom: 10px;">Редактировать</a>
+            <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ event.id }}')">Удалить</a>
+        </div>
 </article>
-
+                  <script>
+    function confirmDelete(eventId) {
+        if (confirm('Вы уверены, что хотите удалить событие?')) {
+            window.location.href = '/delete/' + eventId;
+        }
+    }
+</script>
             </div>
               {% endfor %}
           </div>

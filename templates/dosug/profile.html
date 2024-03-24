@@ -34,9 +34,18 @@
   <div class="page"><br><br><br>
       <section class="section novi-background section-md text-center">
           <h3 style="text-align: center"><b>Мой профиль</b></h3></section>
-      <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: center">
-          <h3>{{user_prof.username}}</h3><hr style="width: 25%">
-<br>
+      <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: left">
+          <div style="display: inline-flex; text-align: center">
+          <div class="block-center">
+          <img src="/static/images/default.png" style="border-radius: 50px; width: 125px; height: 125px">
+          <h3>{{user_prof.username}}</h3><hr>
+              <div style="margin-top: 10px; text-align: left">
+              <p>Тип профиля: {{user_prof.type}}</p>
+              <p> Дата регистрации: {{user_prof.date_joined}}</p>
+              <p> Email: {%if user_prof.email != "" %}{{user_prof.email}}{%else%}Не указан{%endif%}</p>
+              </div>
+              </div>
+                    <div class="block-center">
           <button id="toggleFormButton" class="btn btn-primary">Изменить имя пользователя</button>
                     <button id="toggleFormButton2" class="btn btn-primary">Изменить пароль</button>
 <div id="editFormContainer" style="display: none;">
@@ -52,8 +61,12 @@
     document.getElementById('toggleFormButton').addEventListener('click', function() {
         var formContainer = document.getElementById('editFormContainer');
         var formContainer2 = document.getElementById('editFormContainer2');
+        var old_password = document.getElementById('old_password');
+        var new_password = document.getElementById('new_password');
         if (formContainer.style.display === 'none' || formContainer.style.display === '') {
             formContainer.style.display = 'block';
+            old_password.value = "";
+            new_password.value = "";
             formContainer2.style.display = 'none';
         } else {
             formContainer.style.display = 'none';
@@ -74,14 +87,18 @@
     document.getElementById('toggleFormButton2').addEventListener('click', function() {
         var formContainer = document.getElementById('editFormContainer2');
         var formContainer2 = document.getElementById('editFormContainer');
+        var password = document.getElementById('password');
         if (formContainer.style.display === 'none' || formContainer.style.display === '') {
             formContainer.style.display = 'block';
             formContainer2.style.display = 'none';
+            password.value = "";
         } else {
             formContainer.style.display = 'none';
         }
     });
 </script>
+                        </div>
+              </div>
       </div>
       <br><br>
       </div>

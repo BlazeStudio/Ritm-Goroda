@@ -33,28 +33,41 @@
   </head>
   <body>
     <div class="page">
-      <section class="section novi-background breadcrumbs-custom bg-image context-dark" style="background-image: url(/static/images/concert.jpg);">
+      <section class="section novi-background breadcrumbs-custom bg-image context-dark" style="
+      {% if type == 'all' %}
+      background-image: url(/static/images/site_pics/all.jpg);
+      {% elif type == 'art' %}
+      background-image: url(/static/images/site_pics/art.jpg);
+      {% elif type == 'music' %}
+      background-image: url(/static/images/site_pics/music.jpg);
+      {% elif type == 'entertainments' %}
+      background-image: url(/static/images/site_pics/ent.jpg);
+      {% elif type == 'culture_study' %}
+      background-image: url(/static/images/site_pics/culture.jpg);
+      {% elif type == 'sport' %}
+      background-image: url(/static/images/site_pics/sport.jpg);
+        {% endif %}">
         <div class="breadcrumbs-custom-inner">
           <div class="container breadcrumbs-custom-container">
             <div class="breadcrumbs-custom-main">
                 {% if type == 'all' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold">Все события</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о главном</i>
+              <i class="breadcrumbs-custom-subtitle">Список всех актуальных события</i>
                 {% elif type == 'art' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold"> Творческий досуг</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о творчестве</i>
+              <i class="breadcrumbs-custom-subtitle">Главные творческие события Москвы</i>
                 {% elif type == 'music' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold"> Музыкальный досуг</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о музыке</i>
+              <i class="breadcrumbs-custom-subtitle" style="color: white;">От концертов до уроков игры на диджериду</i>
                 {% elif type == 'entertainments' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold"> Развлекательный досуг</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о развлечениях</i>
+              <i class="breadcrumbs-custom-subtitle" style="color: white;">Самые интересные развлечения Москвы</i>
                 {% elif type == 'culture_study' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold"> Культура и образование</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о культуре и образовании</i>
+              <i class="breadcrumbs-custom-subtitle" style="color: white;">От музея имени А.С. Пушкина до камерной выставки импрессионизма</i>
                 {% elif type == 'sport' %}
               <h1 class="text-uppercase breadcrumbs-custom-title font-weight-bold"> Спортивный досуг</h1><br>
-              <i class="breadcrumbs-custom-subtitle">Главное о спорте</i>
+              <i class="breadcrumbs-custom-subtitle" style="color: white;">Список самого интересного спортивного досуга Москвы</i>
                 {% endif %}
             </div>
             <ul class="breadcrumbs-custom-path">
@@ -100,12 +113,13 @@
 
             <div class="range-input" style="width: 185%; margin-left: 30px">
                 <input type="range"
+                       style="margin-left: -4px"
                        class="min-range"
                        min="0"
                        max="10000"
                        value="{{min_price}}"
                        step="1">
-                <input style="top: -39px" type="range"
+                <input style="top: -39px; margin-left: 4px" type="range"
                        class="max-range"
                        min="0"
                        max="10000"

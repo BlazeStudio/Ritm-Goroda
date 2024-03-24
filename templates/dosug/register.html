@@ -11,33 +11,152 @@
     body {
         height: 100%
     }
-    .login_form{
-        display: block;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 40px;
-        /*width: 300px;*/
-        /*height: 300px;*/
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
+    body {
+    background-image: url('/static/images/site_pics/culture.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.login_form::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 115px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4348bd;
+    z-index: -1;
+    border-radius: 5px 5px 10px 10px;
+}
+
+.login_form {
+    position: relative;
+    display: block;
+    border: 2px solid #4348bd;
+    border-radius: 15px;
+    text-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content: center;
+}
+.login_form::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-color: rgba(244, 246, 250, 0.95);
+    z-index: -1;
+    border-radius: 15px 15px 0 0;
+}
+label{
+    color: white;
+}
+        .right-block h3 {
+            margin-bottom: 20px;
+        }
+.super-border img{
+                max-width: 215px;
+            margin-bottom: 20px;
+}
+.super-border{
+    background-color: rgba(244, 246, 250, 0.9);
+   text-align: center;
+	--angle: 0deg;
+	width: 60%;
+	border: 3px solid;
+    padding: 20px;
+	border-image: conic-gradient(from var(--angle), deepskyblue, #4348bd, cornflowerblue, mediumaquamarine) 1;
+    /*border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;*/
+	animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+	to {
+		--angle: 360deg;
+	}
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 </style>
 <body>
-<div class="page" style="display: none"></div>
+<div class="page" style="display: none; "></div>
     <div class="h-100 d-flex align-items-center justify-content-center">
-        <div class="login_form">
-    <h3>Регистрация</h3>
+    <div class="super-border" style="margin-right: 60px;">
+        <img src="/static/images/logo.png">
+        <p style="text-align: left">
+            Добро пожаловать на Ритм Города – вашу виртуальную площадку для открытия мира развлечений в сердце Москвы!
+            Зарегистрируйтесь прямо сейчас, чтобы окунуться в море событий и открытий, которые город предлагает.<br>
+            Как пользователь, вы сможете легко и удобно просматривать актуальные мероприятия, добавлять их в свой список избранных для удобного отслеживания и делиться своими впечатлениями.<br>
+            А если вы являетесь организатором, наш сайт предоставляет вам все необходимое для создания и редактирования событий. Будьте в центре внимания, предлагая уникальные мероприятия и делая их доступными для всех желающих.
+            Присоединяйтесь к Ритму Города – где каждый может найти что-то особенное для себя!
+        </p>
+    </div>
+        <div class="login_form" >
+    <h3 style="margin-bottom: 10px">Регистрация</h3>
+<a id="UserButton" class="btn btn-primary-default" style="padding-left: 40px; background-color: #4348bd; color: white">Пользователь</a>
+<a id="OrgButton" class="btn btn-primary-default" style="margin-left: -5px;padding-right: 40px;">Организация</a>
+            <div id="User_form" style="margin-top: 10px">
     <form method="POST">
         {% csrf_token %}
-        <label for="username">Имя пользователя<br><input style="" name="username" type="text" id="username" required minlength="4" maxlength="20"></label><br>
-        <label for="password" style="margin-top: 10px">Пароль<br><input name="password" type="password" id="password" style="" required minlength="4"></label><br>
-        <label for="email">Почта<br><input style="" name="email" type="email" id="email"></label><br>
-        <button class="button button-primary-outline" style="border: 1px solid grey;border-radius: 5px">Войти</button><br><br>
-        <small>Уже зарегистрированы? <a href="/login">Войти</a></small><br>
-        <small><a href="/">На главную</a></small>
+        <input id="type_field" style="display: none" value="Пользователь">
+        <label for="org_name" id="org_name_label" style="display: none">Название организации<br><input class="input-tab3" style="" name="org_name" type="text" id="org_name" required minlength="4" maxlength="20"></label>
+        <label for="name" id="name_label" style="display: block">Имя<br><input class="input-tab3" style="" name="name" type="text" id="name" required minlength="4" maxlength="20"></label>
+        <label for="surname" id="surname_label" style="display: block">Фамилия<br><input class="input-tab3" name="surname" type="text" id="surname" required minlength="4" maxlength="20"></label>
+                <label for="username" id="username_label">Логин<br><input class="input-tab3" name="username" type="text" id="username" required minlength="4" maxlength="20"></label><br>
+        <label for="password" style="margin-top: 10px">Пароль<br><input class="input-tab3" name="password" type="password" id="password" style="" required minlength="4"></label><br>
+        <label for="email">Почта<br><input class="input-tab3" style="" name="email" type="email" id="email"></label><br>
+        <button class="button button-primary" style="border-radius: 5px; margin-top: 10px">Зарегистрироваться</button>
+        <small style="color: white; margin-top: 6px">Уже зарегистрированы?<a style="color: white; margin-left: 5px" href="/login">Войти</a></small><br>
+        <small style="color: white"><a style="color: white; margin-left: 5px" href="/">На главную</a></small>
     </form>
-
+<script>
+    document.getElementById('UserButton').addEventListener('click', function() {
+        var button = document.getElementById('UserButton');
+        var button2 = document.getElementById('OrgButton');
+        var type_field = document.getElementById('type_field');
+        var name = document.getElementById('name_label');
+        var surname = document.getElementById('surname_label');
+        var org_name = document.getElementById('org_name_label');
+        type_field.value = "Пользователь";
+        button.style.backgroundColor = '#4348bd';
+        button.style.color = 'white';
+        button2.style.backgroundColor = "";
+        button2.style.color = 'black';
+        org_name.style.display = "none"
+        name.style.display = "block";
+        surname.style.display = "block";
+        // username.innerHTML = "Логин<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";
+    });
+</script>
+                <script>
+    document.getElementById('OrgButton').addEventListener('click', function() {
+        var button = document.getElementById('UserButton');
+        var button2 = document.getElementById('OrgButton');
+        var type_field = document.getElementById('type_field');
+        var name = document.getElementById('name_label');
+        var surname = document.getElementById('surname_label');
+        var org_name = document.getElementById('org_name_label');
+        button2.style.backgroundColor = '#4348bd';
+        type_field.value = "Организация";
+        button2.style.color = 'white';
+        button.style.backgroundColor = "";
+        button.style.color = 'black';
+        org_name.style.display = "block"
+        name.style.display = "none";
+        surname.style.display = "none";
+        // username.innerHTML = "Название организации<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";
+    });
+</script>
+</div>
+</div>
    </div>
     </div>
 </body>

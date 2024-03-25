@@ -30,19 +30,27 @@ def user_register(request):
     username_base = [user.username for user in User.objects.all()]
     if request.method == "POST":
         username = request.POST.get("username")
-        password = request.POST.get("password")
-        email = request.POST.get("email")
-        account_type = request.POST.get("type_field")
         if username in username_base:
             messages.error(request, 'Указанное имя пользователя уже занято')
             return redirect(request.path)
+        password = request.POST.get("password")
+        email = request.POST.get("email")
+        user = User.objects.create_user(username, email, password)
+        account_type = request.POST.get("type_field")
+        print(account_type)
+        name = request.POST.get("name")
+        if name != "":
+           surname = request.POST.get("surname")
+           User.objects.filter(id=user.id).update(type=account_type,
+                                                  first_name=name,
+                                                  last_name=surname)
         else:
-            user = User.objects.create_user(username, email, password)
-            User.objects.filter(id=user.id).update(type=account_type)
-
-            login(request, user)
-            messages.success(request, 'Вы успешно зарегистрированы')
-            return redirect('/')
+            org_name = request.POST.get("org_name")
+            User.objects.filter(id=user.id).update(type=account_type,
+                                                   org_name=org_name)
+        login(request, user)
+        messages.success(request, 'Вы успешно зарегистрированы')
+        return redirect('/')
     return render(request, 'dosug/register.html')
 
 
@@ -89,6 +97,7 @@ def user_events(request):
     return render(request, 'dosug/user_events.html', {'events': events, 'query': query})
 
 def profile(request, id, edit = 0):
+    events = ""
     user_prof = User.objects.filter(id=id).first()
     if user_prof is None:
         messages.warning(request, "Указанный профиль не найден")
@@ -119,7 +128,9 @@ def profile(request, id, edit = 0):
                         else:
                             messages.error(request, "Неверный пароль")
                 return redirect(request.path)
-    return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof})
+        # events = Event.objects.filter(author=user_prof.id)
+        events = Event.objects.all()
+    return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof, 'events': events})
 def event_list(request, type='all', sort=None):
     query = request.GET.get('search_query')
     max_price = request.GET.get('max_price')

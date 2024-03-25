@@ -59,8 +59,8 @@ label{
             margin-bottom: 20px;
         }
 .super-border img{
-                max-width: 215px;
-            margin-bottom: 20px;
+                max-width: 200px;
+            margin-bottom: 15px;
 }
 .super-border{
     background-color: rgba(244, 246, 250, 0.9);
@@ -106,11 +106,11 @@ label{
             <div id="User_form" style="margin-top: 10px">
     <form method="POST">
         {% csrf_token %}
-        <input id="type_field" style="display: none" value="Пользователь">
-        <label for="org_name" id="org_name_label" style="display: none">Название организации<br><input class="input-tab3" style="" name="org_name" type="text" id="org_name" required minlength="4" maxlength="20"></label>
-        <label for="name" id="name_label" style="display: block">Имя<br><input class="input-tab3" style="" name="name" type="text" id="name" required minlength="4" maxlength="20"></label>
-        <label for="surname" id="surname_label" style="display: block">Фамилия<br><input class="input-tab3" name="surname" type="text" id="surname" required minlength="4" maxlength="20"></label>
-                <label for="username" id="username_label">Логин<br><input class="input-tab3" name="username" type="text" id="username" required minlength="4" maxlength="20"></label><br>
+        <input id="type_field" name="type_field" style="display: none" value="Пользователь">
+        <label for="org_name" id="org_name_label" style="display: none">Название организации<br><input class="input-tab3" style="" name="org_name" type="text" id="org_name" minlength="2" maxlength="80"></label>
+        <label for="name" id="name_label" style="display: block">Имя<br><input class="input-tab3" style="" name="name" type="text" id="name" minlength="2" maxlength="20"></label>
+        <label for="surname" id="surname_label" style="display: block">Фамилия<br><input class="input-tab3" name="surname" type="text" id="surname" minlength="2" maxlength="30"></label>
+        <label for="username" id="username_label">Логин<br><input class="input-tab3" name="username" type="text" id="username" required minlength="4" maxlength="30"></label><br>
         <label for="password" style="margin-top: 10px">Пароль<br><input class="input-tab3" name="password" type="password" id="password" style="" required minlength="4"></label><br>
         <label for="email">Почта<br><input class="input-tab3" style="" name="email" type="email" id="email"></label><br>
         <button class="button button-primary" style="border-radius: 5px; margin-top: 10px">Зарегистрироваться</button>
@@ -125,18 +125,23 @@ label{
         var name = document.getElementById('name_label');
         var surname = document.getElementById('surname_label');
         var org_name = document.getElementById('org_name_label');
+        var org_input = document.getElementById('org_name');
+        var password_input = document.getElementById('password');
+        var login_input = document.getElementById('username');
+        var email_input =  document.getElementById('email');
+        document.getElementById('name').setAttribute("required", "");
+        document.getElementById('surname').setAttribute("required", "");
         type_field.value = "Пользователь";
-        button.style.backgroundColor = '#4348bd';
-        button.style.color = 'white';
-        button2.style.backgroundColor = "";
-        button2.style.color = 'black';
-        org_name.style.display = "none"
+        button.style.backgroundColor = '#4348bd'; button.style.color = 'white';
+        button2.style.backgroundColor = ""; button2.style.color = 'black';
+        org_name.style.display = "none";
+        org_input.value = ""; password_input.value = ""; login_input.value = ""; email_input.value = "";
         name.style.display = "block";
         surname.style.display = "block";
         // username.innerHTML = "Логин<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";
     });
 </script>
-                <script>
+<script>
     document.getElementById('OrgButton').addEventListener('click', function() {
         var button = document.getElementById('UserButton');
         var button2 = document.getElementById('OrgButton');
@@ -144,12 +149,19 @@ label{
         var name = document.getElementById('name_label');
         var surname = document.getElementById('surname_label');
         var org_name = document.getElementById('org_name_label');
+        var password_input = document.getElementById('password');
+        var login_input = document.getElementById('username');
+        var email_input =  document.getElementById('email');
+        var name_input =  document.getElementById('name');
+        var surname_input =  document.getElementById('surname');
+        document.getElementById('org_name').setAttribute("required", "");
         button2.style.backgroundColor = '#4348bd';
         type_field.value = "Организация";
         button2.style.color = 'white';
         button.style.backgroundColor = "";
         button.style.color = 'black';
-        org_name.style.display = "block"
+        org_name.style.display = "block";
+        password_input.value = ""; login_input.value = ""; email_input.value = ""; name_input.value = ""; surname_input.value = "";
         name.style.display = "none";
         surname.style.display = "none";
         // username.innerHTML = "Название организации<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";

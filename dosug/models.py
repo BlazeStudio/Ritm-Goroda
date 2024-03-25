@@ -39,3 +39,4 @@ class DateTimeData(models.Model):
 
 
 User.add_to_class('type', models.CharField(max_length=60, default="Пользователь"))
+User.add_to_class('org_name', models.CharField(max_length=150, null=True))

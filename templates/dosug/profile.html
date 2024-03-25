@@ -2,7 +2,7 @@
 {% block content %}
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>Профиль</title>
+    <title>Профиль {{user_prof.username}}</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,19 +33,27 @@
   <body>
   <div class="page"><br><br><br>
       <section class="section novi-background section-md text-center">
-          <h3 style="text-align: center"><b>Мой профиль</b></h3></section>
+          <h3 style="text-align: center"><b>{% if edit == 1 %}Мой профиль{% else %}{{user_prof.username}}{% endif %}</b></h3></section>
       <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: left">
           <div style="display: inline-flex; text-align: center">
           <div class="block-center">
           <img src="/static/images/default.png" style="border-radius: 50px; width: 125px; height: 125px">
-          <h3>{{user_prof.username}}</h3><hr>
+          <h4>{{user_prof.username}}</h4><hr>
               <div style="margin-top: 10px; text-align: left">
               <p>Тип профиля: {{user_prof.type}}</p>
-              <p> Дата регистрации: {{user_prof.date_joined}}</p>
+                  {%if user_prof.org_name is Null %}
+              <p>Имя: {{user_prof.first_name}}</p>
+              <p>Фамилия: {{user_prof.last_name}}</p>
+                  {% else %}
+              <p>Название организации: {{user_prof.org_name}}</p>
+                  {% endif %}
               <p> Email: {%if user_prof.email != "" %}{{user_prof.email}}{%else%}Не указан{%endif%}</p>
+              <p> Дата регистрации: {{user_prof.date_joined}}</p>
+              <p> Последний вход: {{user_prof.last_login}}</p>
               </div>
               </div>
-                    <div class="block-center">
+              {% if edit == 1 %}
+          <div class="block-center">
           <button id="toggleFormButton" class="btn btn-primary">Изменить имя пользователя</button>
                     <button id="toggleFormButton2" class="btn btn-primary">Изменить пароль</button>
 <div id="editFormContainer" style="display: none;">
@@ -98,6 +106,22 @@
     });
 </script>
                         </div>
+              {% endif %}
+      <section class="section novi-background section-lg text-center" style="width: 85%">
+        <div class="container">
+          <h3 class="text-uppercase">События пользователя</h3>
+          <div class="row row-35 row-xxl-70 offset-top-2">
+            {% for event in events %}
+            <div class="col-sm-6 col-lg-3">
+                <article class="thumbnail-light"><a class="thumbnail-light-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 150px; object-fit: cover;" alt=""/></a>
+                <h4 class="thumbnail-light-title"><a href="/event/{{event.id}}">{{event.title}}</a></h4>
+              </article>
+            </div>
+            {% endfor %}
+            <div class="col-md-12 wow-outer"><a class="button button-primary" href="/events/all/-created_at">Больше</a></div>
+          </div>
+        </div>
+      </section>
               </div>
       </div>
       <br><br>

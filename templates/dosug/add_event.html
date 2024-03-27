@@ -59,7 +59,7 @@
         <textarea class="input-tab2" style="margin-left: 65px; font-size: 15px" id="description" name="description" maxlength="250" required>{%if edit == 1%}{{event.tiny_description}}{%endif%}</textarea></label>
     <small><div id="description-count"></div></small>
 <br>
-    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1200" required>{%if edit == 1%}{{event.description}}{%endif%}</textarea></label>
+    <label for="description2"><b>*Описание:</b> <textarea style="font-size: 15px" class="input-tab" id="description2" name="description2" maxlength="1400" required>{%if edit == 1%}{{event.description}}{%endif%}</textarea></label>
     <small><div id="description2-count"></div></small>
 <br>
     <label for="type"><b>*Тип:</b> <select class="input-tab" style="margin-left: 150px" id="type" name="type">
@@ -201,7 +201,7 @@ function clearFields2() {
 
     countCharacters('description', 'description-count', 250);
 
-    countCharacters('description2', 'description2-count', 1200);
+    countCharacters('description2', 'description2-count', 1400);
 </script>
 <script src="/static/js/add_event_map.js"></script>
 <script>

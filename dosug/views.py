@@ -37,7 +37,6 @@ def user_register(request):
         email = request.POST.get("email")
         user = User.objects.create_user(username, email, password)
         account_type = request.POST.get("type_field")
-        print(account_type)
         name = request.POST.get("name")
         if name != "":
            surname = request.POST.get("surname")
@@ -97,39 +96,37 @@ def user_events(request):
     return render(request, 'dosug/user_events.html', {'events': events, 'query': query})
 
 def profile(request, id, edit = 0):
-    events = ""
     user_prof = User.objects.filter(id=id).first()
     if user_prof is None:
         messages.warning(request, "Указанный профиль не найден")
         return redirect('/')
-    if request.user.is_authenticated:
-        if request.user.id == id:
-            edit = 1
-            if request.method == "POST":
-                old_password = request.POST.get("old_password")
-                if old_password is not None or old_password != '':
-                    new_password = request.POST.get("new_password")
-                    if check_password(old_password, request.user.password):
-                        request.user.password = new_password
-                        request.user.set_password(request.user.password)
-                        request.user.save()
-                        user = authenticate(username=request.user.username, password=request.user.password)
-                        login(request, user)
-                        messages.success(request, "Пароль успешно изменён")
+    if request.user.id == id:
+        edit = 1
+        if request.method == "POST":
+            old_password = request.POST.get("old_password")
+            if old_password is not None or old_password != '':
+                new_password = request.POST.get("new_password")
+                if check_password(old_password, request.user.password):
+                    request.user.password = new_password
+                    request.user.set_password(request.user.password)
+                    request.user.save()
+                    user = authenticate(username=request.user.username, password=request.user.password)
+                    login(request, user)
+                    messages.success(request, "Пароль успешно изменён")
+                else:
+                    messages.error(request, "Неверный пароль")
+            else:
+                username = request.POST.get("username") #not(User.objects.filter(username=username).exists())
+                password = request.POST.get("password")
+                if not(username == request.user.username):
+                    if check_password(password, request.user.password):
+                        User.objects.filter(id=request.user.id).update(username=username)
+                        messages.success(request, "Имя пользователя успешно изменено")
                     else:
                         messages.error(request, "Неверный пароль")
-                else:
-                    username = request.POST.get("username") #not(User.objects.filter(username=username).exists())
-                    password = request.POST.get("password")
-                    if not(username == request.user.username):
-                        if check_password(password, request.user.password):
-                            User.objects.filter(id=request.user.id).update(username=username)
-                            messages.success(request, "Имя пользователя успешно изменено")
-                        else:
-                            messages.error(request, "Неверный пароль")
-                return redirect(request.path)
-        # events = Event.objects.filter(author=user_prof.id)
-        events = Event.objects.all()
+            return redirect(request.path)
+    events = Event.objects.filter(author=user_prof.id)
+    if events.count() == 0: events = ""
     return render(request, 'dosug/profile.html', {'edit': edit, 'user_prof': user_prof, 'events': events})
 def event_list(request, type='all', sort=None):
     query = request.GET.get('search_query')
@@ -395,3 +392,6 @@ def event_detail(request, id):
     except Event.DoesNotExist:
         messages.warning(request, "Событие не найдено")
         return redirect('/')
+
+def about(request):
+    return render(request, 'dosug/text.html')

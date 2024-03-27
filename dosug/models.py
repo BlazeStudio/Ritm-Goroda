@@ -8,7 +8,7 @@ class Event(models.Model):
     type = models.CharField(max_length=20)
     image = models.ImageField(default="default.jpg")
     tiny_description = models.CharField(max_length=250)
-    description = models.CharField(max_length=1200)
+    description = models.CharField(max_length=1400)
     link = models.CharField(max_length=30)
     address = models.CharField(max_length=60)
     price = models.IntegerField(max_length=30, default=0)

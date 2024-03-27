@@ -66,7 +66,7 @@
               </article>
             </div>
               {% endfor %}
-            <div class="col-md-12 wow-outer"><a class="button button-primary" href="/events/all/-views">Больше</a></div>
+            <div class="col-md-12 wow-outer"><a class="button button-primary wow slideInUp" href="/events/all/-views">Больше</a></div>
           </div>
         </div>
       </section>
@@ -77,7 +77,7 @@
                         <div class="col-sm-10 col-lg-7 col-xl-6">
               <h3 class="wow-outer"><span class="wow slideInDown text-uppercase">{{ count }}</span></h3>
               <p class="wow-outer offset-top-4"><span class="wow slideInDown" data-wow-delay=".05s" style="font-size: 20px">Ровно столько событий насчитывается на нашем сайте</span></p>
-              <div class="wow-outer button-outer"><a class="button button-primary-white wow slideInDown" href="/events" data-wow-delay=".1s">Перейти</a></div>
+              <div class="wow-outer button-outer"><a class="button button-primary-white wow slideInUp" href="/events" data-wow-delay=".1s">Перейти</a></div>
             </div>
           </div>
         </div>
@@ -85,17 +85,17 @@
       <!-- ШТУКИ-->
       <section class="section novi-background section-lg text-center">
         <div class="container">
-          <h3 class="text-uppercase">Новые события</h3>
-          <p><span class="text-width-1">Последние добавленные события</span></p>
-          <div class="row row-35 row-xxl-70 offset-top-2">
+          <h3 class="text-uppercase font-weight-bolder wow-outer"><span class="wow slideInDown">Новые события</span></h3>
+          <p><span class="text-width-1 wow-outer"><span class="wow slideInDown">Последние добавленные события</span></span></p>
+          <div class="row row-35 row-xxl-70 offset-top-2 wow-outer">
             {% for event in new %}
-            <div class="col-sm-6 col-lg-3">
-                <article class="thumbnail-light"><a class="thumbnail-light-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 150px; object-fit: cover;" alt=""/></a>
+            <div class="col-sm-6 col-lg-3 wow-outer">
+                <article class="thumbnail-light wow slideInLeft" ><a class="thumbnail-light-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 150px; object-fit: cover;" alt=""/></a>
                 <h4 class="thumbnail-light-title"><a href="/event/{{event.id}}">{{event.title}}</a></h4>
               </article>
             </div>
             {% endfor %}
-            <div class="col-md-12 wow-outer"><a class="button button-primary" href="/events/all/-created_at">Больше</a></div>
+            <div class="col-md-12 wow-outer"><a class="button button-primary wow slideInUp" href="/events/all/-created_at">Больше</a></div>
           </div>
         </div>
       </section>
@@ -110,7 +110,7 @@
                 <a class="wow fadeIn" style="font-size: 40px">☺</a>
                 <div class="box-minimal-main wow-outer">
                   <h4 class="box-minimal-title wow slideInDown">Информация</h4>
-                  <p class="wow fadeInUpSmall">Чтобы узнать больше об этом проекте - нажмите тут</p>
+                  <p class="wow fadeInUpSmall">Чтобы узнать больше об этом проекте - нажмите <a href="/about" style="font-weight: bolder"><u>тут</u></a></p>
                 </div>
               </article>
             </div>

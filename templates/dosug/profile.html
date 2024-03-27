@@ -29,14 +29,33 @@
             padding: 5px;
             box-sizing: border-box;
         }
+        .events-container {
+  height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid darkgray;
+}
+  .stuff {
+    display: inline-flex;
+      text-align: center;
+    width: 100%;
+  }
+
+  .stuff > *:first-child {
+    flex-grow: 1;
+  }
+
+  .stuff > *:last-child {
+    flex-grow: 9;
+  }
     </style>
   <body>
   <div class="page"><br><br><br>
       <section class="section novi-background section-md text-center">
           <h3 style="text-align: center"><b>{% if edit == 1 %}Мой профиль{% else %}{{user_prof.username}}{% endif %}</b></h3></section>
       <div class="container" style="border: 1px solid darkgray; border-radius: 10px; padding: 20px; text-align: left">
-          <div style="display: inline-flex; text-align: center">
-          <div class="block-center">
+          <div class="stuff">
+          <div class="block-center" style="border-right: 1px solid #ededee">
           <img src="/static/images/default.png" style="border-radius: 50px; width: 125px; height: 125px">
           <h4>{{user_prof.username}}</h4><hr>
               <div style="margin-top: 10px; text-align: left">
@@ -53,7 +72,7 @@
               </div>
               </div>
               {% if edit == 1 %}
-          <div class="block-center">
+          <div class="block-center" style="">
           <button id="toggleFormButton" class="btn btn-primary">Изменить имя пользователя</button>
                     <button id="toggleFormButton2" class="btn btn-primary">Изменить пароль</button>
 <div id="editFormContainer" style="display: none;">
@@ -106,22 +125,42 @@
     });
 </script>
                         </div>
-              {% endif %}
-      <section class="section novi-background section-lg text-center" style="width: 85%">
-        <div class="container">
-          <h3 class="text-uppercase">События пользователя</h3>
-          <div class="row row-35 row-xxl-70 offset-top-2">
-            {% for event in events %}
-            <div class="col-sm-6 col-lg-3">
-                <article class="thumbnail-light"><a class="thumbnail-light-media" href="/event/{{event.id}}"><img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 150px; object-fit: cover;" alt=""/></a>
-                <h4 class="thumbnail-light-title"><a href="/event/{{event.id}}">{{event.title}}</a></h4>
-              </article>
-            </div>
-            {% endfor %}
-            <div class="col-md-12 wow-outer"><a class="button button-primary" href="/events/all/-created_at">Больше</a></div>
-          </div>
+              {% else %}
+  <section class="section novi-background section-lg text-center">
+    <div class="container">
+      <h4 class="text-uppercase">События {%if user_prof.type == "Пользователь" or user_prof.type == "Администратор" %}пользователя{%else%}организации{%endif%}</h4><br>
+                  {% if events%}
+              <div class="events-container">
+      <div class="row row-35 row-xxl-70 offset-top-2">
+        {% for event in events %}
+        <div class="col-sm-6 col-lg-3">
+          <article class="thumbnail-light">
+            <a class="thumbnail-light-media" href="/event/{{event.id}}">
+              <img src="/static/images/event_pics/{{ event.image }}" style="width: 571px; height: 150px; object-fit: cover;" alt=""/>
+            </a>
+            <h4 class="thumbnail-light-title"><a href="/event/{{event.id}}">{{event.title}}</a></h4>
+                              <ul class="post-modern-meta">
+                  <li>
+                      {%if event.price == 0%}
+                      <a style="color: forestgreen">Бесплатно</a>
+                    {% else %}
+                      <a style="color: #4348bd">{{event.price}} ₽</a>
+                    {% endif %}
+                    </li>
+                </ul>
+          </article>
         </div>
-      </section>
+        {% endfor %}
+      </div>
+                  </div>
+                  {% else %}
+        <div class="text-center">
+          <p>События отсутствуют</p>
+            </div>
+          {% endif %}
+    </div>
+  </section>
+              {% endif %}
               </div>
       </div>
       <br><br>

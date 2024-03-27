@@ -1,0 +1,37 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>О нас</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="../../static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/css/style.css" id="main-styles-link">
+<style>
+
+    .selected-item .ymaps-2-1-78-events-pane {
+  border: 2px solid yellow !important;
+}
+</style>
+  </head>
+  <body>
+  <div class="page"><br><br><br>
+      <section class="section novi-background section-md text-center">
+          <h3 style="text-align: center"><b>О нас</b></h3><br>
+          <div class="container" style="border: 1px solid #e2e2e2; border-radius: 10px; padding: 20px;">
+                      <div class="wow-outer" style="padding: 10px">
+        <img class="wow slideInUp" src="/static/images/logo.png" width="25%" height="25%">
+<!--            Мне было жутко неудобно редактировать текст и я решил засунуть его в отдельный html. Sorry:)-->
+            {% block text %}{% endblock %}
+    </div>
+          </div>
+            <a class="button button-primary wow slideInUp" href="/">На главную</a>
+      </section>
+      <section class="section novi-background section-md text-center"></section>
+      </div>
+  </body>
+</html>
+{% endblock content %}

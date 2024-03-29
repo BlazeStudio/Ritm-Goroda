@@ -25,7 +25,7 @@ def home(request):
     count = Event.objects.count()
     return render(request, 'dosug/home.html', {'event': event, 'count': count, 'popular': popular, 'new': new})
 
-def user_register(request):
+def user_register(request, preloader = 1):
     if request.user.is_authenticated:return redirect('/')
     username_base = [user.username for user in User.objects.all()]
     if request.method == "POST":
@@ -50,10 +50,10 @@ def user_register(request):
         login(request, user)
         messages.success(request, 'Вы успешно зарегистрированы')
         return redirect('/')
-    return render(request, 'dosug/register.html')
+    return render(request, 'dosug/register.html', {'preloader': preloader})
 
 
-def user_login(request):
+def user_login(request, preloader = 1):
     if request.user.is_authenticated: return redirect('/')
     if request.method == "POST":
         username = request.POST.get("username")
@@ -65,8 +65,8 @@ def user_login(request):
             return redirect('/')
         else:
             messages.error(request, 'Неверный логин или пароль')
-            return redirect(request.path)
-    return render(request, 'dosug/login.html')
+            return render(request, 'dosug/login.html', {'preloader': preloader})
+    return render(request, 'dosug/login.html', {'preloader': preloader})
 
 @login_required(login_url="/login")
 def user_logout(request):
@@ -82,6 +82,12 @@ def user_events(request):
     else:
         events = Event.objects.filter(author=request.user.id)
     query = request.GET.get('search_query')
+    max_price = request.GET.get('max_price')
+    min_price = request.GET.get('min_price')
+    if (max_price is None) or (min_price is None) or (max_price == '') or (min_price == ''):
+        max_price = 10000
+        min_price = 0
+    map_dots = Event.objects.filter(price__gte=min_price, price__lte=max_price)
     if query:
         events = [event for event in events if query.lower() in event.title.lower()]
     paginator = Paginator(events, 10)
@@ -93,7 +99,10 @@ def user_events(request):
         events = paginator.page(1)
     except EmptyPage:
         events = paginator.page(paginator.num_pages)
-    return render(request, 'dosug/user_events.html', {'events': events, 'query': query})
+    return render(request, 'dosug/user_events.html', {'events': events,
+                                                      'query': query,
+                                                      'max_price': max_price,
+                                                      'min_price': min_price})
 
 def profile(request, id, edit = 0):
     user_prof = User.objects.filter(id=id).first()

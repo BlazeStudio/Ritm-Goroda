@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="/static/css/style.css" id="main-styles-link">
   </head>
   <body>
-<!--  {% if preloader != True %}-->
+  {% if preloader != 1 and preloader != 2 %}
 
 
-<!--    <div class="preloader">-->
-<!--    <div class="preloader-logo"><img src="/static/images/logo.png" alt="" width="250" height="250" srcset="/static/images/logo.png"/>-->
-<!--   </div>-->
-<!--    <div class="preloader-body">-->
-<!--         <div class="loadingProgressG" id="loadingProgressG_1"></div>-->
-<!--     </div>-->
-<!--    </div>-->
+    <div class="preloader">
+    <div class="preloader-logo"><img src="/static/images/logo.png" alt="" width="250" height="250" srcset="/static/images/logo.png"/>
+   </div>
+    <div class="preloader-body">
+         <div class="loadingProgressG" id="loadingProgressG_1"></div>
+     </div>
+    </div>
 
 
-<!--  {% endif %}-->
+  {% endif %}
         {% if messages %}
         <div class="toast-container">
             {% for message in messages %}
@@ -58,5 +58,30 @@
     $('.toast').toast('show');
   });
 </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Поиск прелоадера
+    var preloader = document.querySelector('.preloader');
+
+    // Функция для удаления класса "loaded" у прелоадера
+    function removeLoadedClass() {
+        preloader.classList.remove('loaded');
+    }
+
+    // Обработчик события перед уходом со страницы
+    window.addEventListener('beforeunload', function() {
+        // Удаление класса "loaded" перед уходом со страницы
+        removeLoadedClass();
+    });
+
+    // Обработчик события перед загрузкой новой страницы
+    window.addEventListener('unload', function() {
+        // Удаление класса "loaded" перед загрузкой новой страницы
+        removeLoadedClass();
+    });
+});
+
+
+  </script>
   </body>
 </html>

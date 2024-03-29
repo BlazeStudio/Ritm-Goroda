@@ -302,6 +302,31 @@
     });
   });
 </script>
+  <script>
+      var searchInput = document.getElementById('search-input');
+var maxInput = document.getElementById('max-input');
+var minInput = document.getElementById('min-input');
+var searchButton = document.getElementById('search-button');
+
+// Функция для обработки нажатия Enter в поле ввода
+function handleEnterKeyPress(event) {
+  if (event.key === 'Enter') {
+    // Получаем значение из поля ввода
+    var inputValue = searchInput.value;
+    var maxPrice = maxInput.value;
+    var minPrice = minInput.value;
+
+    // Формируем ссылку
+    var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min_price=' + minPrice;
+    // Перенаправляем на полученную ссылку
+    window.location.href = hrefValue;
+  }
+}
+
+// Добавляем обработчик события для нажатия клавиши Enter в поле ввода
+searchInput.addEventListener('keypress', handleEnterKeyPress);
+
+  </script>
   </body>
 <script src="/static/js/search_script.js"></script>
 </html>

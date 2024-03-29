@@ -56,7 +56,9 @@ color: #4348bd;
 {#                      <div class="unit-left"><span class="icon novi-icon icon-md icon-modern mdi mdi-map-marker"></span></div>#}
 {#                      <div class="unit-body"><a class="link-default" href="tel:#">Сюда <br> И сюда что-нибудь</a></div>#}
 {#                    </article>#}
+                      {% if request.user.is_authenticated %}
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/add_event">Добавить событие</a><br>
+                      {% endif %}
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/map">Карта</a><br>
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/random_event">Мне повезёт!</a>
                       <div class="dropdown">

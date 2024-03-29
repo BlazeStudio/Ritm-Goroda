@@ -11,7 +11,7 @@ class Event(models.Model):
     description = models.CharField(max_length=1400)
     link = models.CharField(max_length=30)
     address = models.CharField(max_length=60)
-    price = models.IntegerField(max_length=30, default=0)
+    price = models.IntegerField(default=0)
     phone = models.CharField(max_length=30)
     coordinates = models.CharField(max_length=100)
     views = models.IntegerField(default=0)

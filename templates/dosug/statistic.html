@@ -1,0 +1,69 @@
+{% extends "dosug/layout.html" %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="page"><br><br><br>
+    <section class="section novi-background section-md text-center">
+        <h3>Статистика просмотров</h3><br>
+        <canvas id="myChart" style="width: 70%; height: 70%;"></canvas>
+    </section>
+    <div style="text-align: center">
+    <a class="button button-primary" href="/event/{{event.id}}">К событию</a>
+        </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chartData = JSON.parse('{{ chart_data|escapejs }}');
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Количество просмотров',
+                data: chartData.views_count,
+                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Изменяем цвет на оранжевый
+                borderColor: 'rgba(255, 165, 0, 1)', // Изменяем цвет на оранжевый
+                borderWidth: 4, // Увеличиваем толщину линии
+                pointRadius: 0, // Скрываем точки
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество дней' // Переименовываем ось x
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество просмотров' // Переименовываем ось y
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            elements: {
+                point: {
+                    radius: 0 // Скрываем точки при обычном отображении
+                }
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false // Показываем точки при наведении мыши
+            }
+        }
+    });
+</script>
+</body>
+</html>
+{% endblock content %}

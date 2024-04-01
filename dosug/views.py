@@ -4,15 +4,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
-from django.db.models import Max
+from django.db.models import Max, Count, Sum
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from dosug.models import Event, DateTimeData
+from dosug.models import Event, DateTimeData, StatsDays
 import json, random
 from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.hashers import check_password, make_password
+from itertools import groupby
+from operator import itemgetter
 
 # def error_404(request, exception):
 #     print("Yes")
@@ -404,3 +406,32 @@ def event_detail(request, id):
 
 def about(request):
     return render(request, 'dosug/text.html')
+
+def stats(request, id):
+    stats_data = StatsDays.objects.filter(event_id=id).values('day').annotate(views_count=Sum('views')).order_by('day')
+    event = Event.objects.filter(id = id).first()
+
+    if not stats_data.exists():
+        messages.error(request, "Статистика не найдена")
+        return redirect(request.path)
+    max_day = event.days_since_creation()
+    labels = list(range(max_day + 1))
+
+    views_by_day = {entry['day']: entry['views_count'] for entry in stats_data}
+    print(labels)
+    views_count = []
+    previous_count = 0
+    for day in labels:
+        if day in views_by_day:
+            previous_count = views_by_day[day]
+            views_count.append(previous_count)
+        else:
+            views_count.append(previous_count)
+
+    chart_data = {
+        'labels': labels,
+        'views_count': views_count,
+    }
+    print(chart_data)
+
+    return render(request, 'dosug/statistic.html', {'chart_data': json.dumps(chart_data), 'event': event})

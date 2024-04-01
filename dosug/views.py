@@ -5,9 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Max, Count, Sum
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from dosug.models import Event, DateTimeData, StatsDays
+from dosug.models import Event, DateTimeData, StatsDays, Bookmarks
 import json, random
 from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
@@ -89,7 +90,7 @@ def user_events(request):
     if (max_price is None) or (min_price is None) or (max_price == '') or (min_price == ''):
         max_price = 10000
         min_price = 0
-    map_dots = Event.objects.filter(price__gte=min_price, price__lte=max_price)
+    events = events.filter(price__gte=min_price, price__lte=max_price)
     if query:
         events = [event for event in events if query.lower() in event.title.lower()]
     paginator = Paginator(events, 10)
@@ -102,6 +103,34 @@ def user_events(request):
     except EmptyPage:
         events = paginator.page(paginator.num_pages)
     return render(request, 'dosug/user_events.html', {'events': events,
+                                                      'query': query,
+                                                      'max_price': max_price,
+                                                      'min_price': min_price})
+
+def user_bookmarks(request):
+    if not request.user.is_authenticated:
+        return redirect('/login')
+    bookmarks = Bookmarks.objects.filter(user_id=request.user.id).values_list('event_id', flat=True).distinct()
+    events = Event.objects.filter(id__in=bookmarks)
+    query = request.GET.get('search_query')
+    max_price = request.GET.get('max_price')
+    min_price = request.GET.get('min_price')
+    if (max_price is None) or (min_price is None) or (max_price == '') or (min_price == ''):
+        max_price = 10000
+        min_price = 0
+    events = events.filter(price__gte=min_price, price__lte=max_price)
+    if query:
+        events = [event for event in events if query.lower() in event.title.lower()]
+    paginator = Paginator(events, 10)
+
+    page_number = request.GET.get('page')
+    try:
+        events = paginator.page(page_number)
+    except PageNotAnInteger:
+        events = paginator.page(1)
+    except EmptyPage:
+        events = paginator.page(paginator.num_pages)
+    return render(request, 'dosug/user_bookmarks.html', {'events': events,
                                                       'query': query,
                                                       'max_price': max_price,
                                                       'min_price': min_price})
@@ -179,7 +208,7 @@ def random_event(request):
     event_ids = list(Event.objects.values_list('id', flat=True))
     number = random.choice(event_ids)
     event = Event.objects.get(id=number)
-    event.views_add()
+    event.views_add(request)
     datetime = datetime_view(request, number)
     return redirect(f'/event/{event.id}', {'event': event, 'datetime': datetime})
 def add_event(request):
@@ -394,44 +423,81 @@ def map(request):
         json.dump(new_data, json_file, ensure_ascii=False, indent=2)
         return render(request, 'dosug/map.html')
 
-def event_detail(request, id):
+def event_detail(request, id, bookmark = False):
     try:
         event = Event.objects.get(id=id)
-        event.views_add()
+        event.views_add(request)
         datetime = datetime_view(request, id)
-        return render(request, 'dosug/event.html', {'event': event, 'datetime': datetime})
+        finder = Bookmarks.objects.filter(user_id=request.user.id, event_id=id)
+        if finder: bookmark = True
+        return render(request, 'dosug/event.html', {'event': event, 'datetime': datetime, 'bookmark': bookmark})
     except Event.DoesNotExist:
         messages.warning(request, "Событие не найдено")
         return redirect('/')
+
+def like(request, id):
+    event = Event.objects.filter(id=id).first()
+    event.like(request)
+    return HttpResponse("success")
+
+def bookmark(request, id):
+    event = Event.objects.filter(id=id).first()
+    finder = Bookmarks.objects.filter(user_id=request.user.id, event_id=id)
+    if finder: event.delete_bookmark(request, id)
+    else: event.add_bookmark(request, id)
+    return HttpResponse("success")
 
 def about(request):
     return render(request, 'dosug/text.html')
 
 def stats(request, id):
     stats_data = StatsDays.objects.filter(event_id=id).values('day').annotate(views_count=Sum('views')).order_by('day')
-    event = Event.objects.filter(id = id).first()
+    likes_data = StatsDays.objects.filter(event_id=id).values('day').annotate(likes_count=Sum('likes')).order_by('day')
+    bookmarks_data = StatsDays.objects.filter(event_id=id).values('day').annotate(bookmarks_count=Sum('bookmarks')).order_by('day')
+    event = Event.objects.filter(id=id).first()
 
-    if not stats_data.exists():
+    if not stats_data.exists() or not likes_data.exists():
         messages.error(request, "Статистика не найдена")
         return redirect(request.path)
+
     max_day = event.days_since_creation()
     labels = list(range(max_day + 1))
 
     views_by_day = {entry['day']: entry['views_count'] for entry in stats_data}
-    print(labels)
+    likes_by_day = {entry['day']: entry['likes_count'] for entry in likes_data}
+    bookmarks_by_day = {entry['day']: entry['bookmarks_count'] for entry in bookmarks_data}
+
     views_count = []
-    previous_count = 0
+    likes_count = []
+    bookmarks_count = []
+    previous_views_count = 0
+    previous_likes_count = 0
+    previous_bookmarks_count = 0
+
     for day in labels:
         if day in views_by_day:
-            previous_count = views_by_day[day]
-            views_count.append(previous_count)
+            previous_views_count = views_by_day[day]
+            views_count.append(previous_views_count)
         else:
-            views_count.append(previous_count)
+            views_count.append(previous_views_count)
+
+        if day in likes_by_day:
+            previous_likes_count = likes_by_day[day]
+            likes_count.append(previous_likes_count)
+        else:
+            likes_count.append(previous_likes_count)
+
+        if day in bookmarks_by_day:
+            previous_bookmarks_count = bookmarks_by_day[day]
+            bookmarks_count.append(previous_bookmarks_count)
+        else:
+            bookmarks_count.append(previous_bookmarks_count)
 
     chart_data = {
         'labels': labels,
         'views_count': views_count,
+        'likes_count': likes_count,
+        'bookmarks_count': bookmarks_count
     }
-    print(chart_data)
 
     return render(request, 'dosug/statistic.html', {'chart_data': json.dumps(chart_data), 'event': event})

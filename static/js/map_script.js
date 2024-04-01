@@ -6,7 +6,7 @@ var filterState;
 function init() {
   map = new ymaps.Map("map-test", {
     center: [55.753000452722546, 37.62084863478474],
-    zoom: 15,
+    zoom: 11,
   });
 
   filterState = {
@@ -88,7 +88,7 @@ function init() {
 
     clusterer.add(myGeoObjects);
     map.geoObjects.add(clusterer);
-    map.setBounds(clusterer.getBounds(), {
+    map.setBounds(map.getBounds(), {
       checkZoomRange: true
     });
   });

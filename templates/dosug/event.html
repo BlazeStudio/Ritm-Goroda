@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ event.title }}</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style>
         .container {
             display: flex;
@@ -43,7 +44,10 @@
 <!--        <div class="block-inner" style="border: 1px solid #b3b3b3; border-radius: 5px; padding: 10px; margin: 10px 0;">-->
 <!--        <u><b><i style="font-size: 15px">Кратко</i></b></u> — <a style="font-size: 17px">{{ event.tiny_description }}</a></div>-->
 <!--    </div>-->
-<div style="text-align: right; margin-right: 6.57%; margin-bottom: 0.52%">
+<!-- HTML -->
+
+
+    <div style="text-align: right; margin-right: 6.57%; margin-bottom: 0.52%">
     <a class="link-default" href="/stats/{{event.id}}" style="border: 1px solid #ccc; border-radius: 3px; font-weight: bolder; font-size: 1.25em; padding: 0.5em 1em;">Статистика</a>
 </div>
 <div class="container" style="color: #000000">
@@ -64,6 +68,142 @@
 </svg>
                 <i style="font-size: 15px;">{{ event.views }}</i>
             </p>
+
+<!--            LIKE-->
+
+<button id="likeButton" style="border: none; background-color: transparent; color: black; cursor: pointer;">
+    <span id="heartIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+</svg></span>
+</button>
+<i id="likeCount" style="font-size: 15px;">{{ event.likes }}</i>
+<script>
+    var isLiked = false;
+    var heartIcon = document.getElementById('heartIcon');
+
+    document.getElementById('likeButton').addEventListener('click', function() {
+        if (!isLiked) {
+            heartIcon.style.color = 'red';
+
+            var likeCountElement = document.getElementById('likeCount');
+            var currentLikes = parseInt(likeCountElement.textContent);
+            likeCountElement.textContent = currentLikes + 1;
+
+            isLiked = true;
+        } else {
+            heartIcon.style.color = 'currentColor';
+
+            // Уменьшаем количество лайков на 1
+            var likeCountElement = document.getElementById('likeCount');
+            var currentLikes = parseInt(likeCountElement.textContent);
+            likeCountElement.textContent = currentLikes - 1;
+
+            isLiked = false; // Сбрасываем флаг
+        }
+    });
+</script>
+
+    <input id="eventid" value="{{event.id}}" style="display: none">
+
+<script>
+    $(document).ready(function() {
+        var eventId = $("#eventid").val();
+        console.log(eventId)
+        $('#likeButton').click(function() {
+            likeButton(eventId);
+        });
+    });
+
+    function likeButton(eventId) {
+        $.ajax({
+            type: 'GET',
+            url: '/like/' + eventId,
+            success: function(response) {
+                $('#result').text(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>
+
+<!--BOOKMARK-->
+<br>
+            {% if request.user.is_authenticated %}
+            <button id="bookmarkButton" style="border: none; background-color: transparent; color: black; cursor: pointer;">
+    <span id="bookmarkIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z"/>
+  <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1"/>
+</svg></span>
+</button>
+            {% else %}
+<a href="/login" style="border: none; background-color: transparent; color: black; cursor: pointer;">
+    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z"/>
+  <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1"/>
+</svg></span>
+</a>
+            {% endif %}
+<i id="BookmarkTitle" style="font-size: 14px;"></i>
+<input id="bookmarkStatus" value="{{bookmark}}" style="display: none">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var isBookmarked = document.getElementById('bookmarkStatus');
+        var bookmarkIcon = document.getElementById('bookmarkIcon');
+        var BookmarkTitle = document.getElementById('BookmarkTitle');
+
+        if (isBookmarked.value === "True") {
+            bookmarkIcon.style.color = 'orange';
+            BookmarkTitle.textContent = "Событие добавлено в закладки";
+        } else {
+            bookmarkIcon.style.color = 'currentColor';
+            BookmarkTitle.textContent = "";
+        }
+    });
+</script>
+<script>
+    var isBookmarked = document.getElementById('bookmarkStatus');
+    var bookmarkIcon = document.getElementById('bookmarkIcon');
+
+    document.getElementById('bookmarkButton').addEventListener('click', function() {
+        var BookmarkTitle = document.getElementById('BookmarkTitle');
+        if (isBookmarked.value === "False") {
+            bookmarkIcon.style.color = 'orange';
+            BookmarkTitle.textContent = "Событие добавлено в закладки";
+            isBookmarked.value = "True"
+        } else {
+            bookmarkIcon.style.color = 'currentColor';
+            BookmarkTitle.textContent = "";
+            isBookmarked.value = "False";
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var eventId = $("#eventid").val();
+        $('#bookmarkButton').click(function() {
+            bookmarkButton(eventId);
+        });
+    });
+
+    function bookmarkButton(eventId) {
+        $.ajax({
+            type: 'GET',
+            url: '/bookmark/' + eventId,
+            success: function(response) {
+                $('#result').text(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>
+
+
+
         </div>
         <div class="block" style="width: 50%;">
             <h5>Информация о событии</h5>

@@ -20,5 +20,8 @@ urlpatterns = [
     path('profile/<int:id>', views.profile),
     path('user_events', views.user_events),
     path('about', views.about),
-    path('stats/<int:id>', views.stats)
+    path('stats/<int:id>', views.stats),
+    path('like/<int:id>', views.like),
+    path('bookmark/<int:id>', views.bookmark),
+    path('bookmarks', views.user_bookmarks)
 ]

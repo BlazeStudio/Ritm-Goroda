@@ -8,15 +8,27 @@
 </head>
 <body>
 <div class="page"><br><br><br>
-    <section class="section novi-background section-md text-center">
-        <h3>Статистика просмотров</h3><br>
-        <canvas id="myChart" style="width: 70%; height: 70%;"></canvas>
+    <section class="section novi-background section-md text-center" style="width: 85%; margin: auto">
+        <h3>Статистика события</h3><br>
+        <p style="font-weight: bolder">Общий график</p><br>
+        <canvas id="myChart" style="width: 50%; height: 70%;"></canvas>
+                <i style="text-align: center; font-size: 13px">Количество дней</i>
+        <br><br><br>
+        <p style="font-weight: bolder">Разделённые графики</p><br>
+        <canvas id="viewsChart" style="width: 70%; height: 70%"></canvas>
+         <i style="text-align: center; font-size: 13px">Количество дней</i>
+        <br><br>
+        <canvas id="likesChart" style="width: 70%; height: 70%"></canvas>
+         <i style="text-align: center; font-size: 13px">Количество дней</i>
+        <br><br>
+        <canvas id="bookmarksChart" style="width: 70%; height: 70%"></canvas>
+         <i style="text-align: center; font-size: 13px">Количество дней</i>
     </section>
     <div style="text-align: center">
-    <a class="button button-primary" href="/event/{{event.id}}">К событию</a>
-        </div>
+        <a class="button button-primary" href="/event/{{event.id}}">К событию</a>
+    </div>
 </div>
-
+<br><br><br>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var chartData = JSON.parse('{{ chart_data|escapejs }}');
@@ -28,10 +40,77 @@
             datasets: [{
                 label: 'Количество просмотров',
                 data: chartData.views_count,
-                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Изменяем цвет на оранжевый
-                borderColor: 'rgba(255, 165, 0, 1)', // Изменяем цвет на оранжевый
-                borderWidth: 4, // Увеличиваем толщину линии
-                pointRadius: 0, // Скрываем точки
+                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                borderColor: 'rgba(255, 165, 0, 1)',
+                borderWidth: 4,
+                pointRadius: 0,
+            },
+            {
+                label: 'Количество лайков',
+                data: chartData.likes_count,
+                backgroundColor: 'rgba(0, 255, 0, 0.2)', // измените цвет на зеленый или другой по вашему выбору
+                borderColor: 'rgba(0, 255, 0, 1)', // измените цвет на зеленый или другой по вашему выбору
+                borderWidth: 4,
+                pointRadius: 0,
+            },
+            {
+                label: 'Количество закладок',
+                data: chartData.bookmarks_count,
+                backgroundColor: 'rgba(0, 0, 255, 0.2)', // измените цвет на синий или другой по вашему выбору
+                borderColor: 'rgba(0, 0, 255, 1)', // измените цвет на синий или другой по вашему выбору
+                borderWidth: 4,
+                pointRadius: 0,
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество дней' // Переименовываем ось x
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество' // Переименовываем ось y
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            elements: {
+                point: {
+                    radius: 0 // Скрываем точки при обычном отображении
+                }
+            },
+            tooltips: {
+                mode: 'point',
+                intersect: false
+            }
+        }
+    });
+</script>
+
+<script>
+    var viewsCtx = document.getElementById('viewsChart').getContext('2d');
+    var likesCtx = document.getElementById('likesChart').getContext('2d');
+    var bookmarksCtx = document.getElementById('bookmarksChart').getContext('2d');
+
+    var chartData = JSON.parse('{{ chart_data|escapejs }}');
+
+    var viewsChart = new Chart(viewsCtx, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Количество просмотров',
+                data: chartData.views_count,
+                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                borderColor: 'rgba(255, 165, 0, 1)',
+                borderWidth: 4,
+                pointRadius: 0,
             }]
         },
         options: {
@@ -58,8 +137,94 @@
                 }
             },
             tooltips: {
-                mode: 'index',
-                intersect: false // Показываем точки при наведении мыши
+                mode: 'nearest', // изменяем режим на "ближайший"
+                intersect: false
+            }
+        }
+    });
+
+    var likesChart = new Chart(likesCtx, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Количество лайков',
+                data: chartData.likes_count,
+                backgroundColor: 'rgba(0, 255, 0, 0.2)', // измените цвет на зеленый или другой по вашему выбору
+                borderColor: 'rgba(0, 255, 0, 1)', // измените цвет на зеленый или другой по вашему выбору
+                borderWidth: 4,
+                pointRadius: 0,
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество дней' // Переименовываем ось x
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество лайков' // Переименовываем ось y
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            elements: {
+                point: {
+                    radius: 0 // Скрываем точки при обычном отображении
+                }
+            },
+            tooltips: {
+                mode: 'nearest', // изменяем режим на "ближайший"
+                intersect: false
+            }
+        }
+    });
+
+    var bookmarksChart = new Chart(bookmarksCtx, {
+        type: 'line',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Количество закладок',
+                data: chartData.bookmarks_count,
+                backgroundColor: 'rgba(0, 0, 255, 0.2)', // измените цвет на синий или другой по вашему выбору
+                borderColor: 'rgba(0, 0, 255, 1)', // измените цвет на синий или другой по вашему выбору
+                borderWidth: 4,
+                pointRadius: 0,
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество дней' // Переименовываем ось x
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Количество закладок' // Переименовываем ось y
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            elements: {
+                point: {
+                    radius: 0 // Скрываем точки при обычном отображении
+                }
+            },
+            tooltips: {
+                mode: 'nearest', // изменяем режим на "ближайший"
+                intersect: false
             }
         }
     });

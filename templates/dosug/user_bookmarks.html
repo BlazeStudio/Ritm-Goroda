@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Мои события</title>
+    <title>Мои закладки</title>
 </head>
 <style>
 .description {
@@ -17,8 +17,8 @@
 </style>
 <body>
 <div class="page">
-    <br><br><br><br>
-<h3 style="text-align: center">Мои события</h3>
+    <br><br><br><br><br>
+<h3 style="text-align: center">Мои закладки</h3>
  <section class="section novi-background section-md text-center">
      <div class="container">
              <block  style="box-sizing: border-box; display: flex; align-items: center">
@@ -65,7 +65,7 @@
   {% csrf_token %}
 <input class="input-tab" type="text" id="search-input" name="search_query" placeholder="Поиск..." style="height: 35px; width: 250px" {% if query != Null %} value="{{query}}" {% endif %}>
 <a class="btn button-primary-outline" id="search-button" style="margin-bottom: 3px; margin-left: 5px; border: 1px solid darkgray;" href="">Искать</a><br>
-{% if query != Null %}<a id="clear-search" style="color: grey; font-weight: bolder" href="/user_events">Очистить поиск</a>{% endif %}
+{% if query != Null %}<a id="clear-search" style="color: grey; font-weight: bolder" href="/bookmarks">Очистить поиск</a>{% endif %}
 </div>
         </block><hr style=" width: 350px; margin-top: 10px; "></div>
         <div class="container" style="border-left: 1px solid lightgray; border-right: 1px solid lightgray; padding: 30px;">
@@ -88,18 +88,7 @@
                 </ul>
         <p class="description" style="word-wrap: break-word;">{{ event.tiny_description }}</p>
     </div>
-        <div style="display: flex; flex-direction: column; justify-content: space-between; position: absolute; right: 0; top: 0;">
-            <a href="/edit/{{ event.id }}" class="btn btn-primary-accept" style="margin-bottom: 10px;">Редактировать</a>
-            <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ event.id }}')">Удалить</a>
-        </div>
 </article>
-                  <script>
-    function confirmDelete(eventId) {
-        if (confirm('Вы уверены, что хотите удалить событие?')) {
-            window.location.href = '/delete/' + eventId;
-        }
-    }
-</script>
             </div>
               {% endfor %}
           </div>

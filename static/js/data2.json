@@ -12,9 +12,10 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.770796,37.609272",
-      "views": 9,
+      "views": 18,
       "author": 0,
-      "created_at": "2024-03-21 19:13:58"
+      "created_at": "2024-03-21 19:13:58",
+      "likes": 0
     },
     {
       "id": 53,
@@ -30,7 +31,8 @@
       "coordinates": "55.760661,37.664384",
       "views": 2,
       "author": 0,
-      "created_at": "2024-03-27 14:40:48"
+      "created_at": "2024-03-27 14:40:48",
+      "likes": 0
     },
     {
       "id": 54,
@@ -44,9 +46,10 @@
       "price": 400,
       "phone": "+7 (916) 075-0015",
       "coordinates": "55.72778,37.6016",
-      "views": 1,
+      "views": 26,
       "author": 0,
-      "created_at": "2024-03-27 14:43:03"
+      "created_at": "2024-03-27 14:43:03",
+      "likes": 2
     },
     {
       "id": 55,
@@ -62,7 +65,8 @@
       "coordinates": "55.695235,37.766908",
       "views": 3,
       "author": 0,
-      "created_at": "2024-03-27 14:45:46"
+      "created_at": "2024-03-27 14:45:46",
+      "likes": 0
     },
     {
       "id": 56,
@@ -78,7 +82,8 @@
       "coordinates": "55.754841,37.674615",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 14:47:06"
+      "created_at": "2024-03-27 14:47:06",
+      "likes": 0
     },
     {
       "id": 57,
@@ -92,9 +97,10 @@
       "price": 200,
       "phone": "+7 (495) 618-2332",
       "coordinates": "55.813946,37.599911",
-      "views": 28,
+      "views": 32,
       "author": 0,
-      "created_at": "2024-03-27 14:48:55"
+      "created_at": "2024-03-27 14:48:55",
+      "likes": 2
     },
     {
       "id": 58,
@@ -110,7 +116,8 @@
       "coordinates": "55.72055,37.635458",
       "views": 1,
       "author": 0,
-      "created_at": "2024-03-27 14:50:26"
+      "created_at": "2024-03-27 14:50:26",
+      "likes": 0
     },
     {
       "id": 59,
@@ -126,7 +133,8 @@
       "coordinates": "55.751457,37.565461",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 14:51:54"
+      "created_at": "2024-03-27 14:51:54",
+      "likes": 0
     },
     {
       "id": 60,
@@ -142,7 +150,8 @@
       "coordinates": "55.761411,37.583661",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 14:54:02"
+      "created_at": "2024-03-27 14:54:02",
+      "likes": 0
     },
     {
       "id": 61,
@@ -158,7 +167,8 @@
       "coordinates": "55.771145,37.620177",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 14:55:54"
+      "created_at": "2024-03-27 14:55:54",
+      "likes": 0
     },
     {
       "id": 62,
@@ -174,7 +184,8 @@
       "coordinates": "55.762424,37.627921",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 15:21:58"
+      "created_at": "2024-03-27 15:21:58",
+      "likes": 0
     },
     {
       "id": 63,
@@ -188,9 +199,10 @@
       "price": 790,
       "phone": "+7 (905) 752-5028",
       "coordinates": "55.741982,37.588916",
-      "views": 8,
+      "views": 12,
       "author": 0,
-      "created_at": "2024-03-27 15:23:39"
+      "created_at": "2024-03-27 15:23:39",
+      "likes": 1
     },
     {
       "id": 64,
@@ -206,7 +218,8 @@
       "coordinates": "55.757982,37.605265",
       "views": 1,
       "author": 0,
-      "created_at": "2024-03-27 15:25:13"
+      "created_at": "2024-03-27 15:25:13",
+      "likes": 0
     },
     {
       "id": 65,
@@ -222,7 +235,8 @@
       "coordinates": "55.765939,37.661275",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 15:26:37"
+      "created_at": "2024-03-27 15:26:37",
+      "likes": 0
     },
     {
       "id": 66,
@@ -236,9 +250,10 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.797549,37.793822",
-      "views": 4,
+      "views": 8,
       "author": 0,
-      "created_at": "2024-03-27 15:28:14"
+      "created_at": "2024-03-27 15:28:14",
+      "likes": 0
     },
     {
       "id": 67,
@@ -254,7 +269,8 @@
       "coordinates": "55.709637,37.396299",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 15:30:08"
+      "created_at": "2024-03-27 15:30:08",
+      "likes": 0
     },
     {
       "id": 68,
@@ -270,7 +286,8 @@
       "coordinates": "55.80614,37.58385",
       "views": 3,
       "author": 0,
-      "created_at": "2024-03-27 15:31:59"
+      "created_at": "2024-03-27 15:31:59",
+      "likes": 0
     },
     {
       "id": 69,
@@ -286,7 +303,25 @@
       "coordinates": "55.774502,37.599729",
       "views": 0,
       "author": 0,
-      "created_at": "2024-03-27 15:33:20"
+      "created_at": "2024-03-27 15:33:20",
+      "likes": 0
+    },
+    {
+      "id": 70,
+      "title": "Test_ex",
+      "type": "art",
+      "image": "default.jpg",
+      "tiny_description": "dwqwqdqwd",
+      "description": "qwdqwdqwd",
+      "link": "",
+      "address": "Москва, Восточный административный округ, район Метрогородок",
+      "price": 0,
+      "phone": "",
+      "coordinates": "55.82234382548772,37.74364277343746",
+      "views": 62,
+      "author": 0,
+      "created_at": "2024-01-30 15:02:38",
+      "likes": 6
     }
   ]
 }

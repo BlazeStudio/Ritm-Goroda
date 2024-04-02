@@ -153,7 +153,7 @@ function clearFields2() {
     <label  for="phone"><b>Телефон:</b>
     <input class="input-tab" type="tel" style="margin-left: 117px" id="phone" name="phone" {%if edit == 1%}value="{{event.phone}}"{%endif%}></label><br>
     <label  for="url"><b>Сайт:</b>
-    <input class="input-tab" type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https://.*" size="30" {%if edit == 1%}value="{{event.link}}"{%endif%}></label><br>
+    <input class="input-tab" type="url" name="url" id="url" style="margin-left: 150px" placeholder="https://example.com" pattern="https?://.*" size="30" {%if edit == 1%}value="{{event.link}}"{%endif%}></label><br>
     <label for="photo"><b>Фотография:</b> <input style="margin-left: 100px" type="file" id="photo" name="photo" accept="image/jpeg, image/jpg, image/png"></label><br>
 <b>*Карта:</b><div class="input-tab" id="map"></div>
 

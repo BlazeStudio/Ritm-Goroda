@@ -12,10 +12,11 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.770796,37.609272",
-      "views": 18,
+      "views": 20,
       "author": 0,
       "created_at": "2024-03-21 19:13:58",
-      "likes": 0
+      "likes": 1,
+      "bookmarks": 1
     },
     {
       "id": 53,
@@ -29,10 +30,11 @@
       "price": 549,
       "phone": "+7 (916) 850-4620",
       "coordinates": "55.760661,37.664384",
-      "views": 2,
+      "views": 3,
       "author": 0,
       "created_at": "2024-03-27 14:40:48",
-      "likes": 0
+      "likes": 1,
+      "bookmarks": 1
     },
     {
       "id": 54,
@@ -46,10 +48,11 @@
       "price": 400,
       "phone": "+7 (916) 075-0015",
       "coordinates": "55.72778,37.6016",
-      "views": 26,
+      "views": 27,
       "author": 0,
       "created_at": "2024-03-27 14:43:03",
-      "likes": 2
+      "likes": 2,
+      "bookmarks": 0
     },
     {
       "id": 55,
@@ -66,7 +69,8 @@
       "views": 3,
       "author": 0,
       "created_at": "2024-03-27 14:45:46",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 56,
@@ -83,7 +87,8 @@
       "views": 0,
       "author": 0,
       "created_at": "2024-03-27 14:47:06",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 57,
@@ -100,7 +105,8 @@
       "views": 32,
       "author": 0,
       "created_at": "2024-03-27 14:48:55",
-      "likes": 2
+      "likes": 2,
+      "bookmarks": 41
     },
     {
       "id": 58,
@@ -114,10 +120,11 @@
       "price": 700,
       "phone": "+7 (925) 747-1930",
       "coordinates": "55.72055,37.635458",
-      "views": 1,
+      "views": 2,
       "author": 0,
       "created_at": "2024-03-27 14:50:26",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 59,
@@ -131,10 +138,11 @@
       "price": 2500,
       "phone": "+7 (499) 350-2626",
       "coordinates": "55.751457,37.565461",
-      "views": 0,
+      "views": 1,
       "author": 0,
       "created_at": "2024-03-27 14:51:54",
-      "likes": 0
+      "likes": 1,
+      "bookmarks": 0
     },
     {
       "id": 60,
@@ -148,10 +156,11 @@
       "price": 2600,
       "phone": "+7 (499) 350-2626",
       "coordinates": "55.761411,37.583661",
-      "views": 0,
+      "views": 1,
       "author": 0,
       "created_at": "2024-03-27 14:54:02",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 61,
@@ -168,7 +177,8 @@
       "views": 0,
       "author": 0,
       "created_at": "2024-03-27 14:55:54",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 62,
@@ -185,7 +195,8 @@
       "views": 0,
       "author": 0,
       "created_at": "2024-03-27 15:21:58",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 63,
@@ -199,10 +210,11 @@
       "price": 790,
       "phone": "+7 (905) 752-5028",
       "coordinates": "55.741982,37.588916",
-      "views": 12,
+      "views": 13,
       "author": 0,
       "created_at": "2024-03-27 15:23:39",
-      "likes": 1
+      "likes": 1,
+      "bookmarks": 0
     },
     {
       "id": 64,
@@ -219,7 +231,8 @@
       "views": 1,
       "author": 0,
       "created_at": "2024-03-27 15:25:13",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 65,
@@ -236,7 +249,8 @@
       "views": 0,
       "author": 0,
       "created_at": "2024-03-27 15:26:37",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 66,
@@ -253,7 +267,8 @@
       "views": 8,
       "author": 0,
       "created_at": "2024-03-27 15:28:14",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 67,
@@ -267,10 +282,11 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.709637,37.396299",
-      "views": 0,
+      "views": 1,
       "author": 0,
       "created_at": "2024-03-27 15:30:08",
-      "likes": 0
+      "likes": 1,
+      "bookmarks": 0
     },
     {
       "id": 68,
@@ -287,7 +303,8 @@
       "views": 3,
       "author": 0,
       "created_at": "2024-03-27 15:31:59",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 69,
@@ -304,7 +321,8 @@
       "views": 0,
       "author": 0,
       "created_at": "2024-03-27 15:33:20",
-      "likes": 0
+      "likes": 0,
+      "bookmarks": 0
     },
     {
       "id": 70,
@@ -318,10 +336,11 @@
       "price": 0,
       "phone": "",
       "coordinates": "55.82234382548772,37.74364277343746",
-      "views": 62,
+      "views": 65,
       "author": 0,
       "created_at": "2024-01-30 15:02:38",
-      "likes": 6
+      "likes": 6,
+      "bookmarks": 1
     }
   ]
 }

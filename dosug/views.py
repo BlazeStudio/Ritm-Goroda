@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
-from django.db.models import Max, Count, Sum
+from django.db.models import Max, Sum
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -13,9 +13,7 @@ import json, random
 from dosug.forms import EventForm, DateTimeDataForm
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.auth.hashers import check_password, make_password
-from itertools import groupby
-from operator import itemgetter
+from django.contrib.auth.hashers import check_password
 
 # def error_404(request, exception):
 #     print("Yes")

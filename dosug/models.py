@@ -23,8 +23,7 @@ class Event(models.Model):
     def days_since_creation(self):
         current_datetime = datetime.now()
         time_difference = current_datetime - self.created_at
-        days_since_creation = time_difference.days
-        return days_since_creation
+        return time_difference.days
 
     def views_add(self, request):
         current_date = date.today()

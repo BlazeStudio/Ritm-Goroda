@@ -5,87 +5,7 @@
     <meta charset="UTF-8">
     <title>Регистрация</title>
 </head>
-<style>
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css');
-    html,
-    body {
-        height: 100%
-    }
-    body {
-    background-image: url('/static/images/site_pics/culture.jpg');
-    background-size: cover;
-    background-position: center;
-}
-.login_form::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 115px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #4348bd;
-    z-index: -1;
-    border-radius: 5px 5px 10px 10px;
-}
-
-.login_form {
-    position: relative;
-    display: block;
-    border: 2px solid #4348bd;
-    border-radius: 15px;
-    text-align: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    justify-content: center;
-}
-.login_form::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background-color: rgba(244, 246, 250, 0.95);
-    z-index: -1;
-    border-radius: 15px 15px 0 0;
-}
-label{
-    color: white;
-}
-        .right-block h3 {
-            margin-bottom: 20px;
-        }
-.super-border img{
-                max-width: 200px;
-            margin-bottom: 15px;
-}
-.super-border{
-    background-color: rgba(244, 246, 250, 0.9);
-   text-align: center;
-	--angle: 0deg;
-	width: 60%;
-	border: 3px solid;
-    padding: 20px;
-	border-image: conic-gradient(from var(--angle), deepskyblue, #4348bd, cornflowerblue, mediumaquamarine) 1;
-    /*border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;*/
-	animation: 10s rotate linear infinite;
-}
-
-@keyframes rotate {
-	to {
-		--angle: 360deg;
-	}
-}
-
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-</style>
+<link rel="stylesheet" href="/static/css/register.css">
 <body>
 <div class="page" style="display: none; "></div>
     <div class="h-100 d-flex align-items-center justify-content-center">
@@ -117,56 +37,7 @@ label{
         <small style="color: white; margin-top: 6px">Уже зарегистрированы?<a style="color: white; margin-left: 5px" href="/login">Войти</a></small><br>
         <small style="color: white"><a style="color: white; margin-left: 5px" href="/">На главную</a></small>
     </form>
-<script>
-    document.getElementById('UserButton').addEventListener('click', function() {
-        var button = document.getElementById('UserButton');
-        var button2 = document.getElementById('OrgButton');
-        var type_field = document.getElementById('type_field');
-        var name = document.getElementById('name_label');
-        var surname = document.getElementById('surname_label');
-        var org_name = document.getElementById('org_name_label');
-        var org_input = document.getElementById('org_name');
-        var password_input = document.getElementById('password');
-        var login_input = document.getElementById('username');
-        var email_input =  document.getElementById('email');
-        document.getElementById('name').setAttribute("required", "");
-        document.getElementById('surname').setAttribute("required", "");
-        type_field.value = "Пользователь";
-        button.style.backgroundColor = '#4348bd'; button.style.color = 'white';
-        button2.style.backgroundColor = ""; button2.style.color = 'black';
-        org_name.style.display = "none";
-        org_input.value = ""; password_input.value = ""; login_input.value = ""; email_input.value = "";
-        name.style.display = "block";
-        surname.style.display = "block";
-        // username.innerHTML = "Логин<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";
-    });
-</script>
-<script>
-    document.getElementById('OrgButton').addEventListener('click', function() {
-        var button = document.getElementById('UserButton');
-        var button2 = document.getElementById('OrgButton');
-        var type_field = document.getElementById('type_field');
-        var name = document.getElementById('name_label');
-        var surname = document.getElementById('surname_label');
-        var org_name = document.getElementById('org_name_label');
-        var password_input = document.getElementById('password');
-        var login_input = document.getElementById('username');
-        var email_input =  document.getElementById('email');
-        var name_input =  document.getElementById('name');
-        var surname_input =  document.getElementById('surname');
-        document.getElementById('org_name').setAttribute("required", "");
-        button2.style.backgroundColor = '#4348bd';
-        type_field.value = "Организация";
-        button2.style.color = 'white';
-        button.style.backgroundColor = "";
-        button.style.color = 'black';
-        org_name.style.display = "block";
-        password_input.value = ""; login_input.value = ""; email_input.value = ""; name_input.value = ""; surname_input.value = "";
-        name.style.display = "none";
-        surname.style.display = "none";
-        // username.innerHTML = "Название организации<br><input style='' name='username' type='text' id='username' required minlength='4' maxlength='20' value=''>";
-    });
-</script>
+<script src="/static/js/register.js" defer></script>
 </div>
 </div>
    </div>

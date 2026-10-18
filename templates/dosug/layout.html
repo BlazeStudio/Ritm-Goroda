@@ -2,29 +2,7 @@
 {% block layout %}
 <html class="wide wow-animation" lang="en">
   <head>
-    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
-
-    button{
-    background: #4348bd;
-    font-family: "Georgia";
-    color: white;
-}
-button:hover {
-    background: #373b97;
-}
-.login_button{
-    color: grey;
-}
-.login_button:hover{
-color: #4348bd;
-}
-.toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1050;
-}
-    </style>
+    <link rel="stylesheet" href="/static/css/layout.css">
   </head>
   <body>
     <div class="page">
@@ -63,7 +41,7 @@ color: #4348bd;
                       <a class="button button-primary-white" style="border: 1px solid grey" href="/random_event">Мне повезёт!</a>
                       <div class="dropdown">
                           {% if user.is_authenticated %}
-                              <img src="/static/images/default.png" width="60" height="60" onclick="toggleDropdown()" style="cursor: pointer;">
+                              <img src="/static/images/default.png" width="60" height="60" style="cursor: pointer;">
                           <div class="dropdown-content" id="myDropdown" style="z-index: 9999; left: -45px;">
                               <p style="text-align: center; margin-top: 5px">{{user.username}}</p><hr style="margin-top: 10px">
                                 <a href="/profile/{{user.id}}">Мой профиль</a>

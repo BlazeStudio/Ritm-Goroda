@@ -5,16 +5,7 @@
     <meta charset="UTF-8">
     <title>Мои события</title>
 </head>
-<style>
-.description {
-        font-size: 15px;
-        overflow-wrap: break-word;
-        white-space: normal;
-        text-overflow: ellipsis;
-        max-height: 90px;
-        overflow: hidden;
-}
-</style>
+<link rel="stylesheet" href="/static/css/user_lists.css">
 <body>
 <div class="page">
     <br><br><br><br>
@@ -90,16 +81,9 @@
     </div>
         <div style="display: flex; flex-direction: column; justify-content: space-between; position: absolute; right: 0; top: 0;">
             <a href="/edit/{{ event.id }}" class="btn btn-primary-accept" style="margin-bottom: 10px;">Редактировать</a>
-            <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ event.id }}')">Удалить</a>
+            <a href="#" class="btn btn-danger delete-event" data-event-id="{{ event.id }}">Удалить</a>
         </div>
 </article>
-                  <script>
-    function confirmDelete(eventId) {
-        if (confirm('Вы уверены, что хотите удалить событие?')) {
-            window.location.href = '/delete/' + eventId;
-        }
-    }
-</script>
             </div>
               {% endfor %}
           </div>
@@ -126,32 +110,8 @@
 </div>
  </section>
 </div>
-  <script>
-      var searchInput = document.getElementById('search-input');
-var maxInput = document.getElementById('max-input');
-var minInput = document.getElementById('min-input');
-var searchButton = document.getElementById('search-button');
-
-// Функция для обработки нажатия Enter в поле ввода
-function handleEnterKeyPress(event) {
-  if (event.key === 'Enter') {
-    // Получаем значение из поля ввода
-    var inputValue = searchInput.value;
-    var maxPrice = maxInput.value;
-    var minPrice = minInput.value;
-
-    // Формируем ссылку
-    var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min_price=' + minPrice;
-    // Перенаправляем на полученную ссылку
-    window.location.href = hrefValue;
-  }
-}
-
-// Добавляем обработчик события для нажатия клавиши Enter в поле ввода
-searchInput.addEventListener('keypress', handleEnterKeyPress);
-
-  </script>
   </body>
 <script src="/static/js/search_script.js"></script>
+<script src="/static/js/user_events.js" defer></script>
 </html>
 {% endblock content %}

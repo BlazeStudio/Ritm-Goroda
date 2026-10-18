@@ -21,3 +21,6 @@
 [class*="copyrights-pane"] {
   display: none !important;
 }
+.selected-item .ymaps-2-1-78-events-pane {
+  border: 2px solid yellow !important;
+}

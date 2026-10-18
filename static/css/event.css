@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+}
+.block {
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 90%;
+    overflow: hidden; /* Обрезать текст, выходящий за границы блока */
+    word-wrap: break-word; /* Разрывать длинные слова на новую строку */
+}
+.block-inner p{
+    white-space: nowrap; /* Предотвратить перенос текста */
+    overflow: hidden; /* Обрезать текст */
+    text-overflow: ellipsis; /* Добавить многоточие для обозначения обрезанного текста */
+}

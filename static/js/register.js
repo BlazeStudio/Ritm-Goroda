@@ -1,0 +1,45 @@
+document.getElementById('UserButton').addEventListener('click', function() {
+    var button = document.getElementById('UserButton');
+    var button2 = document.getElementById('OrgButton');
+    var type_field = document.getElementById('type_field');
+    var name = document.getElementById('name_label');
+    var surname = document.getElementById('surname_label');
+    var org_name = document.getElementById('org_name_label');
+    var org_input = document.getElementById('org_name');
+    var password_input = document.getElementById('password');
+    var login_input = document.getElementById('username');
+    var email_input =  document.getElementById('email');
+    document.getElementById('name').setAttribute("required", "");
+    document.getElementById('surname').setAttribute("required", "");
+    type_field.value = "Пользователь";
+    button.style.backgroundColor = '#4348bd'; button.style.color = 'white';
+    button2.style.backgroundColor = ""; button2.style.color = 'black';
+    org_name.style.display = "none";
+    org_input.value = ""; password_input.value = ""; login_input.value = ""; email_input.value = "";
+    name.style.display = "block";
+    surname.style.display = "block";
+});
+
+document.getElementById('OrgButton').addEventListener('click', function() {
+    var button = document.getElementById('UserButton');
+    var button2 = document.getElementById('OrgButton');
+    var type_field = document.getElementById('type_field');
+    var name = document.getElementById('name_label');
+    var surname = document.getElementById('surname_label');
+    var org_name = document.getElementById('org_name_label');
+    var password_input = document.getElementById('password');
+    var login_input = document.getElementById('username');
+    var email_input =  document.getElementById('email');
+    var name_input =  document.getElementById('name');
+    var surname_input =  document.getElementById('surname');
+    document.getElementById('org_name').setAttribute("required", "");
+    button2.style.backgroundColor = '#4348bd';
+    type_field.value = "Организация";
+    button2.style.color = 'white';
+    button.style.backgroundColor = "";
+    button.style.color = 'black';
+    org_name.style.display = "block";
+    password_input.value = ""; login_input.value = ""; email_input.value = ""; name_input.value = ""; surname_input.value = "";
+    name.style.display = "none";
+    surname.style.display = "none";
+});

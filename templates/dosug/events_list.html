@@ -18,17 +18,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/static/css/style.css" id="main-styles-link">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-    <style>
-.description {
-        font-size: 15px;
-        overflow-wrap: break-word;
-        white-space: normal;
-        text-overflow: ellipsis;
-        max-width: 300px;
-        max-height: 90px;
-        overflow: hidden;
-}
-    </style>
+    <link rel="stylesheet" href="/static/css/events_list.css">
       <script src="../../static/js/script.js"></script>
   </head>
   <body>
@@ -183,45 +173,8 @@
       </section><br><br><br><br><br><br>
 <div id="myElement" data-sort="{{sort}}"></div>
     </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var currentPage = window.location.href.replace(/^.*\/\/[^\/]+/, '');
-    currentPage = decodeURIComponent(currentPage);
-    var links = document.querySelectorAll(".dropdown-content a");
-    links.forEach(function(link) {
-      if (link.getAttribute("href") === currentPage) {
-        link.style.textDecoration = "underline";
-        link.style.textDecorationColor = "#7e868b"
-      }
-    });
-  });
-</script>
-  <script>
-      var searchInput = document.getElementById('search-input');
-var maxInput = document.getElementById('max-input');
-var minInput = document.getElementById('min-input');
-var searchButton = document.getElementById('search-button');
-
-// Функция для обработки нажатия Enter в поле ввода
-function handleEnterKeyPress(event) {
-  if (event.key === 'Enter') {
-    // Получаем значение из поля ввода
-    var inputValue = searchInput.value;
-    var maxPrice = maxInput.value;
-    var minPrice = minInput.value;
-
-    // Формируем ссылку
-    var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min_price=' + minPrice;
-    // Перенаправляем на полученную ссылку
-    window.location.href = hrefValue;
-  }
-}
-
-// Добавляем обработчик события для нажатия клавиши Enter в поле ввода
-searchInput.addEventListener('keypress', handleEnterKeyPress);
-
-  </script>
   </body>
 <script src="/static/js/search_script.js"></script>
+<script src="/static/js/events_list.js" defer></script>
 </html>
 {% endblock content %}

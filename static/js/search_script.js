@@ -28,15 +28,18 @@ var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min
     this.setAttribute('href', hrefValue);
   });
 
-  priceSubmit.addEventListener('click', function() {
-    var inputValue = searchInput.value;
-    var maxPrice = maxInput.value;
-    var minPrice = minInput.value;
+  // Кнопка "Подтвердить" сейчас закомментирована в шаблонах
+  if (priceSubmit) {
+    priceSubmit.addEventListener('click', function() {
+      var inputValue = searchInput.value;
+      var maxPrice = maxInput.value;
+      var minPrice = minInput.value;
 
-var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min_price=' + minPrice;
-    // Устанавливаем значение атрибута href у ссылки
-    this.setAttribute('href', hrefValue);
-  });
+  var hrefValue = '?search_query=' + inputValue + '&max_price=' + maxPrice + '&min_price=' + minPrice;
+      // Устанавливаем значение атрибута href у ссылки
+      this.setAttribute('href', hrefValue);
+    });
+  }
 
   // Добавляем обработчик события для нажатия клавиши Enter в поле ввода
   searchInput.addEventListener('keypress', handleEnterKeyPress);

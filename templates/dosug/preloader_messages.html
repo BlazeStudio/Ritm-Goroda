@@ -52,36 +52,6 @@
     <script src="/static/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script>
-  // Показываем тост при загрузке страницы
-  $(document).ready(function() {
-    $('.toast').toast('show');
-  });
-</script>
-  <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Поиск прелоадера
-    var preloader = document.querySelector('.preloader');
-
-    // Функция для удаления класса "loaded" у прелоадера
-    function removeLoadedClass() {
-        preloader.classList.remove('loaded');
-    }
-
-    // Обработчик события перед уходом со страницы
-    window.addEventListener('beforeunload', function() {
-        // Удаление класса "loaded" перед уходом со страницы
-        removeLoadedClass();
-    });
-
-    // Обработчик события перед загрузкой новой страницы
-    window.addEventListener('unload', function() {
-        // Удаление класса "loaded" перед загрузкой новой страницы
-        removeLoadedClass();
-    });
-});
-
-
-  </script>
+  <script src="/static/js/preloader_messages.js"></script>
   </body>
 </html>

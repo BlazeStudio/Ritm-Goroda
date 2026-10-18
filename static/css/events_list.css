@@ -1,0 +1,9 @@
+.description {
+        font-size: 15px;
+        overflow-wrap: break-word;
+        white-space: normal;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        max-height: 90px;
+        overflow: hidden;
+}
